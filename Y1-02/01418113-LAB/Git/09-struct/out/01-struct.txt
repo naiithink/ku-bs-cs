@@ -1,0 +1,5 @@
+ID      NAME                    DEVELOPER               CATEGORY                    STARS    PRICE (THB)    IN-APP PURCHASE
+0001    Spotify                 Spotify AB              Music                           5              0    No             
+0002    Notion                  Notion Labs             Productivity                    4              0    Yes            
+0003    LINE                    LINE Corporation        Social Networking               3              0    Yes            
+0004    NisitKU                 Kasetsart University    Education                       5              0    No             

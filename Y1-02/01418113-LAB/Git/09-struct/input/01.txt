@@ -1,0 +1,4 @@
+Spotify Spotify_AB Music 0 No 5
+Notion Notion_Labs Productivity 0 Yes 4
+LINE LINE_Corporation Social_Networking 0 Yes 3
+NisitKU Kasetsart_University Education 0 No 5

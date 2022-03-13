@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -lib "secureip" -o "/home/naiithink/in-Sync/WD/ISE_DS/CS131-LAB/LAB06_02_LAB06_02_sch_tb_isim_beh.exe" -prj "/home/naiithink/in-Sync/WD/ISE_DS/CS131-LAB/LAB06_02_LAB06_02_sch_tb_beh.prj" "work.LAB06_02_LAB06_02_sch_tb" "work.glbl" 

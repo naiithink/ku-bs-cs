@@ -1,0 +1,5 @@
+    Product Name    |Amount|     Total
+T Shirt L           |     6|    670.00
+Boxer               |     4|    188.00
+T Shirt M           |     4|    480.00
+Shorts M            |     1|    120.50

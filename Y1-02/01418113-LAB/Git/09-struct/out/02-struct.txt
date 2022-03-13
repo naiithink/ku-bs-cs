@@ -1,0 +1,5 @@
+ID      NAME                    DEVELOPER               CATEGORY                    STARS    PRICE (THB)    IN-APP PURCHASE
+0001    Messenger               Meta Platforms, Inc.    Social Networking               4              0    Yes            
+0002    Webex                   Cisco                   Business                        5              0    No             
+0003    Discord                 Discord, inc.           Social Networking               5              0    Yes            
+0004    Among Us                InnerSloth LLC          Action                          4              0    Yes            

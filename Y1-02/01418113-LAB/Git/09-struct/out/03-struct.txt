@@ -1,0 +1,5 @@
+ID      NAME                    DEVELOPER               CATEGORY                    STARS    PRICE (THB)    IN-APP PURCHASE
+0001    Google Classroom        Google LLC              Education                       4              0    No             
+0002    LinkedIn                LinkedIn Corporation    Business                        4              0    Yes            
+0003    Netflix                 Netflix, Inc.           Entertainment                   4              0    Yes            
+0004    Visual Studio Code      Microsoft Corpora...    Productivity                    0              0    No             

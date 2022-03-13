@@ -1,0 +1,441 @@
+	a = 0;
+	b = 0;
+	
+	#10;
+	
+	a = 0;
+	b = 1;
+	
+	#10;
+	
+	a = 0;
+	b = 0;
+	
+	#10;
+	
+	a = 1;
+	b = 0;
+	
+	#10
+	
+	a = 1;
+	b = 1;
+	
+	#10;
+
+
+
+###### Simulation Successful
+// Verilog test fixture created from schematic /home/naiithink/in-Sync/Workspaces/Files/ISE_DS/CS131-LAB/Sources/LAB06_01.sch - Wed Sep  1 01:18:28 2021
+
+`timescale 1ns / 1ps
+
+module LAB06_01_LAB06_01_sch_tb();
+
+// Inputs
+   reg b;
+   reg a;
+
+// Output
+   reg x;		//wire
+   reg y;		//wire
+
+// Bidirs
+
+// Instantiate the UUT
+   LAB06_01 UUT (
+		.b(b), 
+		.a(a), 
+		.x(x), 
+		.y(y)
+   );
+// Initialize Inputs
+
+	integer count = 0;
+
+	initial
+		begin
+		
+			while (count <= 4)
+				begin
+				
+					count = count + 1;
+					
+					if (count == 1)
+						begin
+							assign a = 0;
+							assign b = 0;
+						end
+					
+					else if (count == 2)
+						begin
+							assign a = 0;
+							assign b = 1;
+						end
+					
+					else if (count == 3)
+						begin
+							assign a = 1;
+							assign b = 0;
+						end
+					
+					else if (count == 4)
+						begin
+							assign a = 1;
+							assign b = 1;
+						end
+					
+					x = a ^ b;
+					y = a & b;
+					
+					$display("a = %d, b = %d : x = %d, y = %d", a, b, x, y);
+					
+					assign a = 0;
+					assign b = 0;
+					
+					#10;
+					
+				end
+		
+		end
+	
+endmodule
+
+
+
+
+
+
+
+######
+// Verilog test fixture created from schematic /home/naiithink/in-Sync/Workspaces/Files/ISE_DS/CS131-LAB/Sources/LAB05_02.sch - Tue Aug 31 21:35:28 2021
+
+`timescale 1ns / 1ps
+
+module LAB05_02_LAB05_02_sch_tb();
+
+// Inputs
+   reg SeatBelt_B;
+   reg Door_D;
+   reg Engine_E;
+   reg Headlights_H;
+   reg Seat_S;
+
+// Output
+   wire Buzzer;
+
+// Bidirs
+
+// Instantiate the UUT
+   LAB05_02 UUT (
+		.SeatBelt_B(SeatBelt_B), 
+		.Door_D(Door_D), 
+		.Engine_E(Engine_E), 
+		.Headlights_H(Headlights_H), 
+		.Seat_S(Seat_S), 
+		.Buzzer(Buzzer)
+   );
+// Initialize Inputs
+	
+	initial begin
+	
+	//17.1
+	Headlights_H = 0;
+	Seat_S = 0;
+	SeatBelt_B = 0;
+	Door_D = 0;
+	Engine_E = 1;
+	
+	#10;
+	
+	//17.2
+	Headlights_H = 0;
+	Seat_S = 1;
+	SeatBelt_B = 0;
+	Door_D = 0;
+	Engine_E = 1;
+	
+	#10;
+	
+	//17.3
+	Headlights_H = 1;
+	Seat_S = 0;
+	SeatBelt_B = 0;
+	Door_D = 0;
+	Engine_E = 0;
+	
+	#10;
+	
+	//17.4
+	Headlights_H = 0;
+	Seat_S = 0;
+	SeatBelt_B = 1;
+	Door_D = 1;
+	Engine_E = 0;
+	
+	#10;
+	
+	Headlights_H = 0;
+	Seat_S = 0;
+	SeatBelt_B = 0;
+	Door_D = 0;
+	Engine_E = 0;
+	
+	
+	//17.1 was here
+	
+	#10;
+	
+	Headlights_H = 0;
+	Seat_S = 0;
+	SeatBelt_B = 0;
+	Door_D = 1;
+	Engine_E = 0;
+	
+	#10;
+	
+	Headlights_H = 0;
+	Seat_S = 0;
+	SeatBelt_B = 0;
+	Door_D = 1;
+	Engine_E = 1;
+	
+	#10;
+	
+	Headlights_H = 0;
+	Seat_S = 0;
+	SeatBelt_B = 1;
+	Door_D = 0;
+	Engine_E = 0;
+	
+	#10;
+	
+	Headlights_H = 0;
+	Seat_S = 0;
+	SeatBelt_B = 1;
+	Door_D = 0;
+	Engine_E = 1;
+	
+	
+	//17.4 was here
+	
+	#10;
+	
+	Headlights_H = 0;
+	Seat_S = 0;
+	SeatBelt_B = 1;
+	Door_D = 1;
+	Engine_E = 1;
+	
+	#10;
+	
+	Headlights_H = 0;
+	Seat_S = 1;
+	SeatBelt_B = 0;
+	Door_D = 0;
+	Engine_E = 0;
+	
+	
+	//17.2 was here
+	
+	#10;
+	
+	Headlights_H = 0;
+	Seat_S = 1;
+	SeatBelt_B = 0;
+	Door_D = 1;
+	Engine_E = 0;
+	
+	#10;
+	
+	Headlights_H = 0;
+	Seat_S = 1;
+	SeatBelt_B = 0;
+	Door_D = 1;
+	Engine_E = 1;
+	
+	#10;
+	
+	Headlights_H = 0;
+	Seat_S = 1;
+	SeatBelt_B = 1;
+	Door_D = 0;
+	Engine_E = 0;
+	
+	#10;
+	
+	Headlights_H = 0;
+	Seat_S = 1;
+	SeatBelt_B = 1;
+	Door_D = 0;
+	Engine_E = 1;
+	
+	#10;
+	
+	Headlights_H = 0;
+	Seat_S = 1;
+	SeatBelt_B = 1;
+	Door_D = 1;
+	Engine_E = 0;
+	
+	#10;
+	
+	Headlights_H = 0;
+	Seat_S = 1;
+	SeatBelt_B = 1;
+	Door_D = 1;
+	Engine_E = 1;
+	
+	
+	//17.3 was here
+	
+	#10;
+	
+	Headlights_H = 1;
+	Seat_S = 0;
+	SeatBelt_B = 0;
+	Door_D = 0;
+	Engine_E = 1;
+	
+	#10;
+	
+	Headlights_H = 1;
+	Seat_S = 0;
+	SeatBelt_B = 0;
+	Door_D = 1;
+	Engine_E = 0;
+	
+	#10;
+	
+	Headlights_H = 1;
+	Seat_S = 0;
+	SeatBelt_B = 0;
+	Door_D = 1;
+	Engine_E = 1;
+	
+	#10;
+	
+	Headlights_H = 1;
+	Seat_S = 0;
+	SeatBelt_B = 1;
+	Door_D = 0;
+	Engine_E = 0;
+	
+	#10;
+	
+	Headlights_H = 1;
+	Seat_S = 0;
+	SeatBelt_B = 1;
+	Door_D = 0;
+	Engine_E = 1;
+	
+	#10;
+	
+	Headlights_H = 1;
+	Seat_S = 0;
+	SeatBelt_B = 1;
+	Door_D = 1;
+	Engine_E = 0;
+	
+	#10;
+	
+	Headlights_H = 1;
+	Seat_S = 0;
+	SeatBelt_B = 1;
+	Door_D = 1;
+	Engine_E = 1;
+	
+	#10;
+	
+	Headlights_H = 1;
+	Seat_S = 1;
+	SeatBelt_B = 0;
+	Door_D = 0;
+	Engine_E = 0;
+	
+	#10;
+	
+	Headlights_H = 1;
+	Seat_S = 1;
+	SeatBelt_B = 0;
+	Door_D = 0;
+	Engine_E = 1;
+	
+	#10;
+	
+	Headlights_H = 1;
+	Seat_S = 1;
+	SeatBelt_B = 0;
+	Door_D = 1;
+	Engine_E = 0;
+	
+	#10;
+	
+	Headlights_H = 1;
+	Seat_S = 1;
+	SeatBelt_B = 0;
+	Door_D = 1;
+	Engine_E = 1;
+	
+	#10;
+	
+	Headlights_H = 1;
+	Seat_S = 1;
+	SeatBelt_B = 1;
+	Door_D = 0;
+	Engine_E = 0;
+	
+	#10;
+	
+	Headlights_H = 1;
+	Seat_S = 1;
+	SeatBelt_B = 1;
+	Door_D = 0;
+	Engine_E = 0;
+	
+	#10;
+	
+	Headlights_H = 1;
+	Seat_S = 1;
+	SeatBelt_B = 1;
+	Door_D = 0;
+	Engine_E = 0;
+	
+	#10;
+	
+	Headlights_H = 1;
+	Seat_S = 1;
+	SeatBelt_B = 1;
+	Door_D = 0;
+	Engine_E = 1;
+	
+	#10;
+	
+	Headlights_H = 1;
+	Seat_S = 1;
+	SeatBelt_B = 1;
+	Door_D = 1;
+	Engine_E = 0;
+	
+	#10;
+	
+	Headlights_H = 1;
+	Seat_S = 1;
+	SeatBelt_B = 1;
+	Door_D = 1;
+	Engine_E = 1;
+   
+	#10;
+	
+	$finish;
+	end
+	
+	
+	initial begin
+	
+	$monitor("Headlights_H = %d, Seat_S = %d, SeatBelt_B = %d, Door_D = %d, Engine_E = %d : Buzzer = %d", Headlights_H, Seat_S, SeatBelt_B, Door_D, Engine_E, Buzzer);
+	
+	end
+	
+endmodule
+
