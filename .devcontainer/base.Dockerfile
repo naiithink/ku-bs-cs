@@ -14,8 +14,6 @@ COPY    library-scripts/*.sh library-scripts/*.env /tmp/library-scripts/
 RUN     bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" "true" "true" \
         && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
-RUN     git config oh-my-zsh.hide-info 1
-
 # [Optional] Uncomment this section to install additional OS packages.
 RUN     apt-get update && export DEBIAN_FRONTEND=noninteractive \
         && apt-get -y install --no-install-recommends automake build-essential libtool-bin libncurses-dev libc6-dbg libxml2-dev

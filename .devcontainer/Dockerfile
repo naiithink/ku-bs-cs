@@ -2,8 +2,6 @@
 ARG     VARIANT="focal"
 FROM    mcr.microsoft.com/vscode/devcontainers/base:${VARIANT}
 
-RUN     git config oh-my-zsh.hide-info 1
-
 # [Optional] Uncomment this section to install additional OS packages.
 RUN     apt-get update && export DEBIAN_FRONTEND=noninteractive \
         && apt-get -y install --no-install-recommends automake build-essential libtool-bin libncurses-dev libc6-dbg libxml2-dev
