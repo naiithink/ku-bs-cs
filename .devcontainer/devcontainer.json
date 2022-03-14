@@ -36,8 +36,7 @@
 		"vscjava.vscode-java-pack",
 		"redhat.vscode-xml",
 		"redhat.vscode-yaml",
-		"bierner.github-markdown-preview",
-		"lextudio.restructuredtext-pack"
+		"bierner.github-markdown-preview"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
