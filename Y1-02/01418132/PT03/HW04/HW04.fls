@@ -1,8 +1,8 @@
-PWD /Users/naiithink/projects/private/learn/atu/ku/Y1-02/01418132/PT03/HW04
+PWD /Users/naiithink/Library/CloudStorage/OneDrive-Personal/in-Sync/On-Going/01418132/PT03/ASSG/HW04
 INPUT /usr/local/texlive/2021/texmf.cnf
 INPUT /usr/local/texlive/2021/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/naiithink/projects/private/learn/atu/ku/Y1-02/01418132/PT03/HW04/HW04.tex
+INPUT /Users/naiithink/Library/CloudStorage/OneDrive-Personal/in-Sync/On-Going/01418132/PT03/ASSG/HW04/HW04.tex
 OUTPUT HW04.log
 INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/base/article.cls

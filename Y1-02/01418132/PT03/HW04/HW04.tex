@@ -1,165 +1,409 @@
 \documentclass{article}
 
+\usepackage{amsmath}
 \usepackage{geometry}
-\geometry{a4paper, portrait, margin=1in}
+\geometry{a4paper, portrait, margin = 1in}
 \usepackage[thaifont = THSarabunNew]{thaispec}
-\usepackage[linguistics]{forest}
+\usepackage[edges]{forest}
 
-\title{Assignment IV, Basic Counting}
-\author{พศวัต ถิ่นกาญจน์วัฒนา}
+\title{\textbf{Assignment IV, Basic Counting}}
+\author{พศวัต ถิ่นกาญจน์วัฒนา \\
+รหัสประจำตัวนิสิต 6410451199}
 \date{}
 
 \begin{document}
 
 \maketitle
+
 \flushleft
 \renewcommand{\labelenumii}{\arabic{enumii})}
 
 \begin{enumerate}
+	% 1
 	\item จงหาจำนวนวิธีทั้งหมดในการชนะ 3 เกมจากทั้งหมด 5 เกม ระหว่างผู้เล่น 2 คน คือ $T_1$ และ $T_2$\newline
-	และอยากทราบว่าผู้เล่นทั้ง 2 คน จะสามารถชนะเกมได้ทีมละกี่เกม (อาจใช้ Tree diagram)\newline
+	และอยากทราบว่าผู้เล่นทั้ง 2 คน จะสามารถชนะเกมได้ทีมละกี่เกม (อาจใช้ Tree diagram)
+	
 	\begin{forest}
-	for tree={grow=0, s sep=0}
-		[เกม
-			[$W$
-				[$W$
-					[$W$
-						[$W$
-							[$W$]
-							[$L$]
-						]
+	for tree = {
+		tier/.option = level,
+		anchor = mid,
+		grow = east,
+		s sep = 1.5mm,
+		l sep = 10mm,
+		inner sep = 0.7mm
+	}
+		[$T_1$ / $T_2$, rectangle, draw = black, inner sep = 1mm
+			[$L$
+				[$L$
+					[$L$
 						[$L$
-							[$W$]
-							[$L$]
+							[$L$ [$LLLLL$, name = i1, tier = word]]
+							[$W$ [$LLLLW$, name = i2, tier = word]]
+						]
+						[$W$
+							[$L$ [$LLLWL$, tier = word]]
+							[$W$ [$LLLWW$, tier = word]]
 						]
 					]
-					[$L$
-						[$W$
-							[$W$]
-							[$L$]
-						]
+					[$W$
 						[$L$
-							[$W$]
-							[$L$]
+							[$L$ [$LLWLL$, tier = word]]
+							[$W$ [$LLWLW$, tier = word]]
+						]
+						[$W$
+							[$L$ [$LLWWL$, tier = word]]
+							[$W$ [$LLWWW$, draw, red, tier = word]]
 						]
 					]
 				]
-				[$L$
-					[$W$
-						[$W$
-							[$W$]
-							[$L$]
-						]
+				[$W$
+					[$L$
 						[$L$
-							[$W$]
-							[$L$]
+							[$L$ [$LWLLL$, tier = word]]
+							[$W$ [$LWLLW$, tier = word]]
+						]
+						[$W$
+							[$L$ [$LWLWL$, tier = word]]
+							[$W$ [$LWLWW$, draw, red, tier = word]]
 						]
 					]
-					[$L$
-						[$W$
-							[$W$]
-							[$L$]
-						]
+					[$W$
 						[$L$
-							[$W$]
-							[$L$]
+							[$L$ [$LWWLL$, tier = word]]
+							[$W$ [$LWWLW$, draw, red, tier = word]]
+						]
+						[$W$
+							[$L$ [$LWWWL$, draw, red, tier = word]]
+							[$W$ [$LWWWW$, draw, red, tier = word]]
 						]
 					]
 				]
 			]
-			[$L$
-				[$W$
-					[$W$
-						[$W$
-							[$W$]
-							[$L$]
-						]
+			[$W$
+				[$L$
+					[$L$
 						[$L$
-							[$W$]
-							[$L$]
+							[$L$ [$WLLLL$, tier = word]]
+							[$W$ [$WLLLW$, tier = word]]
+						]
+						[$W$
+							[$L$ [$WLLWL$, tier = word]]
+							[$W$ [$WLLWW$, draw, red, tier = word]]
 						]
 					]
-					[$L$
-						[$W$
-							[$W$]
-							[$L$]
-						]
+					[$W$
 						[$L$
-							[$W$]
-							[$L$]
+							[$L$ [$WLWLL$, tier = word]]
+							[$W$ [$WLWLW$, draw, red, tier = word]]
+						]
+						[$W$
+							[$L$ [$WLWWL$, draw, red, tier = word]]
+							[$W$ [$WLWWW$, draw, red, tier = word]]
 						]
 					]
 				]
-				[$L$
-					[$W$
-						[$W$
-							[$W$]
-							[$L$]
-						]
+				[$W$
+					[$L$
 						[$L$
-							[$W$]
-							[$L$]
+							[$L$ [$WWLLL$, tier = word]]
+							[$W$ [$WWLLW$, draw, red, tier = word]]
+						]
+						[$W$
+							[$L$ [$WWLWL$, draw, red, tier = word]]
+							[$W$ [$WWLWW$, draw, red, tier = word]]
 						]
 					]
-					[$L$
-						[$W$
-							[$W$]
-							[$L$]
-						]
+					[$W$
 						[$L$
-							[$W$]
-							[$L$]
+							[$L$ [$WWWLL$, draw, red, tier = word]]
+							[$W$ [$WWWLW$, draw, red, tier = word]]
+						]
+						[$W$
+							[$L$ [$WWWWL$, name = o2, draw, red, tier = word]]
+							[$W$ [$WWWWW$, name = o1, draw, red, tier = word]]
 						]
 					]
 				]
 			]
 		]
+		\node (g1) at (2, 9.5) {เกมที่ 1};
+		\node (g2) at (3.5, 9.5) {เกมที่ 2};
+		\node (g3) at (5, 9.5) {เกมที่ 3};
+		\node (g4) at (6.5, 9.5) {เกมที่ 4};
+		\node (g5) at (8, 9.5) {เกมที่ 5};
+		% \draw [->] (o1) to [out = east, in = east] (i1);
+		% \draw [->] (o2) to [out = east, in = east] (i2);
 	\end{forest}
+	
+	% 2
 	\item จงหาจำนวนวิธีทั้งหมดในการจัดที่นั่งให้คน 4 คนในโต๊ะกลม โดยการจัดที่นั่งที่คนด้านซ้ายและขวาเป็นคนเดิม\newline
 	ถือว่าเป็นการจัดที่นั่งซ้ำ
+        	\begin{equation}
+        	\begin{split}
+	circular~arrangement~of~n-object ::&= (n - 1)! \notag\\
+        &= (4 - 1)! \\
+        &= \mathbf{6}
+        	\end{split}
+        	\end{equation}
+	
+	% 3
 	\item จงหาจำนวนสมาชิกของ $|A \cup B|$ เมื่อ $|A| = 12$ และ $|B| = 18$ เมื่อแต่ละกรณีต่อไปนี้เป็นจริง
 	\begin{enumerate}
 		\item $|A \cap B| = \phi$
+		\begin{equation}
+		\begin{split}
+		|A \cup B| &= |A| + |B| - |A \cap B| \notag\\
+		&= 12 + 18 - 0 \\
+		&=  \mathbf{30}
+		\end{split}
+		\end{equation}
+		
 		\item $|A \cap B| = 1$
+		\begin{equation}
+		\begin{split}
+		|A \cup B| &= |A| + |B| - |A \cap B| \notag\\
+		&= 12 + 18 - 1 \\
+		&=  \mathbf{29}
+		\end{split}
+		\end{equation}
+		
 		\item $|A \cap B| = 6$
+		\begin{equation}
+		\begin{split}
+		|A \cup B| &= |A| + |B| - |A \cap B| \notag\\
+		&= 12 + 18 - 6 \\
+		&=  \mathbf{24}
+		\end{split}
+		\end{equation}
+		
 		\item $A \subseteq B$
+		\begin{equation}
+		\begin{split}
+		|A \cup B| &= |A| + |B| - |A \cap B| \notag\\
+		&= 12 + 18 - 12 \\
+		&=  \mathbf{18}
+		\end{split}
+		\end{equation}
+		
 	\end{enumerate}
+	
+	% 4
 	\item อักขระภาษาอังกฤษประกอบด้วยพยัญชนะ 21 ตัว สระ 5 ตัว จงหาสตริงของอักขระตัวเล็ก (lowercase)\newline
 	ความยาว 6 ที่ประกอบด้วย
 	\begin{enumerate}
 		\item มีสระ 1 ตัว
+		\begin{equation}
+		\begin{split}
+		_{21}C_{5} ~\times~ _{5}C_{1} &= \frac{21!}{16! \times 5!} \times \frac{5!}{4! \times 1!} \notag\\
+		&= 20,349 \times 5 \\
+		&=  \mathbf{101,745~strings}
+		\end{split}
+		\end{equation}
+		
 		\item มีสระ 2 ตัว โดยสามารถเลือกสระซ้ำได้
+		\begin{equation}
+		\begin{split}
+		_{21}C_{4} ~\times~ _{5}C_{2} &= \frac{21!}{17! \times 4!} \times \frac{5!}{3! \times 2!} \notag\\
+		&= 5,985 \times 10 \\
+		&=  \mathbf{59,850~strings}
+		\end{split}
+		\end{equation}
+		
 		\item มีสระอย่างน้อย 1 ตัว
+		\begin{equation}
+		\begin{split}
+		 (_5C_1 ~\times~ _{21}C_5) + (_5C_2 ~\times~ _{21}C_4) + (_5C_3 ~\times~ _{21}C_3) + (_5C_4 ~\times~ _{21}C_2) + (_5C_5 ~\times~ _{21}C_1) + (_5C_5 ~\times~ 5) \notag \\
+		\end{split}
+		\end{equation}
+		
 		\item มีสระอย่างน้อย 2 ตัว
+		\begin{equation}
+		\begin{split}
+		 (_5C_2 ~\times~ _{21}C_4) + (_5C_3 ~\times~ _{21}C_3) + (_5C_4 ~\times~ _{21}C_2) + (_5C_5 ~\times~ _{21}C_1) + (_5C_5 ~\times~ 5) \notag \\
+		\end{split}
+		\end{equation}
 	\end{enumerate}
+	
+	% 5
 	\item การจับสลากของเลข 1 ถึง 100 เพื่อมอบรางวัลจำนวน 4 รางวัล ประกอบด้วยรางวัลที่ 1, 2, 3 และรางวัลพิเศษ\newline
 	จงหาจำนวนวิธีในการมอบรางวัลทั้งสี่ภายใต้เงื่อนไข ดังนี้
 	\begin{enumerate}
 		\item ไม่มีกติกาเพิ่มเติม
+		\begin{equation}
+		\begin{split}
+		_{100}C_{4} &= \frac{100!}{(100 - 4)!} \notag\\
+		&= \frac{100!}{96!} \\
+		&= 97 \times 98 \times 99 \times 100 \\
+		&=  \mathbf{94,109,400~ways}
+		\end{split}
+		\end{equation}
+		
 		\item ผู้ที่ถือสลากหมายเลข 47 ได้รับรางวัลพิเศษ
+		\begin{equation}
+		\begin{split}
+		_{99}C_{3} &= \frac{99!}{(99 - 3)!} \notag \\
+		&= \frac{99!}{96!} \\
+		&= 97 \times 98 \times 99 \\
+		&=  \mathbf{941,094~ways}
+		\end{split}
+		\end{equation}
+		
 		\item ผู้ที่ถือสลากหมายเลข 47 ได้รับรางวัลใดรางวัลหนึ่งในสี่รางวัล
+		\begin{equation}
+		\begin{split}
+		_{99}C_{3} &= \frac{99!}{(99 - 3)!} \times 4 \notag \\
+		&= \frac{99!}{96!} \times 4 \\
+		&= (97 \times 98 \times 99) \times 4 \\
+		&= 941,094 \times 4 \\
+		&=  \mathbf{3,764,376~ways}
+		\end{split}
+		\end{equation}
+		
+\pagebreak
+		
 		\item ผู้ที่ถือสลากหมายเลข 19, 47, 73 หรือ 97 เป็นหมายเลขของรางวัลทั้งสี่
+		\begin{equation}
+		\begin{split}
+		_{96}C_{3} ~\times~ _{4}C_{1} &= \frac{96!}{(96 - 3)!} \times \frac{4!}{(4 - 1)!} \notag \\
+		&= \frac{96!}{93!} \times \frac{4!}{3!} \\
+		&= (94 \times 95 \times 96) \times 4 \\
+		&= 857,280 \times 4 \\
+		&=  \mathbf{3,429,120~ways}
+		\end{split}
+		\end{equation}
 	\end{enumerate}
+	
+	% 6
 	\item จงหาจำนวนเต็มบวกมีค่าไม่เกิน 1,000 ที่หารด้วย 7 หรือ 11 ลงตัว
+	\begin{equation}
+	\begin{split}
+	A &= \{x ~|~ \frac{x}{7} = 0 ~\wedge~ x \leq 1,000 \} \notag \\
+	|A| &= \lfloor \frac{1,000}{7} \rfloor \\
+	&= 142 \\
+	B &= \{y ~|~ \frac{y}{11} = 0 ~\wedge~ y \leq 1,000 \} \\
+	|B| &= \lfloor \frac{1,000}{11} \rfloor \\
+	&= 90 \\
+	C &= \{z ~|~ z \in A ~\vee~ z \in B ~\wedge~ z \notin A \cap B\} \\
+	|C| &= (|A| \cup |B|) - (|A| \cap |B|) \\
+	&= |A| + |B| - |A \cap B| - |A \cap B| \\
+	&= |A| + |B| - 2|A \cap B| \\
+	&= 142 + 90 - 2(\lfloor \frac{1,000}{7 \times 11} \rfloor) \\
+	&= 232 - 2(12) \\
+	&= \mathbf{208~numbers}
+	\end{split}
+	\end{equation}
+	
+	% 7
 	\item จงหาจำนวนวิธีเลือกไพ่ 5 ใบ โดยมีไพ่อย่างน้อย 1 ใบจากแต่ละ suit
+	\begin{equation}
+	\begin{split}
+	(_{13}C_1 ~\times~ 3) ~+~ _{13}P_2 &= \left( \frac{13!}{(13 - 1)!} ~\times~ 3 \right) + \left( \frac{13!}{(13 - 2)! \cdot 2!} \right) \notag \\
+	&= (13 \times 3) + \left( \frac{12 \cdot 13 }{2} \right) \\
+	&= 39 \times \frac{156}{2} \\
+	&= 39 \times 78 \\
+	&= \mathbf{3,042~ways}
+	\end{split}
+	\end{equation}
+	
+\pagebreak
+	
+	% 8
 	\item กำหนดให้ไพ่หนึ่งสำรับมี 52 ใบ จงหาจำนวนวิธีในการแจกไพ่จำนวน 5 ใบให้กับผู้เล่น 4 คน
+	\begin{equation}
+	\begin{split}
+	_{52}P_5 ~+~ _{47}P_5 ~+~ _{42}P_5 ~+~ _{37}P_5 &= \frac{52!}{(52 - 5)! \cdot 5!} + \frac{47!}{(47 - 5)! \cdot 5!} + \frac{42!}{(42 - 5)! \cdot 5!} + \frac{37!}{(37 - 5)! \cdot 5!}\notag \\
+	&= \frac{52!}{47! \cdot 5!} + \frac{47!}{42! \cdot 5!} + \frac{42!}{37! \cdot 5!} + \frac{37!}{32! \cdot 5!} \\
+	&= \frac{48 \cdot 49 \cdot 50 \cdot 51 \cdot 52}{5!} + \frac{43 \cdot 44 \cdot 45 \cdot 46 \cdot 47}{5!} + \frac{38 \cdot 39 \cdot 40 \cdot 41 \cdot 42}{5!} \\
+	&~~~+ \frac{33 \cdot 34 \cdot 35 \cdot 36 \cdot 37}{5!} \\
+	&= \frac{311,875,200}{120} + \frac{184,072,680}{120} + \frac{102,080,160}{120} + \frac{52,307,640}{120} \\
+	&= \frac{311,875,200 + 184,072,680 + 102,080,160 + 52,307,640}{120} \\
+	&= \frac{650,335,680}{120} \\
+	&= \mathbf{5,419,464~ways}
+	\end{split}
+	\end{equation}
+	
+	% 9
 	\item จงหาจำนวนวิธีในการหยิบลูกบอลลักษณะเดียวกันจำนวน 10 ลูกใส่ในตะกร้า 8 ตะกร้าที่มีหมายเลข 1 ถึง 8\newline
 	ติดอยู่ที่ด้านข้างตะกร้าแต่ละใบ
+	\begin{equation}
+	\begin{split}
+	_{10}P_{8} &= \frac{10!}{(10 - 8)! \cdot 8!} \notag \\
+	&= \frac{10!}{2! \cdot 8!} \\
+	&= \frac{9 \times 10}{2} \\
+	&= \mathbf{45~ways}
+	\end{split}
+	\end{equation}
+	
+	% 10
 	\item จงหาจำนวนคำตอบที่เป็นไปได้ของสมการ $x_1 + x_2 + \dots + x_n = k$ เมื่อ $x_i \geq 0$
-
-	\pagebreak
-
+	\begin{equation}
+	\begin{split}
+	 \mathbf{\binom{k + n - 1}{n}~answers} \notag \\
+	\end{split}
+	\end{equation}
+	
+	% 11
 	\item จาก Binomial theorem จงกระจายพจน์ทั้งหมดของ
 	\begin{enumerate}
 		\item ${(x + 1)}^4$
+		\begin{equation}
+		\begin{split}
+		{(x + 1)}^4 &= \binom{4}{0} x^0 +  \binom{4}{1} x^1 + \binom{4}{2} x^2 + \binom{4}{3} x^3 + \binom{4}{4} x^4 \notag \\
+		&=  \mathbf{1 + 4x + 6x^2 + 4x^3 + x^4}
+		\end{split}
+		\end{equation}
+		
 		\item ${(2 + y)}^4$
+		\begin{equation}
+		\begin{split}
+		{(2 + y)}^4 &= \binom{4}{0} 2^4y^0 + \binom{4}{1} 2^3y^1 + \binom{4}{2} 2^2y^2 + \binom{4}{3} 2^1y^3 + \binom{4}{4} 2^0y^4 \notag \\
+		&= 16 + (4 \times 8y) + (6 \times 4y^2) + (4 \times 2y^3) + y^4 \\
+		&=  \mathbf{16 + 32y + 24y^2 + 8y^3 + y^4}
+		\end{split}
+		\end{equation}
 	\end{enumerate}
+	
+\pagebreak
+	
+	% 12
 	\item โยนเหรียญจำนวน 10 ครั้ง แต่ละครั้งออกหัวหรือก้อยด้วยความน่าจะเป็นที่เท่ากัน ให้หาค่าต่อไปนี้
 	\begin{enumerate}
 		\item จำนวน outcomes ที่เป็นไปได้ทั้งหมด
+		\begin{equation}
+		\begin{split}
+		n(E) &= n(E_1) \times n(E_2) \times n(E_3) \times n(E_4) \times n(E_5) \times n(E_6) \times n(E_7) \times n(E_8) \times n(E_9) \times n(E_{10}) \notag \\
+		&= 2^{10} \\
+		&=  \mathbf{1,024~outcomes}
+		\end{split}
+		\end{equation}
+		
 		\item จำนวน outcomes ที่ออกหัวจำนวน 2 ครั้ง
+		\begin{equation}
+		\begin{split}
+		n(E) &= (n(E_1) \times n(E_2) \times n(E_3) \times n(E_4) \times n(E_5) \times n(E_6) \times n(E_7) \times n(E_8)) \times 2 \notag \\
+		&= 2^8 \times 2 \\
+		&= 256 \times 2 \\
+		&=  \mathbf{512~outcomes}
+		\end{split}
+		\end{equation}
+		
 		\item จำนวน outcomes ที่ออกก้อยอย่างมาก 3 ครั้ง
+		\begin{equation}
+		\begin{split}
+		n(E) &= (n(E_1) \times n(E_2) \times n(E_3) \times n(E_4) \times n(E_5) \times n(E_6) \times n(E_7)) \times 3 \notag \\
+		&= 2^7 \times 3 \\
+		&= 128 \times 3 \\
+		&=  \mathbf{384~outcomes}
+		\end{split}
+		\end{equation}
+		
 		\item จำนวน outcomes ที่ออกหัวและก้อยในจำนวนที่เท่ากัน
+		\begin{equation}
+		\begin{split}
+		n(E) &= 5 \times 5 \notag \\
+		&=  \mathbf{25~outcomes}
+		\end{split}
+		\end{equation}
 	\end{enumerate}
 \end{enumerate}
 

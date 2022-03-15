@@ -1,0 +1,339 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\geometry{a4paper, portrait, margin = 1in}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{venndiagram}
+\usepackage[Latin, Thai]{ucharclasses}
+\usepackage[thaifont = THSarabunNew]{thaispec}
+\usepackage[edges]{forest}
+
+\setlength{\columnseprule}{0.4pt}
+
+\title{\textbf{Assignment V, Probability and Random Variables}}
+\author{พศวัต ถิ่นกาญจน์วัฒนา \\
+รหัสประจำตัวนิสิต 6410451199}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\flushleft
+\renewcommand{\labelenumii}{\arabic{enumii})}
+
+\begin{enumerate}
+
+% 1
+\item{หยิบไพ่ 2 ใบจากกองของไพ่ 8 ใบ ประกอบด้วย 4 queens และ 4 kings ถ้าไพ่อย่างน้อย 1 ใบ เป็น
+queen \\
+จงหาความน่าจะเป็นที่ไพ่ 2 ใบดังกล่าวเป็น queen ทั้งสองใบ}
+\begin{align*}
+|E|	&= 3		&		|S|	&= 7		&		p(E)	&= \frac{|E|}{|S|}			\notag \\
+	&			&			&			&				&= \mathbf{\frac{3}{7}}
+\end{align*}
+
+% 2
+\item{จงหาความน่าจะเป็นในการเลือกตัวเลข 6 ตัว ที่ตรงกับรางวัลที่หนึ่งทุกตัว โดยลำดับของตัวเลขไม่มีความสำคัญ \\
+กำหนดให้จำนวนเลขที่เลือกมีค่าตั้งแต่ 1 จนถึงค่าต่อไปนี้}
+	\begin{enumerate}
+	
+	% 2.1
+	\item{40}
+	\begin{align*}
+	|E|	&= 1		&		|S|	&= ~^{40}C_6							&		p(E)	&= \frac{|E|}{|S|}				\notag \\
+		&			&			&= \frac{40!}{(40 - 6)! \cdot 6!}		&				&= \mathbf{\frac{1}{3,838,380}}	\\
+		&			&			&= 3,838,380
+	\end{align*}
+	
+	% 2.2
+	\item{48}
+	\begin{align*}
+	|E|	&= 1		&		|S|	&= ~^{48}C_6							&		p(E)	&= \frac{|E|}{|S|}					\notag \\
+		&			&			&= \frac{48!}{(48 - 6)! \cdot 6!}		&				&= \mathbf{\frac{1}{12,271,512}}	\\
+		&			&			&= 12,271,512
+	\end{align*}
+	
+	% 2.3
+	\item{56}
+	\begin{align*}
+	|E|	&= 1		&		|S|	&= ~^{56}C_6							&		p(E)	&= \frac{|E|}{|S|}					\notag \\
+		&			&			&= \frac{56!}{(56 - 6)! \cdot 6!}		&				&= \mathbf{\frac{1}{32,468,436}}	\\
+		&			&			&= 32,468,436
+	\end{align*}
+	
+	% 2.4
+	\item{64}
+	\begin{align*}
+	|E|	&= 1		&		|S|	&= ~^{64}C_6							&		p(E)	&= \frac{|E|}{|S|}					\notag \\
+		&			&			&= \frac{64!}{(64 - 6)! \cdot 6!}		&				&= \mathbf{\frac{1}{74,974,368}}	\\
+		&			&			&= 74,974,368
+	\end{align*}
+	
+	\end{enumerate}
+	
+% 3
+\item{จงหาความน่าจะเป็นในการเลือกไพ่ 5 ใบ ที่ประกอบด้วย 2 ข้าวหลามตัด 3 โพดำ 6 โพแดง 10 ดอกจิก \\
+และ King โพแดง}
+\begin{align*}
+|E|	&= 51^4 \times 4		&		|S|	&= 52^5				&		p(E)	&= \frac{|E|}{|S|}					\notag \\
+	&= 27,060,804			&			&= 380,204,032		&	 			&= \frac{27,060,804}{380,204,032}	\\
+	&						&			&					&				&\approx \mathbf{0.0711744266}
+\end{align*}
+
+% 4
+\item{จงหาความน่าจะเป็นในการทอยลูกเต๋าที่สมดุล 1 ลูก จำนวน 6 ครั้ง โดยไม่ปรากฏหน้าที่เป็นเลขคู่เลย}
+\begin{align*}
+|E|	&= 3^6		&		|S|	&= 6^6		&		p(E)	&= \frac{|E|}{|S|}		\notag \\
+	&= 729		&			&= 46,656	&				&= \frac{729}{46,656}	\\
+	&			&			&			&				&= \mathbf{0.015625}
+\end{align*}
+
+% 5
+\item{จงหาความน่าจะเป็นแบบมีเงื่อนไขที่บิตสตริงความยาว 4 มีบิต 0 ติดกันอย่างน้อย 2 ตัว \\
+โดยกำหนดให้บิตแรกมีค่าเป็น 1}
+\begin{align*}
+|E| &= 2^2		&		|S|	&= 2^4		&		p(E)	&= \frac{|E|}{|S|}		\notag \\
+	&= 4 		&	 		&= 16 		&	 			&= \frac{4}{16}			\\
+	&			&			&			&				&= \frac{1}{4}			\\
+	&			&			&			&				&= \mathbf{0.25}
+\end{align*}
+
+% 6
+\item{ครอบครัวหนึ่งมีลูก 5 คน จงหาความน่าจะเป็นที่ลูกคนแรกเป็นผู้ชาย หรือสองคนสุดท้ายเป็นผู้หญิง เมื่อ}
+	\begin{enumerate}
+	
+	% 6.1
+	\item{ผู้ชายหรือผู้หญิงมีความน่าจะเป็นเท่ากัน}
+	\begin{align*}
+	Define	&&		\text{ความน่าจะเป็นของผู้ชาย}	&::=	p(E_1)			&&					\\
+	Define	&&		\text{ความน่าจะเป็นของผู้หญิง}	&::=	p(E_2)			&&					\\
+	Let		&&		p(E_1)						&= p(E_2)				&& \tag{1}			\\
+			&&		1							&= p(E_1) + p(E_2)		&&					\\
+			&&		1							&= 2 \cdot p(E_1)		&& ; \tag{1} 		\\
+			&&		p(E_1)						&= \frac{1}{2}			&& \\
+			&&		p(E_1)						&= p(E_2) = 0.5			&& \tag{2}
+	\end{align*}
+
+\pagebreak
+
+	\begin{multicols}{2}
+	\noindent
+		\begin{align*}
+		|E_1| &= 2^4 & |S_1| &= 2^5 \notag \\
+		&= 4 & &= 32
+		\end{align*}
+		\begin{equation}
+		\begin{split}
+		p(E_1) &= \frac{16}{32} \notag \\
+		&= 0.5
+		\end{split}
+		\end{equation}
+	\columnbreak
+		\begin{align*}
+		|E_2| &= 2^3 & |S_2| &= 2^5 \notag \\
+		&= 8 & &= 32
+		\end{align*}
+		\begin{equation}
+		\begin{split}
+		p(E_2) &= \frac{8}{32} \notag \\
+		&= 0.25
+		\end{split}
+		\end{equation}
+	\end{multicols}
+	\noindent
+	\begin{equation}
+	\begin{split}
+	p(E) &= p(E_1) + p(E_2) \notag \\
+	&= 0.5 + 0.25 \\
+	&= \mathbf{0.75}
+	\end{split}
+	\end{equation}
+
+	% 6.2
+	\item{ความน่าจะเป็นของผู้ชายเป็น 0.51}
+	\begin{align*}
+	Define	&&		\text{ความน่าจะเป็นของผู้ชาย}	&::=	p(E_1)				&&					\\
+	Define	&&		\text{ความน่าจะเป็นของผู้หญิง}	&::=	p(E_2)				&&					\\
+	Let		&&		p(E_1)						&=		0.51				&& \tag{1}			\\
+			&&		1							&=		p(E_1) + p(E_2)		&&					\\
+			&&		1							&=		0.51 + p(E_2)		&& ; \tag{1}		\\
+			&&		p(E_2)						&= 		1 - 0.51			&&					\\
+			&&									&= 		0.49
+	\end{align*}
+	\begin{multicols}{2}
+	\noindent
+		\begin{align*}
+		|E_1| &= 2^4 & |S_1| &= 2^5 \notag \\
+		&= 4 & &= 32
+		\end{align*}
+		\begin{equation}
+		\begin{split}
+		p(E_1) &= \frac{16}{32} \notag \\
+		&= 0.5
+		\end{split}
+		\end{equation}
+	\columnbreak
+		\begin{align*}
+		|E_2| &= 2^3 & |S_2| &= 2^5 \notag \\
+		&= 8 & &= 32
+		\end{align*}
+		\begin{equation}
+		\begin{split}
+		p(E_2) &= \frac{8}{32} \notag \\
+		&= 0.25
+		\end{split}
+		\end{equation}
+	\end{multicols}
+	\noindent
+	\begin{equation}
+	\begin{split}
+	p(E) &= 0.51(p(E_1)) + p(E_2) \notag \\
+	&= 0.51(0.5) + 0.25 \\
+	&= 0.255 + 0.25 \\
+	&= \mathbf{0.505}
+	\end{split}
+	\end{equation}
+	
+	\end{enumerate}
+
+\pagebreak
+
+% 7
+\item{สมมติให้ 2\% ของคนที่ไม่ใช้ฝิ่นมีผลทดสอบการใช้ฝิ่นเป็น positive (หรือเรียกอีกอย่างหนึ่งว่า 2\% เป็น \\
+false positive) และ 5\% ของคนที่ใช้ฝิ่นมีผลทดสอบการใช้ฝิ่นเป็น negative (หรือเรียกอีกอย่างหนึ่งว่า
+5\% เป็น \\
+false negative) และมีคน 1\% ที่เป็นผู้ใช้ฝิ่น จงหา}
+\begin{align*}
+\text{กำหนดให้} &&& \mathbb{U}~ \text{เป็น}~ universe~ \text{และ}~ |\mathbb{U}| & &= 100 \\
+\text{กำหนดให้} &&& \text{เซตของคนที่ใช้ฝิ่น} & &::= A \\
+\text{กำหนดให้} &&& \text{เซตของคนที่ไม่ใช้ฝิ่น} & &::= B \\
+\text{กำหนดให้} &&& \text{เซตของคนที่ได้ผลการทดสอบเป็น positive} & &::= C \\
+\text{กำหนดให้} &&& \text{เซตของคนที่ได้ผลการทดสอบเป็น negative} & &::= D \\
+\text{โจทย์กำหนด} &&& 2\%~ \text{เป็น}~ false~positive: && |B \cap C| = 2 \\
+\text{โจทย์กำหนด} &&& 5\%~ \text{เป็น}~ false~negative: && |A \cap D| = 5 \\
+\text{โจทย์กำหนด} &&& 1\%~ \text{เป็นคนที่ใช้ฝิ่น}: && |A| = 1
+\end{align*}
+	\begin{enumerate}
+	
+	% 7.1
+	\item{ความน่าจะเป็นที่คนที่ทดสอบการใช้ฝิ่นได้ผล negative ไม่ได้ใช้ฝิ่น}
+	\begin{equation}
+	\begin{split}
+	true~negative &= B \cap D \notag \\
+	|A| &= 1 \\
+	|A'| &= |\mathbb{U} - A| \\
+	&= 100 - 1 \\
+	&= 99
+	\end{split}
+	\end{equation}
+	
+	% 7.2
+	\item{ความน่าจะเป็นที่คนที่ทดสอบการใช้ฝิ่นได้ผล positive เป็นผู้ใช้ฝิ่น}
+	\begingroup
+	\begin{equation}
+	\begin{split}
+	\notag \\
+	\end{split}
+	\end{equation}
+	\endgroup
+	
+	\end{enumerate}
+% 8
+\item{สมมติให้คนไข้ 8\% เป็นผู้ติดเชื้อไวรัสสายพันธุ์ใหม่กว่า นอกจากนี้พบว่า 98\% ของคนไข้ที่เป็นผู้ติดเชื้อไวรัส \\
+สายพันธุ์ใหม่กว่ามีผลการทดสอบเป็น positive และ 3\% ของคนไข้ที่ไม่เป็นผู้ติดเชื้อไวรัสสายพันธุ์ใหม่กว่า \\
+มีผลการทดสอบเป็น positive จงหา}
+	\begin{enumerate}
+	
+	% 8.1
+	\item{ความน่าจะเป็นที่คนไข้ที่มีผลการทดสอบ positive เป็นผู้ติดเชื้อ}
+	\begin{equation}
+	\begin{split}
+	\notag \\
+	\end{split}
+	\end{equation}
+	
+	% 8.2
+	\item{ความน่าจะเป็นที่คนไข้ที่มีผลการทดสอบ positive ไม่เป็นผู้ติดเชื้อ}
+	\begin{equation}
+	\begin{split}
+	\notag \\
+	\end{split}
+	\end{equation}
+	
+	% 8.3
+	\item{ความน่าจะเป็นที่คนไข้ที่มีผลการทดสอบ negative เป็นผู้ติดเชื้อ}
+	\begin{equation}
+	\begin{split}
+	\notag \\
+	\end{split}
+	\end{equation}
+	
+	% 8.4
+	\item{ความน่าจะเป็นที่คนไข้ที่มีผลการทดสอบ negative ไม่เป็นผู้ติดเชื้อ}
+	\begin{equation}
+	\begin{split}
+	\notag \\
+	\end{split}
+	\end{equation}
+	
+	\end{enumerate}
+
+% 9
+\item{จงหา expected value ของผลรวมของการโยนลูกเต๋า 2 ลูก โดยลูกเต๋าแต่ละลูกมี biased ที่จะออกเลข 3 \\
+เป็นสองเท่าของเลขอื่น ๆ}
+\begin{equation}
+\begin{split}
+\notag \\
+\end{split}
+\end{equation}
+
+% 10
+\item{ในการสอบวิชา 01418000 ข้อสอบประกอบด้วยคำถามแบบถูก/ผิด จำนวน 50 ข้อ ข้อละ 2 คะแนน \\
+และคำถามแบบเลือกตอบ 4 ตัวเลือก จำนวน 25 ข้อ ข้อละ 4 คะแนน ความน่าจะเป็นที่แป๋งตอบคำถาม \\
+แบบ
+ถูก/ผิดได้ถูกต้องคิดเป็น 0.9 และความน่าจะเป็นที่จะตอบคำถามแบบเลือกตอบได้ถูกต้องคิดเป็น 0.8 \\
+จงหา expected value ของคะแนนที่แป๋งจะได้}
+\begin{equation}
+\begin{split}
+\notag \\
+\end{split}
+\end{equation}
+
+% 11
+\item{ป๋องใส่ลูกบอล m ลูกลงในถัง n ใบแบบสุ่มและกระจายไปในถังทุก ๆ ใบเท่า ๆ กัน จงหา}
+	\begin{enumerate}
+	
+	% 11.1
+	\item{ความน่าจะเป็นที่ถังใบแรกไม่มีลูกบอล}
+	\begin{equation}
+	\begin{split}
+	\notag \\
+	\end{split}
+	\end{equation}
+	
+	% 11.2
+	\item{Expected value ของจำนวนถังที่ไม่มีลูกบอล}
+	\begin{equation}
+	\begin{split}
+	\notag \\
+	\end{split}
+	\end{equation}
+	
+	\end{enumerate}
+
+% 12
+\item{จงหาค่า variance ของจำนวน success ในการทำ Bernoulli trials จำนวน n ครั้งที่แต่ละครั้งมีความน่าจะเป็น \\
+ของ success เป็น p และความน่าจะเป็นของ failure เป็น q}
+\begin{equation}
+\begin{split}
+\notag \\
+\end{split}
+\end{equation}
+
+\end{enumerate}
+
+\end{document}
