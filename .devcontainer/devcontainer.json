@@ -1,11 +1,32 @@
 {
 	"name": "Ubuntu",
+
+	// Custom build
+	// "build": {
+	// 	"dockerfile": "base.Dockerfile",
+	// 	// Update 'VARIANT' to pick an Ubuntu version: hirsute, focal, bionic
+	// 	// Use hirsute or bionic on local arm64/Apple Silicon.
+	// 	"args": { "VARIANT": "focal" }
+	// },
+	// Custom build
+
+	// VS Code build
 	"build": {
-		"dockerfile": "base.Dockerfile",
+		"dockerfile": "Dockerfile",
 		// Update 'VARIANT' to pick an Ubuntu version: hirsute, focal, bionic
 		// Use hirsute or bionic on local arm64/Apple Silicon.
-		"args": { "VARIANT": "focal" }
+		"args": { "VARIANT": "hirsute" }
 	},
+
+	"features": {
+		"git": "latest",
+		"git-lfs": "latest",
+		"github-cli": "latest",
+		"java": "lts",
+		"node": "lts",
+		"python": "latest"
+	},
+	// VS Code build
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
@@ -18,7 +39,8 @@
 			"zsh": {
 				"path": "/usr/bin/zsh"
 			}
-		}
+		},
+		"python.defaultInterpreterPath": "/usr/bin/python3"
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
