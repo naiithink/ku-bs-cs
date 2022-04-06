@@ -2,7 +2,7 @@
  * 5->3% ข้อ 5 (3%)
  */
 
-/*  Summitted
+/*  Submitted
 
     float **res;
     float *in;
