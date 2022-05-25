@@ -1,21 +1,21 @@
 {
 	"name": "Ubuntu",
 
-	// Custom build
-	// "build": {
-	// 	"dockerfile": "base.Dockerfile",
-	// 	// Update 'VARIANT' to pick an Ubuntu version: hirsute, focal, bionic
-	// 	// Use hirsute or bionic on local arm64/Apple Silicon.
-	// 	"args": { "VARIANT": "focal" }
-	// },
-	// Custom build
+	/* // >>> Custom build
+	"build": {
+		"dockerfile": "base.Dockerfile",
+		// Update 'VARIANT' to pick an Ubuntu version: hirsute, focal, bionic
+		// Use hirsute or bionic on local arm64/Apple Silicon.
+		"args": { "VARIANT": "focal" }
+	},
+	// <<< Custom build */
 
-	// VS Code build
+	// >>> VS Code build
 	"build": {
 		"dockerfile": "Dockerfile",
 		// Update 'VARIANT' to pick an Ubuntu version: hirsute, focal, bionic
 		// Use hirsute or bionic on local arm64/Apple Silicon.
-		"args": { "VARIANT": "hirsute" }
+		"args": { "VARIANT": "ubuntu-22.04" }
 	},
 
 	"features": {
@@ -26,7 +26,7 @@
 		"node": "lts",
 		"python": "latest"
 	},
-	// VS Code build
+	// <<< VS Code build
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
@@ -55,9 +55,12 @@
 		"ms-python.python",
 		"ms-python.vscode-pylance",
 		"ms-toolsai.jupyter",
+		"ms-vscode.hexeditor",
 		"vscjava.vscode-java-pack",
 		"redhat.vscode-xml",
 		"redhat.vscode-yaml",
+		"James-Yu.latex-workshop",
+		"lextudio.restructuredtext-pack",
 		"bierner.github-markdown-preview"
 	],
 
@@ -74,5 +77,5 @@
 		"CFLAGS": "-g",
 		"CXX": "clang++",
 		"CXXFLAGS": "-g"
-	},
+	}
 }
