@@ -17,6 +17,7 @@ RUN     apt-get install ${APTGET_OPTS} valgrind \
                                                 liblldb-dev libllvm-ocaml-dev libomp-dev libomp5                \
                                                 clang-format clang-tidy clang-tools clang clangd lld lldb       \
                                                 llvm-dev llvm-runtime llvm python3-clang \
+        && apt-get install -y --no-install-recommends ruby-full \
         && apt-get install ${APTGET_OPTS} python3-dev python3 python3-pip python3-venv \
         && apt-get install ${APTGET_OPTS} default-jdk \
         && apt-get install ${APTGET_OPTS} nodejs npm

@@ -18,14 +18,15 @@
 		"args": { "VARIANT": "ubuntu-22.04" }
 	},
 
-	"features": {
-		"git": "latest",
-		"git-lfs": "latest",
-		"github-cli": "latest",
-		"java": "lts",
-		"node": "lts",
-		"python": "latest"
-	},
+	// "features": {
+	// 	"git": "latest",
+	// 	"git-lfs": "latest",
+	// 	"github-cli": "latest",
+	// 	"java": "lts",
+	// 	"node": "lts",
+	// 	"python": "latest",
+	// 	"jupyterlab": "latest"
+	// },
 	// <<< VS Code build
 
 	// Set *default* container specific settings.json values on container create.
@@ -48,14 +49,15 @@
 		"ms-vscode-remote.vscode-remote-extensionpack",
 		"ms-vscode.live-server",
 		"ms-vsliveshare.vsliveshare-pack",
-		"GitHub.vscode-pull-request-github",
 		"GitHub.remotehub",
+		"GitLab.gitlab-workflow",
 		"ms-vscode.cpptools-extension-pack",
 		"ms-vscode.cmake-tools",
 		"ms-python.python",
 		"ms-python.vscode-pylance",
 		"ms-toolsai.jupyter",
 		"ms-vscode.hexeditor",
+		"msrvida.vscode-sanddance",
 		"vscjava.vscode-java-pack",
 		"redhat.vscode-xml",
 		"redhat.vscode-yaml",
