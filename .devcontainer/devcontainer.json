@@ -70,7 +70,15 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "uname -a",
+	"postCreateCommand": [
+		"git config oh-my-zsh.hide-info 1",
+		"git config --global core.editor emacs -nw",
+		"git config --global autocrlf input",
+		"git config commit.template .gitmessage",
+		"git remote add all git@gitlab.com:naiithink/private.git",
+		"git remote set-url --push --add all git@gitlab.com:naiithink/private.git",
+		"git remote set-url --push --add all git@github.com:naiithink/private.git"
+	],
 
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",
