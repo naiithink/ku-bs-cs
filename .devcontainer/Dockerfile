@@ -4,7 +4,6 @@ FROM    mcr.microsoft.com/vscode/devcontainers/base:${VARIANT}
 ARG     APTGET_OPTS="-y --no-install-recommends"
 
 RUN     apt-get update && apt-get upgrade -y && export DEBIAN_FRONTEND=noninteractive
-        && yes | unminimize
 
 RUN     apt-get install ${APTGET_OPTS} libc6-dbg libncurses-dev libtool-bin libxml2-dev                         \
                                                 automake build-essential cmake curl gawk gdb git git-lfs wget \
