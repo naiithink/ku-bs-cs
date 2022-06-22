@@ -1,5 +1,555 @@
 {
+    // Files
+    "files.eol": "\n",
     "files.associations": {
-        "ostream": "cpp"
-    }
+        ".gitmessage": "plaintext",
+        "stdio.h": "c",
+        "locale.h": "c",
+        "limits.h": "c",
+        "stdlib.h": "c",
+        "gcrypt.h": "c",
+        "foo.h": "c",
+        "fileapi.h": "c",
+        "filesys.h": "c",
+        "file.h": "c",
+        "errno.h": "c",
+        "features.h": "c",
+        "cstdlib": "cpp",
+        "*.idl": "c",
+        "*.txt": "plaintext",
+        "__bit_reference": "cpp",
+        "__bits": "cpp",
+        "__config": "cpp",
+        "__debug": "cpp",
+        "__errc": "cpp",
+        "__hash_table": "cpp",
+        "__locale": "cpp",
+        "__mutex_base": "cpp",
+        "__node_handle": "cpp",
+        "__nullptr": "cpp",
+        "__split_buffer": "cpp",
+        "__string": "cpp",
+        "__threading_support": "cpp",
+        "__tree": "cpp",
+        "__tuple": "cpp",
+        "array": "cpp",
+        "atomic": "cpp",
+        "bit": "cpp",
+        "bitset": "cpp",
+        "cctype": "cpp",
+        "charconv": "cpp",
+        "chrono": "cpp",
+        "clocale": "cpp",
+        "cmath": "cpp",
+        "compare": "cpp",
+        "complex": "cpp",
+        "concepts": "cpp",
+        "condition_variable": "cpp",
+        "cstdarg": "cpp",
+        "cstddef": "cpp",
+        "cstdint": "cpp",
+        "cstdio": "cpp",
+        "cstring": "cpp",
+        "ctime": "cpp",
+        "cwchar": "cpp",
+        "cwctype": "cpp",
+        "deque": "cpp",
+        "exception": "cpp",
+        "coroutine": "cpp",
+        "initializer_list": "cpp",
+        "iomanip": "cpp",
+        "ios": "cpp",
+        "iosfwd": "cpp",
+        "iostream": "cpp",
+        "istream": "cpp",
+        "limits": "cpp",
+        "locale": "cpp",
+        "map": "cpp",
+        "memory": "cpp",
+        "mutex": "cpp",
+        "new": "cpp",
+        "numbers": "cpp",
+        "numeric": "cpp",
+        "optional": "cpp",
+        "ostream": "cpp",
+        "queue": "cpp",
+        "random": "cpp",
+        "ratio": "cpp",
+        "semaphore": "cpp",
+        "set": "cpp",
+        "shared_mutex": "cpp",
+        "sstream": "cpp",
+        "stdexcept": "cpp",
+        "streambuf": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "system_error": "cpp",
+        "thread": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "typeinfo": "cpp",
+        "unordered_map": "cpp",
+        "variant": "cpp",
+        "vector": "cpp",
+        "*.tcc": "cpp",
+        "algorithm": "cpp",
+        "functional": "cpp",
+        "iterator": "cpp",
+        "memory_resource": "cpp",
+        "utility": "cpp",
+        "stop_token": "cpp",
+        "cinttypes": "cpp"
+    },
+    // "workbench.editorAssociations": {
+    //     "*.md": "vscode.markdown.preview.editor"
+    // },
+
+    // Extensions
+    "extensions.autoCheckUpdates": true,
+    "extensions.autoUpdate": "onlyEnabledExtensions",
+
+    // Editor
+    /// Controls whether suggestions should automatically show up while typing.
+    "editor.guides.indentation": true,
+    "editor.quickSuggestions": {
+        "other": "on",
+        "comments": "off",
+        "strings": "off"
+    },
+    "editor.suggestOnTriggerCharacters": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.accessibilitySupport": "off",
+    "editor.useTabStops": true,
+    "editor.renderWhitespace": "all",
+    "editor.foldingMaximumRegions": 5000,
+    "editor.wordWrap": "off",
+    "editor.wordWrapColumn": 80,
+    "editor.wrappingIndent": "indent",
+    "editor.fontLigatures": false,
+    "editor.fontFamily": "Consolas, Menlo, Monaco, 'Courier New', monospace",
+    "editor.minimap.enabled": false,
+
+    "breadcrumbs.enabled": false,
+    "workbench.startupEditor": "none",
+    "[latex]": {
+        "editor.formatOnPaste": false,
+        "editor.suggestSelection": "recentlyUsedByPrefix",
+        "editor.autoIndent": "none"
+    },
+    "[latex-expl3]": {
+        "editor.autoIndent": "none"
+    },
+    "window.titleBarStyle": "custom",
+
+    // Git
+    "git.autorefresh": true,
+    "git.autofetch": true,
+    "git.autofetchPeriod": 180,
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+
+    // Terminals
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "source": "PowerShell",
+            "icon": "terminal-powershell"
+        },
+        "Command Prompt": {
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": [],
+            "icon": "terminal-cmd"
+        },
+        "Ubuntu": {
+            /* "icon": "ms-appx:///ProfileIcons/{9acb9455-ca41-5af7-950f-6bca1bc9722f}.png", */
+            "path": "wsl.exe -d Ubuntu"
+        },
+        "Developer PowerShell for VS 2022": {
+        "path": "C:\\Windows\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe -noe -c \"&{Import-Module \"\"\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\Microsoft.VisualStudio.DevShell.dll\"\"\"; Enter-VsDevShell 69e18fd0}\""
+        },
+        "Developer Command Prompt for VS 2022": {
+            // "path": "%comspec% /k \"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\VsDevCmd.bat\""
+            "path": "\"C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/Tools/VsDevCmd.bat\"",
+            "args": [
+                "&" /* , "\"C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/Tools/VsDevCmd.bat\"" */
+            ]
+        },
+        "Git Bash": {
+            "source": "Git Bash"
+        },
+        "MSYS2": {
+            "path": "C:\\Program Files\\msys64\\msys2.exe"
+        },
+        "MinGW": {
+            "path": "C:\\Program Files\\msys64\\mingw64.exe"
+        }
+    },
+
+    // Telemetry
+    /// (2) Deprecated in favor of `telemetry.telemetryLevel`:
+    /// 1. "telemetry.enableTelemetry": false,
+    /// 2.  "telemetry.enableCrashReporter": false,
+    "telemetry.telemetryLevel": "off",
+
+    // ---- Others ----
+
+    // Remote
+
+    /// "ms-vscode-remote.remote-ssh"
+    "remote.SSH.defaultExtensions": [
+        "gitpod.gitpod-remote-ssh"
+    ],
+    "remote.SSH.configFile": "/var/folders/dm/wqycl49j13b9nnps13glqj5h0000gn/T/gitpod_ssh_config-16338-iC9xFlm9K0Kx",
+
+    // "ms-vsliveshare.vsliveshare-pack"
+    "liveshare.presence": false,
+
+    // Red Hat Extensions
+    "redhat.telemetry.enabled": false,
+
+    /// "redhat.vscode-yaml"
+    "yaml.schemas": {
+        "file:///Users/naiithink/.vscode/extensions/atlassian.atlascode-2.10.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    },
+
+    // "bierner.github-markdown-preview"
+    "markdown-preview-github-styles.colorTheme": "system",
+
+    // "ms-toolsai.jupyter"
+    "jupyter.askForKernelRestart": false,
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "right"
+    },
+    "notebook.lineNumbers": "on",
+    "notebook.cellFocusIndicator": "border",
+    "notebook.cellToolbarVisibility": "hover",
+
+    // "lextudio.restructuredtext-pack"
+    "esbonio.server.enabled": false,
+    "esbonio.sphinx.confDir": "",
+    "list.indentationSize": 2,
+    "slugifyMode": true,
+    "restructuredtext.editor.listEditing.list.indentationSize": "inherit",
+    "restructuredtext.preview.name": "docutils",
+
+    // "yzane.markdown-pdf"
+    "markdown-pdf.outputDirectoryRelativePathFile": true,
+    "markdown-pdf.outputDirectory": "../../output",
+    "markdown-pdf.highlightStyle": "vs.css",
+    "markdown-pdf.displayHeaderFooter": false,
+    "markdown-pdf.format": "A4",
+    "markdown-pdf.margin.top": "1.5",
+    "markdown-pdf.margin.bottom": "1cm",
+    "markdown-pdf.margin.right": "1cm",
+    "markdown-pdf.margin.left": "1cm",
+    "markdown-pdf.orientation": "portrait",
+    "markdown-pdf.styles": [],
+    "markdown-pdf.quality": 100,
+    "markdown-pdf.mermaidServer": "https://unpkg.com/mermaid/dist/mermaid.min.js",
+
+    // "James-Yu.latex-workshop"
+    "latex-workshop.latex.build.forceRecipeUsage": false,
+    "latex-workshop.latex.autoBuild.run": "onSave",
+    "latex-workshop.latex.autoBuild.cleanAndRetry.enabled": true,
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.latex.magic.args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%"
+    ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk 🔃",
+            "tools": [
+                "latexmk"
+            ]
+        },
+        {
+            "name": "latexmk (latexmkrc)",
+            "tools": [
+                "latexmk_rconly"
+            ]
+        },
+        {
+            "name": "latexmk (lualatex)",
+            "tools": [
+                "lualatexmk"
+            ]
+        },
+        {
+            "name": "latexmk (xelatex)",
+            "tools": [
+                "xelatexmk"
+            ]
+        },
+        {
+            "name": "pdflatex ➞ bibtex ➞ pdflatex × 2",
+            "tools": [
+                "pdflatex",
+                "bibtex",
+                "pdflatex",
+                "pdflatex"
+            ]
+        },
+        {
+            "name": "Compile Rnw files",
+            "tools": [
+                "rnw2tex",
+                "latexmk"
+            ]
+        },
+        {
+            "name": "Compile Jnw files",
+            "tools": [
+                "jnw2tex",
+                "latexmk"
+            ]
+        },
+        {
+            "name": "tectonic",
+            "tools": [
+                "tectonic"
+            ]
+        },
+        {
+            "name": "xelatex",
+            "tools": [
+                "xelatex"
+            ]
+        }
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "lualatexmk",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-lualatex",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "latexmk_rconly",
+            "command": "latexmk",
+            "args": [
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "bibtex",
+            "command": "bibtex",
+            "args": [
+                "%DOCFILE%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "rnw2tex",
+            "command": "Rscript",
+            "args": [
+                "-e",
+                "knitr::opts_knit$set(concordance = TRUE); knitr::knit('%DOCFILE_EXT%')"
+            ],
+            "env": {}
+        },
+        {
+            "name": "jnw2tex",
+            "command": "julia",
+            "args": [
+                "-e",
+                "using Weave; weave(\"%DOC_EXT%\", doctype=\"tex\")"
+            ],
+            "env": {}
+        },
+        {
+            "name": "jnw2texmintex",
+            "command": "julia",
+            "args": [
+                "-e",
+                "using Weave; weave(\"%DOC_EXT%\", doctype=\"texminted\")"
+            ],
+            "env": {}
+        },
+        {
+            "name": "tectonic",
+            "command": "tectonic",
+            "args": [
+                "--synctex",
+                "--keep-logs",
+                "%DOC%.tex"
+            ],
+            "env": {}
+        },
+        {
+            "name": "xelatex",
+            "command": "xelatex",
+            "args": [
+                "-pdf",
+                "%DOC%"
+            ]
+        }
+    ],
+
+    // "cschlosser.doxdocgen"
+    /// The prefix that is used for each comment line except for first and last.
+    "doxdocgen.c.commentPrefix": " * ",
+
+    /// Smart text snippet for factory methods/functions.
+    "doxdocgen.c.factoryMethodText": "Create a {name} object",
+
+    /// The first line of the comment that gets generated. If empty it won't get generated at all.
+    "doxdocgen.c.firstLine": "/**",
+
+    /// Smart text snippet for getters.
+    "doxdocgen.c.getterText": "Get the {name} object",
+
+    /// The last line of the comment that gets generated. If empty it won't get generated at all.
+    "doxdocgen.c.lastLine": " */",
+
+    /// Smart text snippet for setters.
+    "doxdocgen.c.setterText": "Set the {name} object",
+
+    /// Doxygen comment trigger. This character sequence triggers generation of Doxygen comments.
+    "doxdocgen.c.triggerSequence": "/**",
+
+    /// Smart text snippet for constructors.
+    "doxdocgen.cpp.ctorText": "Construct a new {name} object",
+
+    /// Smart text snippet for destructors.
+    "doxdocgen.cpp.dtorText": "Destroy the {name} object",
+
+    /// The template of the template parameter Doxygen line(s) that are generated. If empty it won't get generated at all.
+    "doxdocgen.cpp.tparamTemplate": "@tparam {param} ",
+
+    /// File copyright documentation tag.  Array of strings will be converted to one line per element.  Can template {year}.
+    "doxdocgen.file.copyrightTag": [
+        "@copyright Copyright (c) {year}"
+    ],
+
+    /// Additional file documentation. One tag per line will be added. Can template `{year}`, `{date}`, `{author}`, `{email}` and `{file}`. You have to specify the prefix.
+    "doxdocgen.file.customTag": [],
+
+    /// The order to use for the file comment. Values can be used multiple times. Valid values are shown in default setting.
+    "doxdocgen.file.fileOrder": [
+        "file",
+        "author",
+        "brief",
+        "version",
+        "date",
+        "empty",
+        "copyright",
+        "empty",
+        "custom"
+    ],
+
+    /// The template for the file parameter in Doxygen.
+    "doxdocgen.file.fileTemplate": "@file {name}",
+
+    /// Version number for the file.
+    "doxdocgen.file.versionTag": "@version 0.0.1",
+
+    /// Set the e-mail address of the author.  Replaces {email}.
+    "doxdocgen.generic.authorEmail": "potsawattkw@outlook.com",
+
+    /// Set the name of the author.  Replaces {author}.
+    "doxdocgen.generic.authorName": "Potsawat Thinkanwatthana",
+
+    /// Set the style of the author tag and your name.  Can template {author} and {email}.
+    "doxdocgen.generic.authorTag": "@author {author} ({email})",
+
+    /// If this is enabled a bool return value will be split into true and false return param.
+    "doxdocgen.generic.boolReturnsTrueFalse": true,
+
+    /// The template of the brief Doxygen line that is generated. If empty it won't get generated at all.
+    "doxdocgen.generic.briefTemplate": "@brief {text}",
+
+    /// The format to use for the date.
+    "doxdocgen.generic.dateFormat": "YYYY-MM-DD",
+
+    /// The template for the date parameter in Doxygen.
+    "doxdocgen.generic.dateTemplate": "@date {date}",
+
+    /// Decide if you want to get smart text for certain commands.
+    "doxdocgen.generic.generateSmartText": true,
+
+    /// Whether include type information at return.
+    "doxdocgen.generic.includeTypeAtReturn": true,
+
+    /// How many lines the plugin should look for to find the end of the declaration. Please be aware that setting this value too low could improve the speed of comment generation by a very slim margin but the plugin also may not correctly detect all declarations or definitions anymore.
+    "doxdocgen.generic.linesToGet": 20,
+
+    /// The order to use for the comment generation. Values can be used multiple times. Valid values are shown in default setting.
+    "doxdocgen.generic.order": [
+        "brief",
+        "empty",
+        "tparam",
+        "param",
+        "return",
+        "custom",
+        "version",
+        "author",
+        "date",
+        "copyright"
+    ],
+
+    /// Custom tags to be added to the generic order. One tag per line will be added. Can template `{year}`, `{date}`, `{author}`, `{email}` and `{file}`. You have to specify the prefix.
+    "doxdocgen.generic.customTags": [],
+
+    /// The template of the param Doxygen line(s) that are generated. If empty it won't get generated at all.
+    "doxdocgen.generic.paramTemplate": "@param {param} ",
+
+    /// The template of the return Doxygen line that is generated. If empty it won't get generated at all.
+    "doxdocgen.generic.returnTemplate": "@return {type} ",
+
+    /// Decide if the values put into {name} should be split according to their casing.
+    "doxdocgen.generic.splitCasingSmartText": true,
+
+    /// Array of keywords that should be removed from the input prior to parsing.
+    "doxdocgen.generic.filteredKeywords": [],
+
+    /// Substitute {author} with git config --get user.name.
+    "doxdocgen.generic.useGitUserName": false,
+
+    /// Substitute {email} with git config --get user.email.
+    "doxdocgen.generic.useGitUserEmail": false,
+
+    /// Provide intellisense and snippet for doxygen commands
+    "doxdocgen.generic.commandSuggestion": true,
+
+    /// Add `\\` in doxygen command suggestion for better readbility (need to enable commandSuggestion)
+    "doxdocgen.generic.commandSuggestionAddPrefix": false,
 }
