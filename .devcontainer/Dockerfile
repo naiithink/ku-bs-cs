@@ -22,6 +22,8 @@ RUN     apt-get install ${APTGET_OPTS} valgrind \
         && apt-get install ${APTGET_OPTS} default-jdk \
         && apt-get install ${APTGET_OPTS} nodejs npm
 
+RUN     apt-get install ${APTGET_OPTS} php-mysql php-curl composer
+
 RUN     apt-get install ${APTGET_OPTS} groff latexmk texlive texlive-xetex \
         && apt-get install ${APTGET_OPTS} graphviz node-mermaid
 
