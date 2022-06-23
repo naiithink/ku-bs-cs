@@ -18,7 +18,7 @@ RUN     apt-get install ${APTGET_OPTS} valgrind \
                                                 llvm-dev llvm-runtime llvm python3-clang \
         && apt-get install ${APTGET_OPTS} docutils-common \
         && apt-get install ${APTGET_OPTS} ruby-full sbcl \
-        && apt-get install ${APTGET_OPTS} python3.10-full \
+        && apt-get install ${APTGET_OPTS} python3-all-dev python3-all python3-all-dbg \
         && apt-get install ${APTGET_OPTS} openjdk-17-jdk \
         && apt-get install ${APTGET_OPTS} nodejs
 

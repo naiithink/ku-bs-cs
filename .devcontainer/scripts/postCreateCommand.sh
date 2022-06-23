@@ -4,7 +4,7 @@
 # USER_NAME='Potsawat Thinkanwatthana'
 # USER_EMAIL='potsawattkw@outlook.com'
 
-git config oh-my-zsh.hide-info 1
+# git config oh-my-zsh.hide-info 1
 # git config --global core.autocrlf input
 # git config --global user.name $USER_NAME
 # git config --global user.email $USER_EMAIL
