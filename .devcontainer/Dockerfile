@@ -18,11 +18,12 @@ RUN     apt-get install ${APTGET_OPTS} valgrind \
                                                 llvm-dev llvm-runtime llvm python3-clang \
         && apt-get install -y --no-install-recommends ruby-full \
         && apt-get install ${APTGET_OPTS} sbcl \
-        && apt-get install ${APTGET_OPTS} python3-dev python3 python3-pip python3-venv \
-        && apt-get install ${APTGET_OPTS} default-jdk \
-        && apt-get install ${APTGET_OPTS} nodejs npm
+        && apt-get install ${APTGET_OPTS} python3.10-full \
+        && apt-get install ${APTGET_OPTS} openjdk-17-jdk \
+        && apt-get install ${APTGET_OPTS} nodejs
 
-RUN     apt-get install ${APTGET_OPTS} php-mysql php-curl composer
+RUN     apt-get install ${APTGET_OPTS} sqlite3 \
+        && apt-get install ${APTGET_OPTS} composer php-mysql php-curl
 
 RUN     apt-get install ${APTGET_OPTS} groff latexmk texlive texlive-xetex \
         && apt-get install ${APTGET_OPTS} graphviz node-mermaid
@@ -31,5 +32,3 @@ RUN     apt-get install ${APTGET_OPTS} groff latexmk texlive texlive-xetex \
 RUN     apt-get install ${APTGET_OPTS} binutils libc6-dev libcurl4 libedit2 libgcc-9-dev libpython2.7           \
                                                 libsqlite3-0 libstdc++-9-dev libz3-dev pkg-config tzdata        \
                                                 uuid-dev zlib1g-dev
-
-RUN     apt-get update && apt-get upgrade -y
