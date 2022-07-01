@@ -35,7 +35,7 @@ int main(int argc, char **argv)
 
         if (decimal_in == 0)
         {
-            printf("Binary out: (unsigned)\t0\n");
+            printf("Birnay out: (unsigned)\t0\n");
             continue;
         }
 
