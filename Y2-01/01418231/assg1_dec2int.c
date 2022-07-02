@@ -1,47 +1,28 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-#define CHAR_MAX 32
-#define DEC_MAX 2147483647
+#define BIT_LEN (sizeof(int) * 8)
+#define DEC_MAX (1 << (BIT_LEN - 1))
 
 int main(void)
 {
-    long dec_max = 1;
-
-    for (int i = 0, exp = CHAR_MAX - 1; i < exp; ++i)
-        dec_max *= 2;
-    dec_max++;
-
-    printf("%ld\n", dec_max);
-
-    unsigned int decimal_in = 0;
-    unsigned int char_index = 0;
+    int decimal_in = 0;
     int result_string_lenth = 0;
-    char binary_out[CHAR_MAX];
+    int char_index = 0;
+    char binary_out[BIT_LEN];
 
-    for (int i = 0; i < CHAR_MAX; ++i)
+    for (int i = 0; i < BIT_LEN; ++i)
         binary_out[i] = '\0';
 
     printf("Decimal in: ");
     scanf("%d", &decimal_in);
 
-    if (decimal_in < 0)
+    if (decimal_in < 0 || decimal_in > (unsigned) DEC_MAX)
     {
-        fprintf(stderr, "Error: Cannot convert negative numbers.\n");
+        fprintf(stderr, "Error: Input must fall within [0, %u).\n", DEC_MAX);
         return 1;
-    }
-    else if (decimal_in > DEC_MAX)
-    {
-        fprintf(stderr, "Error: Number too large (%d max).\n", DEC_MAX);
-        return 1;
-    }
-    else if (decimal_in == 0)
-    {
-        printf("Binary out: %d\n", 0);
-        return 0;
     }
 
-    while (decimal_in > 0)
+    do
     {
         if (decimal_in & 1)
             binary_out[char_index] = '1';
@@ -50,6 +31,7 @@ int main(void)
         decimal_in >>= 1;
         char_index++;
     }
+    while (decimal_in > 0);
 
     for (; binary_out[result_string_lenth] != '\0'; ++result_string_lenth);
 
