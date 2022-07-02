@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+<<<<<<< HEAD
 #define BIT_LEN (sizeof(int) * 8)
 #define DEC_MAX (1 << (BIT_LEN - 1))
 
@@ -11,6 +12,27 @@ int main(void)
     char binary_out[BIT_LEN];
 
     for (int i = 0; i < BIT_LEN; ++i)
+=======
+#define STR_MAX 32
+#define DEC_MAX 2147483647
+
+int main(void)
+{
+    long dec_max = 1;
+
+    for (int i = 0, exp = STR_MAX - 1; i < exp; ++i)
+        dec_max *= 2;
+    dec_max++;
+
+    printf("%ld\n", dec_max);
+
+    unsigned int decimal_in = 0;
+    unsigned int char_index = 0;
+    int result_string_lenth = 0;
+    char binary_out[STR_MAX];
+
+    for (int i = 0; i < STR_MAX; ++i)
+>>>>>>> 00646508ddd623e8e5fd370aff4a68e390917371
         binary_out[i] = '\0';
 
     printf("Decimal in: ");
