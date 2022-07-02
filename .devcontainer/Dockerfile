@@ -6,7 +6,8 @@ ARG     APTGET_OPTS="-y --no-install-recommends"
 RUN     apt-get update && apt-get upgrade -y && export DEBIAN_FRONTEND=noninteractive
 
 RUN     apt-get install ${APTGET_OPTS} libc6-dbg libncurses-dev libtool-bin libxml2-dev                         \
-                                                automake build-essential cmake curl gawk gdb git git-lfs wget \
+                                                automake build-essential cmake curl gawk gcc-multilib gdb git   \
+                                                git-lfs wget \
         && apt-get install ${APTGET_OPTS} ca-certificates gnupg2 \
         && apt-get install ${APTGET_OPTS} emacs vim \
         && apt-get install ${APTGET_OPTS} ffmpeg gawk ghostscript pandoc tesseract-ocr
