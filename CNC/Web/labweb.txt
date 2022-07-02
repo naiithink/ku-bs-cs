@@ -1,0 +1,7 @@
+- log in
+- *blogs
+- activities, awards
+
+
+Servers
+- domain: ONLY https://cnc.cs.sci.ku.ac.th/

@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define CHAR_MAX 32
+#define STR_MAX 32
 #define DEC_MAX 2147483647
 
 int main(void)
 {
     long dec_max = 1;
 
-    for (int i = 0, exp = CHAR_MAX - 1; i < exp; ++i)
+    for (int i = 0, exp = STR_MAX - 1; i < exp; ++i)
         dec_max *= 2;
     dec_max++;
 
@@ -17,9 +17,9 @@ int main(void)
     unsigned int decimal_in = 0;
     unsigned int char_index = 0;
     int result_string_lenth = 0;
-    char binary_out[CHAR_MAX];
+    char binary_out[STR_MAX];
 
-    for (int i = 0; i < CHAR_MAX; ++i)
+    for (int i = 0; i < STR_MAX; ++i)
         binary_out[i] = '\0';
 
     printf("Decimal in: ");
