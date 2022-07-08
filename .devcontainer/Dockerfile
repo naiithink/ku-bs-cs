@@ -23,6 +23,7 @@ RUN     apt-get install ${APTGET_OPTS} valgrind \
         && apt-get install ${APTGET_OPTS} python3 python3-dbg python3-dev python3-doc python3-pip python3-tk    \
                                                 python3-venv \
         && apt-get install ${APTGET_OPTS} openjdk-17-jdk \
+        && apt-get install ${APTGET_OPTS} emscripten \
         && apt-get install ${APTGET_OPTS} nodejs
 
 RUN     apt-get install ${APTGET_OPTS} sqlite3 \
