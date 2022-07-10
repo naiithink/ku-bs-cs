@@ -4,7 +4,7 @@
     Scale = 1.4,
     Ligatures = TeX,
     Extension = .ttf,
-    Path = ../../assets/fonts/THSarabunNew/,
+    Path = ../../../assets/fonts/THSarabunNew/,
     UprightFont = THSarabunNew,
     BoldFont = THSarabunNew_Bold,
     ItalicFont = THSarabunNew_Italic,
