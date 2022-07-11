@@ -27,6 +27,9 @@ oscrypto-ca-bundle.crt
 bh_unicode_properties.cache
 GitHub.sublime-settings
 
+# IntelliJ
+.idea/
+
 # Vim
 [._]*.s[a-v][a-z]
 !*.svg  # comment out if you don't need vector files
