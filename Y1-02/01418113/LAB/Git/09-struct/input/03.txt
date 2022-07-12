@@ -1,0 +1,4 @@
+Google_Classroom Google_LLC Education 0 No 4
+LinkedIn LinkedIn_Corporation Business 0 Yes 4
+Netflix Netflix,_Inc. Entertainment 0 Yes 4
+Visual_Studio_Code Microsoft_Corporation Productivity 0 No 0
