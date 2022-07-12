@@ -1,0 +1,69 @@
+////////////////////////////////////////////////////////////////////////////////
+// Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+////////////////////////////////////////////////////////////////////////////////
+//   ____  ____ 
+//  /   /\/   / 
+// /___/  \  /    Vendor: Xilinx 
+// \   \   \/     Version : 14.7
+//  \   \         Application : sch2hdl
+//  /   /         Filename : LAB06_02.vf
+// /___/   /\     Timestamp : 09/01/2021 07:35:21
+// \   \  /  \ 
+//  \___\/\___\ 
+//
+//Command: sch2hdl -sympath /home/naiithink/in-Sync/Workspaces/WD/ISE_DS/CS131-LAB -intstyle ise -family spartan6 -verilog /home/naiithink/in-Sync/Workspaces/WD/ISE_DS/CS131-LAB/LAB06_02.vf -w /home/naiithink/in-Sync/Workspaces/Files/ISE_DS/CS131-LAB/Sources/LAB06_02.sch
+//Design Name: LAB06_02
+//Device: spartan6
+//Purpose:
+//    This verilog netlist is translated from an ECS schematic.It can be 
+//    synthesized and simulated, but it should not be modified. 
+//
+`timescale 1ns / 1ps
+
+module LAB06_02(A, 
+                B, 
+                C, 
+                D, 
+                C1, 
+                S0, 
+                S1);
+
+    input A;
+    input B;
+    input C;
+    input D;
+   output C1;
+   output S0;
+   output S1;
+   
+   wire XLXN_5;
+   wire XLXN_26;
+   wire XLXN_28;
+   wire XLXN_31;
+   wire XLXN_80;
+   wire XLXN_81;
+   
+   AND2  XLXI_3 (.I0(B), 
+                .I1(A), 
+                .O(XLXN_31));
+   XOR2  XLXI_4 (.I0(B), 
+                .I1(A), 
+                .O(S0));
+   AND2  XLXI_5 (.I0(D), 
+                .I1(C), 
+                .O(XLXN_28));
+   XOR2  XLXI_6 (.I0(D), 
+                .I1(C), 
+                .O(XLXN_5));
+   AND2  XLXI_7 (.I0(XLXN_5), 
+                .I1(XLXN_31), 
+                .O(XLXN_26));
+   XOR2  XLXI_8 (.I0(XLXN_5), 
+                .I1(XLXN_31), 
+                .O(S1));
+   OR2  XLXI_9 (.I0(XLXN_28), 
+               .I1(XLXN_26), 
+               .O(C1));
+   VCC  XLXI_16 (.P(XLXN_81));
+   GND  XLXI_17 (.G(XLXN_80));
+endmodule
