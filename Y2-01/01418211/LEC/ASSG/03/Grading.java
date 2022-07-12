@@ -22,7 +22,7 @@ public class Grading {
             grade = "F";
         else if (!projectStatus)
             grade = "I";
-        else {
+        else
             if (totalScore >= 80)
                 grade = "A";
             else if (totalScore >= 75)
@@ -37,7 +37,6 @@ public class Grading {
                 grade = "D+";
             else
                 grade = "D";
-        }
 
         return grade;
     }
