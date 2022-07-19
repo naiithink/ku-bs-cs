@@ -1,4 +1,0 @@
-Messenger Meta_Platforms,_Inc. Social_Networking 0 Yes 4
-Webex Cisco Business 0 No 5
-Discord Discord,_inc. Social_Networking 0 Yes 5
-Among_Us InnerSloth_LLC Action 0 Yes 4
