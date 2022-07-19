@@ -4,9 +4,3 @@
 [submodule "Y2-01/01418211/LAB/ASSG/lab-03-assignment-class-and-object-2-naiithink"]
 	path = Y2-01/01418211/LAB/ASSG/lab-03-assignment-class-and-object-2-naiithink
 	url = git@github.com:CS211-651/lab-03-assignment-class-and-object-2-naiithink.git
-[submodule "Y1-02/01418113-LAB/ASSG/07-git-101-naiithink"]
-	path = Y1-02/01418113-LAB/ASSG/07-git-101-naiithink
-	url = git@github.com:CS113-642/07-git-101-naiithink.git
-[submodule "Y1-02/01418113-LAB/ASSG/09-struct-naiithink"]
-	path = Y1-02/01418113-LAB/ASSG/09-struct-naiithink
-	url = git@github.com:CS113-642/09-struct-naiithink.git
