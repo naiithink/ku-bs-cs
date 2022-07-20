@@ -1,0 +1,49 @@
+Player(int level, String jobClass, Weapon weapon, Armor armor) {
+    this.level = level;
+    this.jobClass = jobClass;
+    this.weapon = weapon;
+    this.armor = armor;
+
+    if (jobClass == "Warior")
+        this.baseHealth = 2;
+    else if (jobClass == "Wizard")
+        this.baseHealth = 1;
+    else
+        this.baseHealth = 1.5;
+
+    this.health = (this.baseHealth + this.level) * 100 + this.getArmor().getDefendPoint();
+}
+
+
+---
+
+
+Weapon ptwWeapon
+                        double      damagePoint             1000.0
+
+
+Armor ptwArmor
+                        double      defendPoint             1000.0
+
+
+Player pro
+public      static      int         globalDeathCount        3
+                        int         deathCount              0
+                        int         level                   3
+                        String      jobClass                "Wizard"
+                        double      baseHealth              2.0
+                        double      health                  0.0
+                        Weapon      Weapon                  null
+                        Armor       Armor                   null
+
+
+Player noob
+public      static      int         globalDeathCount        3
+                        int         deathCount              0
+                        int         level                   3
+                        String      jobClass                "Wizard"
+                        double      baseHealth              2.0
+                        double      health                  0.0
+                        Weapon      Weapon                  null
+                        Armor       Armor                   null
+
