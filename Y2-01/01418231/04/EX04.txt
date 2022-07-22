@@ -1,0 +1,6 @@
+k is stored at xxx.
+value of k is 2.
+value of k is 7.
+value of j is 8.
+value of k is 7.
+value of *intPtr is 7.
