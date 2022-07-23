@@ -22,6 +22,7 @@ int main(void)
     scanf("%d", &tables);
     if (tables < TABLE_MIN || tables > TABLE_MAX)
     {
+        /* fprintf(stderr, "Error"); */
         printf("Error");
         if (tables < TABLE_MIN)
         {
