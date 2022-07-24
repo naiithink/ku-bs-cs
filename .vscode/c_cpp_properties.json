@@ -14,6 +14,12 @@
             "/usr/include/aarch64-linux-gnu",
             "/usr/include"
         ],
+        "envX64RHELGCCVersion": "12",
+        "envX64RHELIncludePath": [
+            "/usr/lib/gcc/x86_64-redhat-linux/${env:envX64RHELGCCVersion}/include",
+            "/usr/local/include",
+            "/usr/include"
+        ],
         "envMacClangVersion": "13.1.6",
         "envMacIncludePath": [
             "/usr/local/include",
@@ -24,43 +30,6 @@
         ]
     },
     "configurations": [
-        {
-            "name": "linux-gcc-arm64",
-            "includePath": [
-                "${workspaceFolder}/**",
-                "${env:envArm64LinuxIncludePath}"
-            ],
-            "defines": [],
-            "compilerPath": "/usr/bin/gcc",
-            "cStandard": "c17",
-            "cppStandard": "c++14",
-            "intelliSenseMode": "linux-gcc-arm64"
-        },
-        {
-            "name": "linux-clang-arm64",
-            "includePath": [
-                "${workspaceFolder}/**",
-                "${env:envArm64LinuxIncludePath}"
-            ],
-            "defines": [],
-            "compilerPath": "/usr/bin/clang",
-            "cStandard": "c17",
-            "cppStandard": "c++14",
-            "intelliSenseMode": "linux-clang-arm64"
-        },
-        {
-            "name": "linux-gcc-x64",
-            "includePath": [
-                "${workspaceFolder}/**",
-                "${env:envX64LinuxIncludePath}"
-            ],
-            "defines": [],
-            "macFrameworkPath": [],
-            "compilerPath": "/usr/bin/gcc",
-            "cStandard": "gnu17",
-            "cppStandard": "gnu++17",
-            "intelliSenseMode": "linux-gcc-x64"
-        },
         {
             "name": "macos-clang-arm64",
             "includePath": [
@@ -105,6 +74,67 @@
             "cStandard": "gnu17",
             "cppStandard": "gnu++17",
             "intelliSenseMode": "macos-gcc-arm64"
+        },
+        {
+            "name": "linux-gcc-arm64",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${env:envArm64LinuxIncludePath}"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c17",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "linux-gcc-arm64"
+        },
+        {
+            "name": "linux-clang-arm64",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${env:envArm64LinuxIncludePath}"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c17",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "linux-clang-arm64"
+        },
+        {
+            "name": "linux-gcc-x64",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${env:envX64LinuxIncludePath}"
+            ],
+            "defines": [],
+            "macFrameworkPath": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x64"
+        },
+        {
+            "name": "rhel-gcc-x64",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${env:envX64RHELIncludePath}"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c17",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "linux-gcc-x64"
+        },
+        {
+            "name": "rhel-clang-x64",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${env:envX64RHELIncludePath}"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c17",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "linux-clang-x64"
         },
         {
             "name": "windows-msvc-x64",
