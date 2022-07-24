@@ -40,8 +40,7 @@ public class MemberCardDetailController {
     private void showMemberCardData() {
         nameLabel.setText(memberCard.getName());
         phoneLabel.setText(memberCard.getPhone());
-        String cumulativePurchase =
-                String.format("%.2f", memberCard.getCumulativePurchase());
+        String cumulativePurchase = String.format("%.2f", memberCard.getCumulativePurchase());
         cumulativePurchaseLabel.setText(cumulativePurchase);
         String point = "" + memberCard.getStamp();
         pointLabel.setText(point);
@@ -49,9 +48,19 @@ public class MemberCardDetailController {
 
     @FXML
     public void handleAddPurchaseButton(ActionEvent actionEvent) {
+        String input = purchaseTextField.getText();
+        double purchase = Double.parseDouble(input);
+        memberCard.addPurchase(purchase);
+        showMemberCardData();
+        purchaseTextField.clear();
     }
 
     @FXML
     public void handleUsePointButton(ActionEvent actionEvent) {
+        String input = pointTextField.getText();
+        double purchase = Double.parseDouble(input);
+        memberCard.addPurchase(purchase);
+        showMemberCardData();
+        pointTextField.clear();
     }
 }
