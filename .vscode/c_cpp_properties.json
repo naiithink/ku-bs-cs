@@ -1,12 +1,23 @@
 {
+    "env": {
+        "envMacClangVersion": "13.1.6",
+        "envMacIncludePath": [
+            "/usr/local/include",
+            "/Library/Developer/CommandLineTools/usr/lib/clang/${env:envMacClangVersion}/include",
+            "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include",
+            "/Library/Developer/CommandLineTools/usr/include",
+            "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        ]
+    },
     "configurations": [
         {
             "name": "macos-clang-arm64",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${env:envMacIncludePath}"
             ],
             "defines": [],
-            "macFrameworkPath": [],
+            "macFrameworkPath": ["/System/Library/Frameworks"],
             "compilerPath": "/usr/bin/clang",
             "cStandard": "gnu17",
             "cppStandard": "gnu++17",
@@ -15,10 +26,11 @@
         {
             "name": "macos-gcc-12-arm64",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${env:envMacIncludePath}"
             ],
             "defines": [],
-            "macFrameworkPath": [],
+            "macFrameworkPath": ["/System/Library/Frameworks"],
             "compilerPath": "/opt/homebrew/bin/gcc-12",
             "cStandard": "gnu17",
             "cppStandard": "gnu++17",
@@ -27,10 +39,11 @@
         {
             "name": "macos-gcc-11-arm64",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${env:envMacIncludePath}"
             ],
             "defines": [],
-            "macFrameworkPath": [],
+            "macFrameworkPath": ["/System/Library/Frameworks"],
             "compilerPath": "/opt/homebrew/bin/gcc-11",
             "cStandard": "gnu17",
             "cppStandard": "gnu++17",
