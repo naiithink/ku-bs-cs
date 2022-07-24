@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.lab04.shop.controllers.MemberCardDetailController">
    <children>
       <AnchorPane layoutY="129.0">
@@ -45,7 +44,7 @@
                            <children>
                               <Group>
                                  <children>
-                                    <Label fx:id="pointLabelText" layoutY="45.0" prefHeight="17.0" prefWidth="105.0" text="คะแนนสะสม (แต้ม)" />
+                                    <Label fx:id="pointLabelText" layoutY="45.0" prefHeight="18.0" prefWidth="201.0" text="คะแนนสะสม (แต้ม)" />
                                     <Label fx:id="phoneLabeltext" text="หมายเลขโทรศัพท์" />
                                     <Label fx:id="phoneLabel" layoutX="130.0" text="phoneLabel" />
                                     <Label fx:id="pointLabel" layoutY="70.0" text="pointLabel">

@@ -33,7 +33,7 @@ public class MemberCardDetailController {
     public void initialize() {
         // initialize จะถูกเรียกใช้เมื่อมีการ load Controller นี้
         System.out.println("initialize MemberCardDetailController");
-        memberCard = new MemberCard("John Smith", "081-222-8888");
+        memberCard = new MemberCard("Potsawat T.", "64-1045-1199");
         showMemberCardData();
     }
 
@@ -58,8 +58,8 @@ public class MemberCardDetailController {
     @FXML
     public void handleUsePointButton(ActionEvent actionEvent) {
         String input = pointTextField.getText();
-        double purchase = Double.parseDouble(input);
-        memberCard.addPurchase(purchase);
+        int point = Integer.parseInt(input);
+        memberCard.useStamp(point);
         showMemberCardData();
         pointTextField.clear();
     }
