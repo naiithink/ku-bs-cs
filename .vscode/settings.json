@@ -98,7 +98,8 @@
         "memory_resource": "cpp",
         "utility": "cpp",
         "stop_token": "cpp",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "string.h": "c"
     },
     // "workbench.editorAssociations": {
     //     "*.md": "vscode.markdown.preview.editor"
