@@ -18,16 +18,16 @@ static dish *menu_start = NULL;
 
 int main(void)
 {
-    dish *menu;
     char s_buff[STR_LEN] = "";
 
     dish *temp = menu_start;
     int index = 0;
     int id = 0;
 
-    while (1)
+    while (true)
     {
         // printf("> ");
+        // fgets(s_buff, STR_LEN, stdin);
         scanf("%s", s_buff);
 
         switch (s_buff[0])
@@ -38,6 +38,7 @@ int main(void)
                     && s_buff[3] == '\0')
                 {
                     // printf("+ ");
+                    // fgets(s_buff, STR_LEN, stdin);
                     scanf("%s", s_buff);
 
                     dish *adish = malloc(sizeof *adish);
@@ -72,6 +73,7 @@ int main(void)
                     temp = menu_start;
 
                     // printf("+ ");
+                    // fgets(s_buff, STR_LEN, stdin);
                     scanf("%s", s_buff);
 
                     index = strtol(s_buff, NULL, 10);

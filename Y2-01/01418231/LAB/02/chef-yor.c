@@ -18,14 +18,13 @@ static dish *menu_start = NULL;
 
 int main(void)
 {
-    dish *menu;
     char s_buff[STR_LEN] = "";
 
     dish *temp = menu_start;
     int index = 0;
     int id = 0;
 
-    while (1)
+    while (true)
     {
         // printf("> ");
         if (fgets(s_buff, STR_LEN, stdin) == NULL)
