@@ -7,6 +7,13 @@
             "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include",
             "/Library/Developer/CommandLineTools/usr/include",
             "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        ],
+        "envX64LinuxGCCVersion": "11",
+        "envX64LinuxIncludePath": [
+            "/usr/lib/gcc/x86_64-linux-gnu/${env:envX64LinuxGCCVersion}/include",
+            "/usr/local/include",
+            "/usr/include/x86_64-linux-gnu",
+            "/usr/include"
         ]
     },
     "configurations": [
@@ -17,7 +24,9 @@
                 "${env:envMacIncludePath}"
             ],
             "defines": [],
-            "macFrameworkPath": ["/System/Library/Frameworks"],
+            "macFrameworkPath": [
+                "/System/Library/Frameworks"
+            ],
             "compilerPath": "/usr/bin/clang",
             "cStandard": "gnu17",
             "cppStandard": "gnu++17",
@@ -30,7 +39,9 @@
                 "${env:envMacIncludePath}"
             ],
             "defines": [],
-            "macFrameworkPath": ["/System/Library/Frameworks"],
+            "macFrameworkPath": [
+                "/System/Library/Frameworks"
+            ],
             "compilerPath": "/opt/homebrew/bin/gcc-12",
             "cStandard": "gnu17",
             "cppStandard": "gnu++17",
@@ -43,7 +54,9 @@
                 "${env:envMacIncludePath}"
             ],
             "defines": [],
-            "macFrameworkPath": ["/System/Library/Frameworks"],
+            "macFrameworkPath": [
+                "/System/Library/Frameworks"
+            ],
             "compilerPath": "/opt/homebrew/bin/gcc-11",
             "cStandard": "gnu17",
             "cppStandard": "gnu++17",
@@ -52,7 +65,8 @@
         {
             "name": "linux-gcc-x64",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${env:envX64LinuxIncludePath}"
             ],
             "defines": [],
             "macFrameworkPath": [],
@@ -60,6 +74,38 @@
             "cStandard": "gnu17",
             "cppStandard": "gnu++17",
             "intelliSenseMode": "linux-gcc-x64"
+        },
+        {
+            "name": "windows-msvc-x64",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "windowsSdkVersion": "10.0.19041.0",
+            "compilerPath": "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.32.31326/bin/Hostx64/x64/cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-msvc-x64"
+        },
+        {
+            "name": "windows-gcc-x64",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "windowsSdkVersion": "10.0.19041.0",
+            "compilerPath": "C:/Program Files/msys64/ucrt64/bin/gcc.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-gcc-x64"
         }
     ],
     "version": 4
