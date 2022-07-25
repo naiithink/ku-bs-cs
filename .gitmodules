@@ -13,3 +13,6 @@
 [submodule "Y2-01/01418211/LAB/ASSG/lab-04-assignment---mvc-and-javafx-naiithink"]
 	path = Y2-01/01418211/LAB/ASSG/lab-04-assignment---mvc-and-javafx-naiithink
 	url = git@github.com:CS211-651/lab-04-assignment---mvc-and-javafx-naiithink.git
+[submodule "Y2-01/01418211/LAB/ASSG/lab-05-assignment---change-page-javafx-naiithink"]
+	path = Y2-01/01418211/LAB/ASSG/lab-05-assignment---change-page-javafx-naiithink
+	url = git@github.com:CS211-651/lab-05-assignment---change-page-javafx-naiithink.git
