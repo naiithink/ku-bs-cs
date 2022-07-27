@@ -1,0 +1,40 @@
+$ ./flowers
+You will be, in turn, asked to enter infos about 3 flowers.
+
+<<<<< #1 <<<<<
+ID:   ๕๗๑๐๐
+Name: พวงแสด
+Cost: 100
+LOCALE
+- District: เมืองเชียงราย
+- Province: เชียงราย
+
+<<<<< #2 <<<<<
+ID:   ๕๐๓๐๐
+Name: ทองกวาว
+Cost: 101
+LOCALE
+- District: เมืองเชียงใหม่
+- Province: เชียงใหม่
+
+<<<<< #3 <<<<<
+ID:   ๕๕๐๐๐
+Name: เสี้ยวดอกขาว
+Cost: 102
+LOCALE
+- District: เมืองน่าน
+- Province: น่าน
+
+>>>>> Summary >>>>>
+# 1     ID:       ๕๗๑๐๐
+        Name:     พวงแสด
+        Cost:     100.00
+        Locale:   เมืองเชียงราย, เชียงราย
+# 2     ID:       ๕๐๓๐๐
+        Name:     ทองกวาว
+        Cost:     101.00
+        Locale:   เมืองเชียงใหม่, เชียงใหม่
+# 3     ID:       ๕๕๐๐๐
+        Name:     เสี้ยวดอกขาว
+        Cost:     102.00
+        Locale:   เมืองน่าน, น่าน
