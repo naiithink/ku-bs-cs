@@ -1,0 +1,116 @@
+% !TEX program = xelatex
+
+\documentclass{article}
+
+% \usepackage{showframe}
+
+% \usepackage{blindtext}
+\usepackage{fontspec}
+\usepackage{geometry}
+\usepackage{sidenotes}
+% \usepackage{wallpaper}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{listings}
+\usepackage{polyglossia}
+\usepackage{hyperref}
+
+\hypersetup{%
+pdftitle = {Recursion: Factorial},
+pdfauthor = {พศวัต ถิ่นกาญจน์วัฒนา (6410451199)},
+pdfkeywords = {01418231, {data structures}, recursion}}
+
+\reversemarginpar
+
+\geometry{%
+a4paper,
+margin = 0.55in,
+left = 1in,
+right = 1in}
+
+\XeTeXlinebreaklocale "th"
+\setdefaultlanguage[numerals=arabic]{thai}
+\setotherlanguages{english}
+
+\setmainfont{TH Sarabun New}
+\newfontfamily\thaifont[Script=Default]{TH Sarabun New}
+
+\lstset{%
+basicstyle = \ttfamilylatin,
+commentstyle = \color{olive},
+keywordstyle = \color{magenta},
+numbers = left,
+captionpos = b,
+belowcaptionskip = 1ex,
+frame = single,
+xleftmargin = 3.4pt,
+xrightmargin = -3.4pt}
+
+\linespread{1.5}
+
+\pagenumbering{gobble}
+
+\title{\flushleft\normalsize 01418231, Data Structures\\
+\LARGE \textbf{Recursion}: Factorial\\
+\vspace{2ex}
+\normalsize พศวัต ถิ่นกาญจน์วัฒนา\\
+รหัสประจำตัวนิสิต 6410451199
+\vspace{-12ex}}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\sloppy\flushleft
+
+\fbox{\begin{minipage}[c]{\textwidth}
+วาดแผนภาพ แสดงการเรียกซ้ำ ของ function factorial แบบ recursive
+\end{minipage}}
+
+\begin{minipage}[t]{\textwidth}
+\begin{lstlisting}[language=C,caption=The Factorial Function]
+int factorial(int n)
+{
+    if (n == 1)
+        return 1;
+    else
+        return n * factorial(n - 1);
+}
+\end{lstlisting}
+\end{minipage}
+
+\rule{0em}{5ex}
+
+\begin{lstlisting}[language=C,numbers=none,frame=none]
+int result = 0;
+result = factorial(5);
+
+factorial(5)    =    5  *  factorial(4)
+                           \__________/
+                            |
+                            |
+                =    5  *   ( 4  *  factorial(3) )
+                                    \__________/
+                                     |
+                                     |
+                =    5  *     4  *   ( 3  *  factorial(2) )
+                                             \__________/
+                                              |
+                                              |
+                =    5  *     4  *     3  *   ( 2  *  factorial(1) )
+                                                      \__________/
+                                                       |
+                                                       |
+                =    5  *     4  *     3  *     2  *   ( 1 )
+                     \_____________________________________/
+                      |
+                      |
+                =     120
+
+result = 120;
+\end{lstlisting}
+
+\end{document}
