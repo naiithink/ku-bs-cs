@@ -1,0 +1,103 @@
+% !TEX program = pdflatex
+
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{multirow}
+\usepackage{hyperref}
+
+\hypersetup{%
+pdftitle = {Macmillan Education Student Application User Feedback Report},
+pdfauthor = {Potsawat Thinkanwatthana},
+pdfkeywords = {{macmillan}, {education}, {app}}}
+
+\geometry{%
+a4paper}
+
+\title{Macmillan Education Student Application\\
+User Feedback Report}
+\author{Potsawat Thinkanwatthana\\
+Department of Computer Science, Faculty of Science\\
+Kasetsart University, Bangkok, Thailand\\
+potsawattkw@outlook.com}
+\date{\today}
+
+\begin{document}
+\begin{titlepage}
+\maketitle
+\thispagestyle{empty}
+\tableofcontents
+\end{titlepage}
+
+\section{Introduction}
+My name is Potsawat Thinkanwatthana, a Macmillan Education Student app user. I have been using the Macmillan Education Student app
+both the web client and the mobile client versions. At the moment, I have faced some issues using the app
+and wish to report them to the developers. Those issues involve:
+\begin{itemize}
+\setlength\itemsep{0ex}
+    \item Class management system
+    \item Session authentication and management system
+    \item Offline material management
+    \item Working progress monitoring
+    \item User interface: page transitioning, screen rotation
+    \item Note taking feature
+\end{itemize}
+I will explain the details about each of the issues and steps to reproduce some of them later in section \ref{sec:detailed-explanation} on page \pageref{sec:detailed-explanation}.
+If there is any other required information, you can ask me by writing to potsawattkw@outlook.com.
+
+\section{Environment}
+There are two client versions of the app I have been using---the web and mobile client.
+
+\subsection{Web Client}
+\begin{tabular}{p{7em} l}
+Environment     & PROD\\
+Version         & 1.6.1.76\\
+Browser         & Google Chrome Desktop (Stable Release)\\
+Browser Version & 103.0.5060.134 (Official Build) (arm64)
+\end{tabular}
+
+\subsection{Mobile Client}
+\begin{tabular}{p{7em} l}
+Environment     & PROD\\
+Version         & 1.5.7.74\\
+Device          & Apple iPad Pro (10.5-inch)\\
+OS              & iPadOS\\
+OS Version      & 15.6 (19G71)
+\end{tabular}
+
+\pagebreak[4]
+
+\section{Detailed Explanation}
+\label{sec:detailed-explanation}
+Issues I have faced:
+\begin{enumerate}
+\setlength\itemsep{0ex}
+    \item There is no option to leave the joined classes. Students should be able to leave a class that they are no longer attended by themselves.
+    \item The login page always shows up even already logged in to a session.
+    \item On the mobile client version, the offline material management is unstable.
+    \item While working on an activity, if the page was reloaded, the current working progress will be reset and recounts only new activities that were not touched.
+            Thus, reattempting recently attempted activity is not possible until the last one in the assignment is reached.
+    \item Note taking feature is buggy and sometime does not load some saved notes.
+    \item Pages take too long to load, including those have been downloaded to the device.
+    \item On iPadOS mobile clients, the main menu view cannot goes landscape.
+\end{enumerate}
+
+\subsection{Class Management}
+My teacher and I have came across problems with the app's class management system as it is not
+possible for students to leave classes.
+
+\subsubsection*{Steps to Reproduce}
+Supposed that a student wants to join a class, $A$, but entered a wrong class code which refers to another class, $B$.
+\begin{center}
+\fbox{\begin{minipage}[c]{\textwidth}
+\begin{enumerate}
+    \item Enters $B$ class code into the app to join the class.
+    \item Enters $A$ class code into the app to join the class.
+    \item Now, there are 2 classes have been joined so far but there is no way to leave any of them.
+\end{enumerate}
+\end{minipage}}
+\end{center}
+
+\subsection{The Login Page}
+Everytime I open the app on my tablet, I got the login page regardless of my current login status.
+\end{document}
