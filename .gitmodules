@@ -16,3 +16,6 @@
 [submodule "Y2-01/01418211/LAB/ASSG/lab-05-assignment---change-page-javafx-naiithink"]
 	path = Y2-01/01418211/LAB/ASSG/lab-05-assignment---change-page-javafx-naiithink
 	url = git@github.com:CS211-651/lab-05-assignment---change-page-javafx-naiithink.git
+[submodule "Y2-01/01418211/LAB/ASSG/lab-06-assignment---arraylist-and-listview-naiithink"]
+	path = Y2-01/01418211/LAB/ASSG/lab-06-assignment---arraylist-and-listview-naiithink
+	url = git@github.com:CS211-651/lab-06-assignment---arraylist-and-listview-naiithink.git
