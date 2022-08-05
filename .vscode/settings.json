@@ -1,4 +1,7 @@
 {
+    // SSH
+    "remote.SSH.remoteServerListenOnSocket": true,
+
     // Files
     "files.eol": "\n",
     "files.associations": {
@@ -16,90 +19,7 @@
         "features.h": "c",
         "cstdlib": "cpp",
         "*.idl": "c",
-        "*.txt": "plaintext",
-        "__bit_reference": "cpp",
-        "__bits": "cpp",
-        "__config": "cpp",
-        "__debug": "cpp",
-        "__errc": "cpp",
-        "__hash_table": "cpp",
-        "__locale": "cpp",
-        "__mutex_base": "cpp",
-        "__node_handle": "cpp",
-        "__nullptr": "cpp",
-        "__split_buffer": "cpp",
-        "__string": "cpp",
-        "__threading_support": "cpp",
-        "__tree": "cpp",
-        "__tuple": "cpp",
-        "array": "cpp",
-        "atomic": "cpp",
-        "bit": "cpp",
-        "bitset": "cpp",
-        "cctype": "cpp",
-        "charconv": "cpp",
-        "chrono": "cpp",
-        "clocale": "cpp",
-        "cmath": "cpp",
-        "compare": "cpp",
-        "complex": "cpp",
-        "concepts": "cpp",
-        "condition_variable": "cpp",
-        "cstdarg": "cpp",
-        "cstddef": "cpp",
-        "cstdint": "cpp",
-        "cstdio": "cpp",
-        "cstring": "cpp",
-        "ctime": "cpp",
-        "cwchar": "cpp",
-        "cwctype": "cpp",
-        "deque": "cpp",
-        "exception": "cpp",
-        "coroutine": "cpp",
-        "initializer_list": "cpp",
-        "iomanip": "cpp",
-        "ios": "cpp",
-        "iosfwd": "cpp",
-        "iostream": "cpp",
-        "istream": "cpp",
-        "limits": "cpp",
-        "locale": "cpp",
-        "map": "cpp",
-        "memory": "cpp",
-        "mutex": "cpp",
-        "new": "cpp",
-        "numbers": "cpp",
-        "numeric": "cpp",
-        "optional": "cpp",
-        "ostream": "cpp",
-        "queue": "cpp",
-        "random": "cpp",
-        "ratio": "cpp",
-        "semaphore": "cpp",
-        "set": "cpp",
-        "shared_mutex": "cpp",
-        "sstream": "cpp",
-        "stdexcept": "cpp",
-        "streambuf": "cpp",
-        "string": "cpp",
-        "string_view": "cpp",
-        "system_error": "cpp",
-        "thread": "cpp",
-        "tuple": "cpp",
-        "type_traits": "cpp",
-        "typeinfo": "cpp",
-        "unordered_map": "cpp",
-        "variant": "cpp",
-        "vector": "cpp",
-        "*.tcc": "cpp",
-        "algorithm": "cpp",
-        "functional": "cpp",
-        "iterator": "cpp",
-        "memory_resource": "cpp",
-        "utility": "cpp",
-        "stop_token": "cpp",
-        "cinttypes": "cpp",
-        "string.h": "c"
+        "*.txt": "plaintext"
     },
     // "workbench.editorAssociations": {
     //     "*.md": "vscode.markdown.preview.editor"
@@ -150,7 +70,8 @@
     "git.confirmSync": false,
     "git.enableSmartCommit": true,
 
-    // Terminals
+    // Terminal
+    "terminal.integrated.shellIntegration.enabled": false,
     "terminal.integrated.profiles.windows": {
         "PowerShell": {
             "source": "PowerShell",
@@ -181,11 +102,23 @@
         "Git Bash": {
             "source": "Git Bash"
         },
-        "MSYS2": {
-            "path": "C:\\Program Files\\msys64\\msys2.exe"
+        "MINGW64 / MSYS2": {
+            "path": "C:\\Program Files\\msys64\\msys2_shell.cmd",
+            "args": [
+                "-defterm", "-here", "-no-start", "-mingw64"
+            ]
         },
-        "MinGW": {
-            "path": "C:\\Program Files\\msys64\\mingw64.exe"
+        "MINGW32 / MSYS2": {
+            "path": "C:\\Program Files\\msys64\\msys2_shell.cmd",
+            "args": [
+                "-defterm", "-here", "-no-start", "-mingw32"
+            ]
+        },
+        "MSYS / MSYS2": {
+            "path": "C:\\Program Files\\msys64\\msys2_shell.cmd",
+            "args": [
+                "-defterm", "-here", "-no-start", "-msys"
+            ]
         }
     },
 
@@ -200,10 +133,10 @@
     // Remote
 
     /// "ms-vscode-remote.remote-ssh"
-    "remote.SSH.defaultExtensions": [
-        "gitpod.gitpod-remote-ssh"
-    ],
-    "remote.SSH.configFile": "/var/folders/dm/wqycl49j13b9nnps13glqj5h0000gn/T/gitpod_ssh_config-16338-iC9xFlm9K0Kx",
+    // "remote.SSH.defaultExtensions": [
+    //     // "gitpod.gitpod-remote-ssh"
+    // ],
+    // "remote.SSH.configFile": "/var/folders/dm/wqycl49j13b9nnps13glqj5h0000gn/T/gitpod_ssh_config-16338-iC9xFlm9K0Kx",
 
     // "ms-vsliveshare.vsliveshare-pack"
     "liveshare.presence": false,
@@ -553,4 +486,8 @@
 
     /// Add `\\` in doxygen command suggestion for better readbility (need to enable commandSuggestion)
     "doxdocgen.generic.commandSuggestionAddPrefix": false,
+    "remote.SSH.remotePlatform": {
+        "cnc.cs.sci.ku.ac.th": "linux"
+    },
+    "liveshare.connectionMode": "relay",
 }
