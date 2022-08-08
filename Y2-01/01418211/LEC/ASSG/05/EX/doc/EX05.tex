@@ -1,0 +1,102 @@
+% !TEX program = xelatex
+
+\documentclass{article}
+
+% \usepackage{showframe}
+
+% \usepackage{blindtext}
+\usepackage{fontspec}
+\usepackage{geometry}
+\usepackage{sidenotes}
+% \usepackage{wallpaper}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{listings}
+\usepackage{polyglossia}
+\usepackage{hyperref}
+
+\hypersetup{%
+pdftitle = {แบบฝึกหัด 5},
+pdfauthor = {พศวัต ถิ่นกาญจน์วัฒนา (6410451199)},
+pdfkeywords = {}}
+
+\reversemarginpar
+
+\geometry{%
+a4paper,
+margin = 0.75in,
+left = 1.28in,
+right = 1.28in}
+
+\XeTeXlinebreaklocale "th"
+\setdefaultlanguage[numerals=arabic]{thai}
+\setotherlanguages{english}
+
+\setmainfont{TH Sarabun New}
+\newfontfamily\thaifont[Script=Default]{TH Sarabun New}
+
+\lstset{%
+basicstyle = \ttfamilylatin,
+commentstyle = \color{olive},
+keywordstyle = \color{magenta},
+numbers = left,
+captionpos = b,
+belowcaptionskip = 1ex,
+frame = single}
+
+\linespread{1.5}
+
+\pagenumbering{gobble}
+
+\title{\flushleft\Large แบบฝึกหัด 5\\
+\rule{0em}{1ex}\\
+\normalsize พศวัต ถิ่นกาญจน์วัฒนา\\
+รหัสนิสิต 6410451199
+\vspace{-8ex}}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\sloppy\flushleft
+\begin{enumerate}
+    \item เพราะ attribute \texttt{name} ใน \texttt{Player} class มี type เป็น reference type และโดย default แล้ว \texttt{Object.clone()} จะทำการ clone object แบบ shallow ซึ่งจะทำให้ field ที่เป็น reference type (ในที่นี้คือ \texttt{String name}) ถูก copy reference ไป แทนที่จะ iterate เพื่อ copy value
+    \begin{lstlisting}[language=Java,numbers=none,frame=none,title={Player.java}]
+...
+
+public class Player implements Cloneable {
+
+    ...
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+}
+    \end{lstlisting}
+
+จากนั้นก็ iterate เพื่อ clone \texttt{Player[] clan\_server1} แต่ละ element
+
+    \item Implement \texttt{Comparable} interface, override \texttt{compareTo()} method เพื่อกำหนด element ที่จะใช้สำหรับ sort array
+    \begin{lstlisting}[language=Java,numbers=none,frame=none,title={Player.java}]
+...
+
+public class Player implements Cloneable, Comparable {
+
+    ...
+
+    @Override
+    public int compareTo(Object o) {
+        Player ply = (Player) o;
+        int diff = this.health - ply.health;
+        return diff > 0 ? 1
+                        : diff == 0 ? 0
+                                    : -1;
+    }
+
+...
+    \end{lstlisting}
+\end{enumerate}
+\end{document}
