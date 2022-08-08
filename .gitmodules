@@ -19,3 +19,6 @@
 [submodule "Y2-01/01418211/LAB/ASSG/lab-06-assignment---arraylist-and-listview-naiithink"]
 	path = Y2-01/01418211/LAB/ASSG/lab-06-assignment---arraylist-and-listview-naiithink
 	url = git@github.com:CS211-651/lab-06-assignment---arraylist-and-listview-naiithink.git
+[submodule "Y2-01/01418211/LAB/ASSG/lab-07-assignment---junit-naiithink"]
+	path = Y2-01/01418211/LAB/ASSG/lab-07-assignment---junit-naiithink
+	url = git@github.com:CS211-651/lab-07-assignment---junit-naiithink.git
