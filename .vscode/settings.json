@@ -1,8 +1,26 @@
 {
-    // SSH
+    "C_Cpp.intelliSenseEngine": "Default",
+    "C_Cpp.errorSquiggles": "Enabled",
+
+    // Remote
     "remote.SSH.remoteServerListenOnSocket": true,
+    "remote.SSH.remotePlatform": {
+        "cnc.cs.sci.ku.ac.th": "linux"
+    },
+    "liveshare.connectionMode": "relay",
+
+    /// "ms-vscode-remote.remote-ssh"
+    // "remote.SSH.defaultExtensions": [
+    //     // "gitpod.gitpod-remote-ssh"
+    // ],
+    // "remote.SSH.configFile": "/var/folders/dm/wqycl49j13b9nnps13glqj5h0000gn/T/gitpod_ssh_config-16338-iC9xFlm9K0Kx",
+
+    // "ms-vsliveshare.vsliveshare-pack"
+    "liveshare.presence": false,
+
 
     // Files
+    "files.insertFinalNewline": true,
     "files.eol": "\n",
     "files.associations": {
         ".gitmessage": "plaintext",
@@ -19,7 +37,9 @@
         "features.h": "c",
         "cstdlib": "cpp",
         "*.idl": "c",
-        "*.txt": "plaintext"
+        "*.txt": "plaintext",
+        "iostream": "cpp",
+        "string.h": "c"
     },
     // "workbench.editorAssociations": {
     //     "*.md": "vscode.markdown.preview.editor"
@@ -129,17 +149,6 @@
     "telemetry.telemetryLevel": "off",
 
     // ---- Others ----
-
-    // Remote
-
-    /// "ms-vscode-remote.remote-ssh"
-    // "remote.SSH.defaultExtensions": [
-    //     // "gitpod.gitpod-remote-ssh"
-    // ],
-    // "remote.SSH.configFile": "/var/folders/dm/wqycl49j13b9nnps13glqj5h0000gn/T/gitpod_ssh_config-16338-iC9xFlm9K0Kx",
-
-    // "ms-vsliveshare.vsliveshare-pack"
-    "liveshare.presence": false,
 
     // Red Hat Extensions
     "redhat.telemetry.enabled": false,
@@ -486,8 +495,4 @@
 
     /// Add `\\` in doxygen command suggestion for better readbility (need to enable commandSuggestion)
     "doxdocgen.generic.commandSuggestionAddPrefix": false,
-    "remote.SSH.remotePlatform": {
-        "cnc.cs.sci.ku.ac.th": "linux"
-    },
-    "liveshare.connectionMode": "relay",
 }
