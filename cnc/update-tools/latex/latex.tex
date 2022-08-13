@@ -1,19 +1,112 @@
 % !TEX program = xelatex
 
-\documentclass{slides}
+\documentclass[xetex,serif,aspectratio=1610]{beamer}
 
-\usepackage{beamer}
+% \usepackage{newunicodechar}
+% \usepackage{fontspec}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage{pdfpages}
+\usepackage{polyglossia}
+\usepackage{hyperref}
 
-\title{\LaTeX}
-\author{Potsawat Thinkanwatthana}
-\date{}
+\usetheme{Singapore}
+% Marburg
+% Pittsburgh
+% Rochester
+% Singapore
+% Szeged
+
+\usecolortheme{dove}
+% crane
+% dolphin
+% dove
+% seagull
+% whale
+% wolverine
+
+\addtobeamertemplate{navigation symbols}{}{%
+    \usebeamerfont{footline}%
+    \usebeamercolor[fg]{footline}%
+    \hspace{1em}%
+    \href{https://github.com/naiithink}{@naiithink}~~\insertframenumber/\inserttotalframenumber
+}
+
+\AtBeginSection[]{%
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\AtBeginSubsection[]{%
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+\title[\LaTeX]{\Huge\textbf{\LaTeX{}}}
+\subtitle{``A Document Preparation System''}
+\author[naiithink]{พศวัต ถิ่นกาญจน์วัฒนา}
+\date[CNC 2022]{17 สิงหาคม 2022}
+\subject{CNC Update Tools presentation}
+
+\XeTeXlinebreaklocale "th"
+\setdefaultlanguage[numerals=arabic]{thai}
+\setotherlanguages{english}
+
+\setmainfont{TH Sarabun New}
+\newfontfamily\thaifont[Script=Default]{TH Sarabun New}
+
+\begin{document}
+\maketitle
+\appendix
 
 \begin{frame}
-\titlepage
+\frametitle{\textbf{\LaTeX{}}~คืออะไร?}
+``\textbf{\LaTeX{}}~is a high-quality typesetting system; it includes features designed
+for the production of technical and scientific documentation. \textbf{\LaTeX{}}~is the
+de facto standard for the communication and publication of scientific documents.
+\textbf{\LaTeX{}}~is available as free software.''
 \end{frame}
 
 \begin{frame}
-\begin{latex}
-latex
-\begin{latex}
+\frametitle{\textbf{\LaTeX{}}~ใช้ทำอะไร?}
+\begin{columns}[c]
+\column{.47\textwidth}
+เตรียมเอกสาร เขียนหนังสือ
+\column{.47\textwidth}
+\begin{figure}
+    \includegraphics[width=.55\textwidth]{./pdf/Laravel8-saacsos_cover.pdf}
+    \caption*{หนังสือ Laravel 8 เขียนโดย @saacsos}
+    \label{fig:book-saacsos-laravel8}
+\end{figure}
+\end{columns}
 \end{frame}
+
+\begin{frame}
+\frametitle{\textbf{\LaTeX{}}~ใช้ทำอะไร?}
+\begin{columns}[c]
+\column{.47\textwidth}
+ทำสไลด์นำเสนอ
+\column{.47\textwidth}
+\begin{figure}
+    \includegraphics[width=.55\textwidth]{./pdf/Laravel8-saacsos_cover.pdf}
+    \caption*{หนังสือ Laravel 8 เขียนโดย @saacsos}
+    \label{fig:presentation-naiithink-slide-making}
+\end{figure}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{อยากใช้ \textbf{\LaTeX{}}~เริ่มยังไง?}
+\begin{itemize}
+    \item ติดตั้งบนคอมพิวเตอร์
+    \item ใช้ผ่านเว็บไซต์ อย่าง \href{https://www.overleaf.com/}{overleaf.com} หรือ \href{https://replit.com}{replit.com}
+    \item Docker Container \href{https://github.com/cnc2022/tex}{github.com/cnc2022/tex}
+\end{itemize}
+\end{frame}
+\end{document}

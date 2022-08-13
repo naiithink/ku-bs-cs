@@ -1,0 +1,10 @@
+\defaultfontfeatures[NotoSansThai]
+{
+    Script = Default,
+    Scale = 1.4,
+    Ligatures = TeX,
+    Extension = .ttf,
+    Path = ../../../assets/fonts/Noto_Sans_Thai/,
+    UprightFont = *-Regular,
+    BoldFont = *-Bold
+}
