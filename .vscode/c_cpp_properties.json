@@ -31,7 +31,7 @@
     },
     "configurations": [
         {
-            "name": "Mac",
+            "name": "macos-clang-arm64",
             "includePath": [
                 "${workspaceFolder}/**",
                 "${env:envMacIncludePath}"
@@ -46,7 +46,22 @@
             "intelliSenseMode": "macos-clang-arm64"
         },
         {
-            "name": "Mac GCC",
+            "name": "macos-clang++-arm64",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${env:envMacIncludePath}"
+            ],
+            "defines": [],
+            "macFrameworkPath": [
+                "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
+            ],
+            "compilerPath": "/usr/bin/clang++",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "macos-clang-arm64"
+        },
+        {
+            "name": "macos-gcc-12-arm64",
             "includePath": [
                 "${workspaceFolder}/**",
                 "${env:envMacIncludePath}",
@@ -57,6 +72,22 @@
                 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
             ],
             "compilerPath": "/opt/homebrew/bin/gcc-12",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "macos-gcc-arm64"
+        },
+        {
+            "name": "macos-g++-12-arm64",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${env:envMacIncludePath}",
+                "/opt/homebrew/include"
+            ],
+            "defines": [],
+            "macFrameworkPath": [
+                "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
+            ],
+            "compilerPath": "/opt/homebrew/bin/g++-12",
             "cStandard": "gnu17",
             "cppStandard": "gnu++17",
             "intelliSenseMode": "macos-gcc-arm64"
