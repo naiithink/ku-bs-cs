@@ -408,15 +408,16 @@
 
     /// The order to use for the file comment. Values can be used multiple times. Valid values are shown in default setting.
     "doxdocgen.file.fileOrder": [
-        "file",
-        "author",
-        "brief",
-        "version",
-        "date",
-        "empty",
-        "copyright",
-        "empty",
-        "custom"
+    //     "file",
+    //     "author",
+    //     "brief",
+    //     "version",
+    //     "date",
+    //     "empty",
+    //     "copyright",
+    //     "empty",
+    //     "custom"
+        "empty"
     ],
 
     /// The template for the file parameter in Doxygen.
