@@ -458,16 +458,17 @@
 
     /// The order to use for the comment generation. Values can be used multiple times. Valid values are shown in default setting.
     "doxdocgen.generic.order": [
-        "brief",
-        "empty",
-        "tparam",
-        "param",
-        "return",
-        "custom",
-        "version",
-        "author",
-        "date",
-        "copyright"
+    //     "brief",
+    //     "empty",
+    //     "tparam",
+    //     "param",
+    //     "return",
+    //     "custom",
+    //     "version",
+    //     "author",
+    //     "date",
+    //     "copyright"
+        "empty"
     ],
 
     /// Custom tags to be added to the generic order. One tag per line will be added. Can template `{year}`, `{date}`, `{author}`, `{email}` and `{file}`. You have to specify the prefix.
