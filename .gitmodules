@@ -31,3 +31,6 @@
 [submodule "cnc/plant-factory/libs/Arduino_JSON"]
 	path = cnc/plant-factory/libs/Arduino_JSON
 	url = git@github.com:arduino-libraries/Arduino_JSON.git
+[submodule "Y2-01/01418211/LAB/ASSG/lab-09-inheritance-naiithink"]
+	path = Y2-01/01418211/LAB/ASSG/lab-09-inheritance-naiithink
+	url = git@github.com:CS211-651/lab-09-inheritance-naiithink.git
