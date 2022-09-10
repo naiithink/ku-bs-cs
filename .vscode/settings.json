@@ -39,7 +39,8 @@
         "*.idl": "c",
         "*.txt": "plaintext",
         "iostream": "cpp",
-        "string.h": "c"
+        "string.h": "c",
+        "__locale": "c"
     },
     // "workbench.editorAssociations": {
     //     "*.md": "vscode.markdown.preview.editor"
