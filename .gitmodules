@@ -34,3 +34,6 @@
 [submodule "Y2-01/01418211/LAB/ASSG/lab-09-inheritance-naiithink"]
 	path = Y2-01/01418211/LAB/ASSG/lab-09-inheritance-naiithink
 	url = git@github.com:CS211-651/lab-09-inheritance-naiithink.git
+[submodule "Y2-01/01418211/LAB/ASSG/lab-11-12-dictionary-naiithink"]
+	path = Y2-01/01418211/LAB/ASSG/lab-11-12-dictionary-naiithink
+	url = git@github.com:CS211-651/lab-11-12-dictionary-naiithink.git
