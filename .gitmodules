@@ -4,7 +4,7 @@
 [submodule "Y1-02/01418113/LAB/ASSG/09-struct-naiithink"]
 	path = Y1-02/01418113/LAB/ASSG/09-struct-naiithink
 	url = git@github.com:CS113-642/09-struct-naiithink.git
-[submodule "Y2-01/01418211/LAB/lab-02-assignment---class-and-object-naiithink"]
+[submodule "Y2-01/01418211/LAB/ASSG/lab-02-assignment---class-and-object-naiithink"]
 	path = Y2-01/01418211/LAB/ASSG/lab-02-assignment---class-and-object-naiithink
 	url = git@github.com:CS211-651/lab-02-assignment---class-and-object-naiithink.git
 [submodule "Y2-01/01418211/LAB/ASSG/lab-03-assignment-class-and-object-2-naiithink"]
@@ -25,12 +25,12 @@
 [submodule "Y2-01/01418211/LAB/ASSG/lab-08-assignment-csv-naiithink"]
 	path = Y2-01/01418211/LAB/ASSG/lab-08-assignment-csv-naiithink
 	url = git@github.com:CS211-651/lab-08-assignment-csv-naiithink.git
+[submodule "Y2-01/01418211/LAB/ASSG/lab-09-inheritance-naiithink"]
+	path = Y2-01/01418211/LAB/ASSG/lab-09-inheritance-naiithink
+	url = git@github.com:CS211-651/lab-09-inheritance-naiithink.git
 [submodule "cnc/plant-factory/libs/cJSON"]
 	path = cnc/plant-factory/libs/cJSON
 	url = git@github.com:DaveGamble/cJSON.git
 [submodule "cnc/plant-factory/libs/Arduino_JSON"]
 	path = cnc/plant-factory/libs/Arduino_JSON
 	url = git@github.com:arduino-libraries/Arduino_JSON.git
-[submodule "Y2-01/01418211/LAB/ASSG/lab-09-inheritance-naiithink"]
-	path = Y2-01/01418211/LAB/ASSG/lab-09-inheritance-naiithink
-	url = git@github.com:CS211-651/lab-09-inheritance-naiithink.git
