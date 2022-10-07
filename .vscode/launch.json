@@ -1,6 +1,20 @@
 {
     "configurations": [
         {
+            "type": "java",
+            "name": "Launch OddOrPos",
+            "request": "launch",
+            "mainClass": "th.ku.naiithink.cs211.lessons.unit_test.white_box.OddOrPos",
+            "projectName": "cs211"
+        },
+        {
+            "type": "java",
+            "name": "Launch App",
+            "request": "launch",
+            "mainClass": "th.ku.naiithink.cs211.App",
+            "projectName": "cs211"
+        },
+        {
             "name": "C/C++: gcc build and debug active file",
             "type": "cppdbg",
             "request": "launch",

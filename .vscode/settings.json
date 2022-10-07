@@ -40,7 +40,9 @@
         "*.txt": "plaintext",
         "iostream": "cpp",
         "string.h": "c",
-        "__locale": "c"
+        "*.ino": "arduino",
+        "__locale": "c",
+        "__string": "c"
     },
     // "workbench.editorAssociations": {
     //     "*.md": "vscode.markdown.preview.editor"
@@ -498,4 +500,5 @@
 
     /// Add `\\` in doxygen command suggestion for better readbility (need to enable commandSuggestion)
     "doxdocgen.generic.commandSuggestionAddPrefix": false,
+    "java.configuration.updateBuildConfiguration": "interactive",
 }
