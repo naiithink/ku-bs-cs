@@ -1,0 +1,76 @@
+% !TEX program = xelatex
+\documentclass[a4paper]{article}
+
+% \usepackage[thaifont = {TH SarabunPSK}]{thaispec}
+\usepackage{geometry}
+\usepackage{polyglossia}
+\usepackage{enumitem}
+\usepackage{amsmath}
+
+\geometry{%
+paper=a4paper,
+twoside=false,
+hmargin={0.86in,0.86in},
+vmargin={1in,1.3in},
+marginparwidth=110pt,
+marginparsep=30pt,
+reversemarginpar=true}
+
+\XeTeXlinebreaklocale "th"
+
+\setmainfont{TH SarabunPSK}
+% \newfontfamily\thaifont{TH SarabunPSK}[Script=Thai]
+
+\begin{document}
+\begin{enumerate}[label*=\arabic*.]
+    \item \textbf{มีเหตุผลอะไรที่บริษัทจะระดมทุนด้วยการกู้เงิน (debt financing) แทนที่จะออกหุ้นหาผู้ร่วมทุน (equity financing)}
+
+    \begin{itemize}
+        \item Debt financing มีความเสี่ยงที่ต่ำกว่า equity financing
+        \item ในเวลาที่จำเป็น สามารถเอา asset มาขายทอดตลาดได้ --- investors มีสิทธิ์ในการจับต้อง asset, สามารถรับเงินคืนได้เมื่อต้องการ และทันเวลา
+    \end{itemize}
+    \item \textbf{มีเหตุผลอะไรที่บริษัทจะระดมทุนด้วย equity financing แทนที่จะใช้ debt financing}
+
+    \begin{itemize}
+        \item Equity financing มีโอกาสที่จะได้ผลตอบแทนที่สูงกว่า debt financing --- แต่ก็มีความเสี่ยงที่สูงกว่าเช่นกัน; \textit{high risk, high return}
+        \item มีการคิดเงินปันผล --- แบ่งประโยชน์ให้ผองเพื่อน
+    \end{itemize}
+    \item \textbf{มีเหตุผลอะไรที่บริษัทจะระดมทุนโดยใช้ทั้ง debt และ equity financing ควบคู่กันไป}
+    
+    Financing ทั้งสองรูปแบบมีจุดเด่นที่ต่างกัน โดยเฉพาะในเรื่องของความเสี่ยงและการรับมือ การที่บริษัทจะเลือก invest ทั้งสองแบบพร้อม ๆ กัน ก็อาจจะเป็นเพราะต้องการค่าตอบแทนที่มากขึ้น --- debt financing ---
+    แต่ในขณะเดียวกันก็ต้องการมีทางออกในมือ --- equity financing --- เมื่อเกิดความเสียหาย ก็อาจจะลดภาระลงได้
+    \item \textbf{(4.1) จากคำแถลงข่าวของ CEO ของบริษัทแห่งหนึ่ง “จาก balance sheet ของบริษัท จะเห็นได้ว่า asset รวมของเรามีมูลค่ามหาศาล ดังนั้นผู้ถือหุ้นของบริษัทเราจึงมั่งคั่งทุกคน” คำพูดของ CEO เชื่อถือได้มากน้อยแค่ไหน (4.2) ข้อมูลอะไรที่จะมาหักล้างหรือสนับสนุนคำพูดของ CEO คนนี้}
+
+    \fbox{Assets $=$ Liabilities $+$ Stockholders Equity} --- \textbf{(1)}
+
+    \begin{description}
+        \item[(4.1)] ผมตีความคำกล่าวได้ว่า ``$($ total asset มีมูลค่ามหาศาล $)$ $\implies$ $($ shareholders ทุกคนมั่งคั่ง $);$ total asset ปรากฏอยู่ใน balance sheet ของบริษัท''
+
+        ผมถือว่าคำกล่่่าวนี้คลุมเครือและเชื่อถือไม่ได้ เนื่องจาก
+
+        1. ถ้าการตีความของผมถูกต้อง CEO ได้กล่าวถึงแค่ 2 ตัวแปร ใน \textbf{(1)} นั่นคือ `Assets' และ `Stockholders Equity' และก็คือการ implies ว่า \newline \mbox{`Assets' $\propto$ `Stockholders Equity'} ซึ่งจะเป็นจริงก็ต่อเมื่อ `Liabilities' $\geq 0$
+        แต่ CEO ไม่ได้พูดถึง `Liabilities' เลย
+
+        2. การกล่าวว่า ``ผู้ถือหุ้นของบริษัทเราจึงมั่งคั่งทุกคน'' (for all) นั้นคลุมเครือเกินไป --- ถ้าผู้ถือหุ้นคนใดมีการเงินที่ติดลบ และหลังจากรับเงินปันผลแล้วก็ยังคงติดลบ ผู้ถือหุ้นคนนั้นจะถือว่ามั่งคั่งหรือไม่?
+        \item[(4.2)] `Liabilities'
+    \end{description}
+    \item \textbf{เราดู income statement ของบริษัทเพื่อต้องการข้อมูลอะไร}
+
+    ข้อมูลรายได้ (income) ของบริษัท กล่าวคือ ข้อมูล revenue, expense, net profit, ... เพื่อประเมิน profitability
+    \item \textbf{บริษัทแห่งหนึ่งจ่ายผลตอบแทนให้ผู้ถือหุ้นมาตลอด 5 ปีที่ผ่านมากับอีกบริษัทหนึ่งไม่เคยจ่ายเงินปันผลให้ผู้ถือหุ้นเลยในช่วง 5 ปีที่ผ่านมา บริษัทไหนน่าลงทุนกว่ากัน}
+
+    บริษัทแห่งที่จ่ายผลตอบแทนให้ผู้ถือหุ้นมาตลอด 5 ปี
+    \item \textbf{ทำไมบางบริษัทที่ดูยิ่งใหญ่ มั่นคง จึงไม่เลือกเป็นบริษัทมหาชนที่มีหุ้นซื้อขายในตลาดหลักทรัพย์}
+
+    เพราะถ้าบริษัทยังคง private จะมีจัดการ capital ได้ทันทีจึงขยับตัวได้คล่อง และปรับตัวได้เร็ว
+    \item \textbf{ทำไมจึงยากที่จะหาการลงทุนที่ให้ผลตอบแทน 20\% ต่อไปเป็นเวลาต่อเนื่องกันหลายๆปี}
+
+    high return, high risk
+    \item \textbf{ทำไมนักลงทุนที่มีชื่อเสียงอย่าง Warren Buffet จึงมีกฏการลงทุนที่พูดเป็นเชิงทีเล่น ทีจริง กฏข้อที่ 1: ห้ามเสียเงิน และ กฏข้อที่ 2: อย่าลืมกฏข้อ 1}
+
+    เพราะ Buffet ให้ความสำคัญกับความมั่นคง
+    \item \textbf{ทำไมในทางปฏิบัติ คำแนะนำในการลงทุนทั้ง 9 ข้อของ Ackman จึงนำมาใช้ได้ยาก}
+
+    เพราะเราไม่สามารถควบคุมการลงทุนของนักลงทุนทุกคนได้
+\end{enumerate}
+\end{document}
