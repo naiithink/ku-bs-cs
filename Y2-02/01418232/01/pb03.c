@@ -1,57 +1,33 @@
-/**
- * 01418232, LAB01, The End (of The Beginning)
- * 
- * Potsawat Thinkanwatthana
- * 6410451199
- */
-
 #include <stdio.h>
 
-#define ARR_LEN 255
+#define STR_LEN 255
 
-void dup(char *, char *, int **);
+int strlen_t(char *);
 
-int strlen(char *);
+char *skip_spaces(char *);
 
-int main(int argc, char **argv)
+void print_dups(char *, char *);
+
+int main(void)
 {
-    void *res;
+    char n[STR_LEN];
+    char m[STR_LEN];
 
-    char n[255];
-    char m[255];
+    scanf("%[^\n]%*c", n);
+    scanf("%[^\n]%*c", m);
 
-    scanf("%s", n);
-    scanf("%s", m);
+    int n_len = strlen_t(n);
+    int m_len = strlen_t(m);
 
-    int ln = strlen(n);
-    int lm = strlen(m);
-
-    printf("%d, %d\n", ln, lm);
-
-    if (ln * lm == 0)
-        return 0;
-    else if (ln > lm)
-    {
-        int ires[ln] = { 0 };
-        res = ires;
-        dup(n, m, res);
-    }
+    if (n_len < m_len)
+        print_dups(n, m);
     else
-    {
-        int ires[lm] = { 0 };
-        res = ires;
-        dup(m, n, res);
-    }
-
-    int eiei[] = res;
-
-    for (int i = 0, c = 0; c < lm; i++)
-        printf("%d\n", eiei[i]);
+        print_dups(m, n);
 
     return 0;
 }
 
-int strlen(char *s)
+int strlen_t(char *s)
 {
     int res = 0;
 
@@ -61,8 +37,36 @@ int strlen(char *s)
     return res;
 }
 
-void dup(char *n, char *m, int **res)
+char *skip_spaces(char *str)
 {
-    if (*n == '\0')
-        ;
+    char *s = str;
+
+    while (*s == ' ')
+        s++;
+
+    return s;
+}
+
+void print_dups(char *s_low, char *s_high)
+{
+    if (!*s_low || !*s_high)
+    {
+        // printf("\n");
+        return;
+    }
+
+    if (*s_low == *s_high)
+    {
+        printf("%c ", *s_low);
+        s_low++;
+        s_high++;
+    }
+    else if (*s_low > *s_high)
+        s_high++;
+    else if (*s_low < *s_high)
+        s_low++;
+    else
+        printf("unknown condition\n");
+
+    print_dups(skip_spaces(s_low), skip_spaces(s_high));
 }

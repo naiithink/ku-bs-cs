@@ -1,0 +1,131 @@
+/**
+ * 01418232, LAB01, The End (of the Beginning)
+ * 
+ * Potsawat Thinkanwatthana
+ * 6410451199
+ */
+
+#include <stdio.h>
+
+#define STR_LEN 255
+
+int strlen_t(char *);
+
+void remove_spaces(const char *, char *, int);
+
+int search_for_char(char, char *);
+
+void print_dups(char *, char *);
+
+int main(int argc, char **argv)
+{
+    char n[STR_LEN];
+    char m[STR_LEN];
+
+    char s1[] = "2 5 5 5";
+    char s2[] = "2 2 3 5 5 7";
+
+    // char ns_n[strlen_t(s1) / 2];
+    // char ns_m[strlen_t(s2) / 2];
+
+    char ss1[strlen_t(s1)/2];
+    char ss2[strlen_t(s2)/2];
+
+    remove_spaces(s1, ss1, strlen_t(s1));
+    remove_spaces(s2, ss2, strlen_t(s2));
+
+    // printf("%s\n", ss1);
+    // printf("%s\n", ss2);
+
+    // return 2;
+
+    print_dups(ss1, ss2);
+
+    /* IN */
+    // scanf("%s", n);
+    // scanf("%s", m);
+
+    /* Length */
+    // int ln = strlen_t(n);
+    // int lm = strlen_t(m);
+
+    // printf("%d, %d\n", ln, lm);
+
+    // printf("%d\n", search_for_char('t', "abcdefghijklmnopz"));
+
+    /* OUT */
+    // if (ln * lm == 0)
+    //     return 0;
+    // else if (ln > lm)
+    //     print_dups(m, n);
+    // else
+    //     print_dups(n, m);
+
+    return 0;
+}
+
+int strlen_t(char *s)
+{
+    int res = 0;
+
+    while (*s++ != '\0')
+        res++;
+
+    return res;
+}
+
+void remove_spaces(const char *src, char *out, int len)
+{
+    const char *s = src;
+    char *o = out;
+
+    for (int i = 0, j = 0; i < len; i++)
+        if (*s == ' ')
+            s++;
+        else
+            o[j++] = *s++;
+}
+
+/**
+ * a_n = a_1 + (n - 1) * 2          for n > 0.
+ *     = (n - 1) * 2                for a_1 = 0.
+ */
+int search_for_char(char c, char *s)
+{
+    long s_len = strlen_t(s);
+
+    long l = 0;
+    long m = 0;
+    long r = s_len;
+
+    while (s[m] != c && r - l > 1)
+    {
+        m = (l + r) / 2;
+
+        if (s[m] > c)
+            r = m;
+        else
+            l = m;
+    }
+
+    return s[m] == c;
+}
+
+void print_dups(char *n, char *m)
+{
+    if (!*n)
+    {
+        printf("\n");
+        return;
+    }
+
+    while (*n == ' ' || *n == *(n + 1))
+        n++;
+
+    if (search_for_char(*n, m))
+        printf("%c ", *n);
+
+    n++;
+
+    print_dups(n, m);
+}
