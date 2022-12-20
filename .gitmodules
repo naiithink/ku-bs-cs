@@ -37,3 +37,6 @@
 [submodule "cnc/plant-factory/libs/Arduino_JSON"]
 	path = cnc/plant-factory/libs/Arduino_JSON
 	url = git@github.com:arduino-libraries/Arduino_JSON.git
+[submodule "Y2-02/01418233/assembly-language"]
+	path = Y2-02/01418233/assembly-language
+	url = git@github.com:napatswift/assembly-language.git
