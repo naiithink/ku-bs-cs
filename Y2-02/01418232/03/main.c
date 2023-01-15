@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX_LEN 255
+#define MAX_LEN 1024
 
 int merged_is_odd;
 int *non_empty_int_arr;
