@@ -15,7 +15,7 @@ run() {
         -cpu 486 \
         -m 64M \
         -hda "./local_disk_c.qcow2" \
-        -drive "file=fat:rw:./ASSG,media=disk" \
+        -drive "file=fat:rw:./D,media=disk" \
         $1
 }
 
