@@ -60,7 +60,7 @@ _start  PROC                                    ; Start of the main procedure _s
         mov     ah, 0Ah                         ; DOS Buffered Keyboard Input function
         int     21h
 
-        mov     bx, 0                           ; Reset BX
+        mov     bx, 0                           ; Clear BX
         mov     bl, STRING[1]                   ; Get the number of input chars from the buffer;
                                                 ;       set by DOS function 0Ah
         mov     STRING[bx+2], '$'               ; Insert '$' into the string buffer;
@@ -140,17 +140,82 @@ btoa    ENDP
 
 ;; Procedure #3
 ;; ASCII to binary
+; This procedure does not validate its argument.
 ; ARGUMENTS:
 ;       push    BYTE PTR []                     ; Pointer to string storing ASCII-coded signed integer value;
                                                 ;       the string must be in the format required by DOS function 0Ah
+;       push    WORD                            ; Source string length, not counting any terminator or CR
 ;       push    WORD PTR []                     ; Pointer to WORD buffer to store the result
 atob    PROC
+        push    ax                              ; Save AX
+        push    bx                              ; Save BX
+        push    cx                              ; Save CX
+        push    dx                              ; Save DX
+        push    si                              ; Save SI
+        push    di                              ; Save DI
         push    bp                              ; Save BP
         mov     bp, sp                          ; Copy SP to BP
         sub     sp, 2                           ; Step into local stack frame
 
+        mov     si, [bp+20]                     ; Get the source string address
+        mov     cx, [bp+18]                     ; Get length of source string
+        mov     di, [bp+16]                     ; Get the destination address, store to DI
+
+        add     si, cx                          ; SI is now virtually pointing to the least-significant decimal digit of the source string
+        dec     si                              ; String is kind of zero-based array
+
+        mov     ax, 0                           ; A* register accumulates the decoded values
+        mov     bx, 1                           ; BX yields the place values -- in decimal
+
+NEXT_DIGIT:
+        mov     dl, [si]                        ; Get the ASCII-coded number
+        sub     dl, 30h                         ; De-ASCII the number
+
+        cmp     dl, '-'                         ; Whether it's a `'-'` indicating negative number
+        je      NEG_NUM                         ; Negate the result
+
+        push    ax                              ; >>>1 Save current actual result
+
+        mov     ax, 0                           ; Clear AX
+
+        mov     al, dl                          ; Move the result to AL for multiplication
+        cbw                                     ; Will be performing 32-bit multiplication on AX and BX
+        mul     bx                              ; Weight the current digit with the corresponding place value
+
+        pop     dx                              ; <<<1 Restore current actual result
+
+        add     ax, dx                          ; Add current digit to the result
+
+        push    ax                              ; >>>1 Save current actual result
+
+        mov     ax, bx                          ; Advance to the next decimal place
+        mov     bx, 10
+        mul     bx
+        mov     bx, ax
+
+        pop     ax                              ; <<<1 Restore current actual result
+
+        dec     si                              ; Decimal-left-shift over the source string
+
+        loop    NEXT_DIGIT
+
+        jmp     DONE                            ; No `'-'` was found, non-negative number
+
+NEG_NUM:
+        mov     bx, -1                          ; Negate the number
+        mul     bx
+
+DONE:
+        mov     [di], ax                        ; Store the result at location pointed to by DI
+
         mov     sp, bp                          ; Step out of local stack frame
         pop     bp                              ; Restore BP
+        pop     di                              ; Restore DI
+        pop     si                              ; Restore SI
+        pop     dx                              ; Restore DX
+        pop     cx                              ; Restore CX
+        pop     bx                              ; Restore BX
+        pop     ax                              ; Restore AX
         ret     4                               ; This procedure uses 2 stack elements -- 2 bytes each
 atob    ENDP
 
@@ -177,7 +242,39 @@ print   ENDP
 
 
 ;; Procedure #5
-is_leap PROC
-is_leap ENDP
+;; Get String
+; ARGUMENTS:
+;       push    BYTE PTR []                     ; Where to store the input string
+get_string      PROC
+        push    ax                              ; Save AX
+        push    bx                              ; Save BX
+        push    dx                              ; Save DX
+        push    di                              ; Save DI
+        push    bp                              ; Save BP
+        mov     bp, sp                          ; Copy SP to BP
+        sub     sp, 2                           ; Step into local stack frame
+
+        mov     dx, [bp+6]                      ; Get the destination string address, store to DI
+
+        mov     ah, 0Ah                         ; DOS Buffered Keyboard Input function
+        int     21h
+
+        mov     ax, 0                           ; Clear AX
+        mov     bx, 0                           ; Clear BX
+        mov     bx, dx
+
+        mov     al, [bx+1]                      ; Get number of input chars, not counting CR
+
+
+        mov     sp, bp                          ; Step out of local stack frame
+        pop     bp                              ; Restore BP
+        pop     di                              ; Restore DI
+        pop     dx                              ; Restore DX
+        pop     bx                              ; Restore BX
+        pop     ax                              ; Restore AX
+        ret     2                               ; This procedure uses 1 stack element -- 2 bytes each
+get_string      ENDP
+
+
 CSEG    ENDS
         END     _start                          ; Initialize CS and IP
