@@ -258,7 +258,12 @@ BILLED:
         dec     cx                              ;  |
         cmp     cx, 0                           ;  * Loop construct
         push    cx                              ;  |
-        jg      NEXT_TABLE                      ; /
+        jg      JNEXT_TABLE                     ; /
+        jmp     EOP__START                      ; No more table, all done
+
+JNEXT_TABLE:                                    ; With MASM other than 6.11,
+                                                ;       JG at line 261 is not compatible with far jump
+        jmp     NEXT_TABLE                      ; JMP can be used for far jump
 
 EOP__START:                                     ; Very end of _start procedure
         mov     ah, 4Ch
