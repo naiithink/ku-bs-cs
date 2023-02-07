@@ -29,11 +29,12 @@ OFILE_TBL_HEADER_C2     db      "DATE OF BIRTH",'$'                     ; Out fi
 OFILE_TBL_HEADER_C3     db      "AGE",'$'                               ; Out file line #3 -- table header col #3
 OFILE_TBL_RS            db      13,10,10,'$'                            ; Out file table record separator -- ASCII CRLF + LF
 OFILE_TBL_FS            db      9,'$'                                   ; Out file table field separator -- ASCII TAB
-STRING                  db      36,?,6 dup (' ')                        ; String buffer -- 35 chars + CR = 36
+STRING                  db      36,?,36 dup (' ')                       ; String buffer -- 35 chars + CR = 36
                                                                         ;       Byte 1: Sets to max length of the buffer, including CR
                                                                         ;       Byte 2: The function sets to input chars, not counting CR
                                                                         ;       Byte 3--n: The buffer
 STRING_TERM             db      '$',0                                   ; Prevent any kind of buffer overflow -- dollar-terminated or ASCIIZ strings
+BUFF_NUM                dw      ?                                       ; Number buffer
 DSEG    ENDS
 
 
@@ -56,24 +57,61 @@ _start  PROC                                    ; Start of the main procedure _s
         mov     ax, ESEG                        ; Initialize ES
         mov     es, ax
 
-        lea     dx, STRING                      ; Load the formed buffer to DS:DX
-        mov     ah, 0Ah                         ; DOS Buffered Keyboard Input function
-        int     21h
+;;; Getting keyboard input
+        ; lea     dx, STRING                      ; Load the formed buffer to DS:DX
+        ; mov     ah, 0Ah                         ; DOS Buffered Keyboard Input function
+        ; int     21h
 
-        mov     bx, 0                           ; Clear BX
-        mov     bl, STRING[1]                   ; Get the number of input chars from the buffer;
-                                                ;       set by DOS function 0Ah
-        mov     STRING[bx+2], '$'               ; Insert '$' into the string buffer;
-                                                ;       the string terminator for DOS function 09h to work properly.
+        ; mov     bx, 0                           ; Clear BX
+        ; mov     bl, STRING[1]                   ; Get the number of input chars from the buffer;
+        ;                                         ;       set by DOS function 0Ah
+        ; mov     STRING[bx+2], '$'               ; Insert '$' into the string buffer;
+        ;                                         ;       the string terminator for DOS function 09h to work properly.
 
-        mov     dl, 10
-        mov     ah, 02h
-        int     21h
+        lea     ax, STRING
+        push    ax
+        call    get_string
 
-        lea     dx, [STRING+2]                  ; As required for 0Ah to work,
-                                                ;       starting byte of the string buffer is located at the end of the 2nd byte
-        mov     ah, 09h                         ; DOS Display String function
-        int     21h
+        call    print_crlf                      ; Move pass the first input line
+
+        lea     ax, [STRING+2]
+        push    ax
+        mov     ax, 1
+        push    ax
+        call    print
+
+        ; lea     ax, STRING                      ; The input string
+        ; add     ax, 2                           ; DOS function 0Ah string format
+        ; push    ax
+        ; mov     ax, 0                           ; Clear AX
+        ; mov     al, [STRING+1]                  ; Get string length w/o CR
+        ; push    ax
+        ; lea     ax, BUFF_NUM                    ; Save the decoded number
+        ; push    ax
+        ; call    atob
+
+;;;
+        ; mov     ax, BUFF_NUM
+        ; push    ax
+        ; mov     ax, 10
+        ; push    ax
+        ; lea     ax, STRING
+        ; push    ax
+        ; call    btoa
+
+        ; mov     ax, offset [STRING+2]
+        ; push    ax
+        ; mov     ax, 1
+        ; push    ax
+        ; call    print
+
+        mov     cx, BUFF_NUM                    ; Number of people
+        
+
+        ; lea     dx, [STRING+2]                  ; As required for 0Ah to work,
+        ;                                         ;       starting byte of the string buffer is located at the end of the 2nd byte
+        ; mov     ah, 09h                         ; DOS Display String function
+        ; int     21h
 
         mov     al, 0
         mov     ah, 4Ch
@@ -221,23 +259,30 @@ atob    ENDP
 
 
 ;; Procedure #4
-;; Print String -- DOS function 09h wrapper
+; Print/Display String (Function 09H wrapper)
 ; ARGUMENTS:
-;       push    BYTE PTR []                     ; Offset from DS to a string, the string must have trailing `'$'`
+;       push    BYTE PTR []                     ; [BP+6]  Pointer to string, ending with '$'
+;       push    BYTE                            ; [BP+4]  CRLF switch; if set to 1, CRLF is printed at the end of the string,
+;                                               ;               otherwise, no CRLF is printed.
 print   PROC
-        push    dx                              ; Save DX
         push    bp                              ; Save BP
         mov     bp, sp                          ; Copy SP to BP
-        sub     sp, 4                           ; Step into local stack frame
+        sub     sp, 2                           ; Step into local scope
 
-        mov     dx, [bp+6]                      ; Get the string offset
-        mov     ah, 09h                         ; DOS Display Character function
+        mov     ah, 09h                         ; DOS 'Display String' function
+        mov     dx, [bp+6]                      ; Second argument; String to be printed
         int     21h
 
-        mov     sp, bp                          ; Step out of local stack frame
+        mov     dx, [bp+4]                      ; First argument; CRLF switch
+        cmp     dx, 0                           ; If the caller requests CRLF
+        je      EO_PROC                         ; No CRLF requested from the caller
+
+        call    print_crlf
+
+EO_PROC:                                        ; End-of-procedure
+        mov     sp, bp                          ; Step out of local scope
         pop     bp                              ; Restore BP
-        pop     dx                              ; Restore DX
-        ret     2                               ; This procedure uses 1 stack element -- 2 bytes each
+        ret     4                               ; This procedure uses 2 stack elements -- 2 bytes each
 print   ENDP
 
 
@@ -246,35 +291,55 @@ print   ENDP
 ; ARGUMENTS:
 ;       push    BYTE PTR []                     ; Where to store the input string
 get_string      PROC
-        push    ax                              ; Save AX
         push    bx                              ; Save BX
         push    dx                              ; Save DX
-        push    di                              ; Save DI
+        push    si                              ; Save SI
         push    bp                              ; Save BP
         mov     bp, sp                          ; Copy SP to BP
         sub     sp, 2                           ; Step into local stack frame
 
-        mov     dx, [bp+6]                      ; Get the destination string address, store to DI
+        mov     dx, [bp+10]                     ; Get the destination string address, store to DI
 
         mov     ah, 0Ah                         ; DOS Buffered Keyboard Input function
         int     21h
 
-        mov     ax, 0                           ; Clear AX
         mov     bx, 0                           ; Clear BX
-        mov     bx, dx
+        mov     si, dx
 
-        mov     al, [bx+1]                      ; Get number of input chars, not counting CR
-
+        mov     bl, [si+1]                      ; Get number of input chars, not counting CR
+        mov     WORD PTR [bx+si+2], '$'
 
         mov     sp, bp                          ; Step out of local stack frame
         pop     bp                              ; Restore BP
-        pop     di                              ; Restore DI
+        pop     si                              ; Restore SI
         pop     dx                              ; Restore DX
         pop     bx                              ; Restore BX
-        pop     ax                              ; Restore AX
         ret     2                               ; This procedure uses 1 stack element -- 2 bytes each
 get_string      ENDP
 
 
+;; Procedure #6
+; Print ASCII 'TAB' character
+print_tab       PROC
+        mov     ah, 02h                         ; DOS 'Display Character' function
+        mov     dl, 9                           ; ASCII TAB
+        int     21h
+
+        ret
+print_tab       ENDP
+
+
+;; Procedure #7
+; Print ASCII 'CRLF' sequence
+print_crlf      PROC
+        mov     ah, 02h                         ; DOS 'Display Character' function
+        mov     dl, 13                          ; ASCII CR
+        int     21h
+        mov     ah, 02h                         ; DOS 'Display Character' function
+        mov     dl, 10                          ; ASCII LF
+        int     21h
+
+        ret
+print_crlf      ENDP
 CSEG    ENDS
         END     _start                          ; Initialize CS and IP
