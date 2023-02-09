@@ -1,0 +1,2 @@
+	TODAY'S DATE IS	09/02/2023
+NAME                               ||DATE OF BIRTH||AGE                    ||hello                              ||22/10/2023   ||

@@ -1,0 +1,31 @@
+1.5.5  File Attributes
+
+    Table 1.9 describes the file attributes and how they are represented in
+    the attribute byte of the directory entry (offset 0BH). The attributes can
+    be inspected or changed with Function 43H (Get/Set File Attributes
+    [Chmod]).
+
+    Table 1.9
+    File Attributes
+    Code                     Description
+    ──────────────────────────────────────────────────────────────────────────
+    00H                      Normal; can be read or written without
+                            restriction
+
+    01H                      Read-only; cannot be opened for write; a file
+                            with the same name cannot be created
+
+    02H                      Hidden; not found by directory search
+
+    04H                      System; not found by directory search
+
+    08H                      VolumeID; only one file can have this attribute;
+                            it must be in the root directory
+
+    10H                      Subdirectory
+
+    20H                      Archive; set whenever the file is changed, or
+    ──────────────────────────────────────────────────────────────────────────
+
+    The VolumeID (08H) and Subdirectory (10H) attributes cannot be changed
+    with Function 43H (Get/Set File Attributes [Chmod]).

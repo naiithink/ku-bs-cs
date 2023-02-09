@@ -1,0 +1,569 @@
+Table 1.5
+    File-Related Function Requests
+╓┌─┌─────────┌─────────────────────┌─────────────────────────────────────────╖
+    Code       Request              Description
+    ──────────────────────────────────────────────────────────────────────────
+    3CH       Create Handle        Creates a file
+
+    3DH       Open Handle          Opens a file
+
+    3EH       Close Handle         Closes a file
+
+    3FH       Read Handle          Reads from a file
+
+    40H       Write Handle         Writes to a file
+
+    42H       Move File Pointer    Sets the read/write pointer in a file
+
+    45H       Duplicate File       Creates a new handle that refers to the
+    Code       Request              Description
+    ──────────────────────────────────────────────────────────────────────────
+    45H       Duplicate File       Creates a new handle that refers to the
+                Handle               same file as an existing handle
+
+    46H       Force Duplicate File Makes an existing handle refer to the same
+                Handle               file as another existing handle
+
+    5AH       Create Temporary     Creates a file with a unique name
+                File
+
+    5BH       Create New File      Attempts to create a file, but fails if a
+                                    file with the same name exists
+
+    67H       Set Handle Count     Increases or decreases the number of files
+                                    a program can have open at one time
+
+    68H       Commit File          Flushes buffered data for a file without
+                                    closing it to ensure the disk image of
+    ──────────────────────────────────────────────────────────────────────────
+
+    Code       Request              Description
+    ──────────────────────────────────────────────────────────────────────────
+
+
+
+
+
+────────────────────────────────────────────────────────────────────────────
+Create Handle (Function 3CH)
+────────────────────────────────────────────────────────────────────────────
+
+    Call:
+
+    AH = 3CH
+    DS:DX
+        Pointer to pathname
+    CX
+        File attribute
+
+    Return:
+
+    Carry set:
+    AX
+        2        = File not found
+        3        = Path not found
+        4        = Too many open files
+        5        = Access denied
+    Carry not set:
+    AX
+        Handle
+
+
+    Comments:
+
+    Function 3CH creates a file and assigns it the first available handle. DX
+    must contain the offset (from the segment address in DS) of an ASCIZ
+    string that specifies the pathname of the file to be created. CX must
+    contain the attribute to be assigned to the file, as described under "File
+    Attributes" earlier in this chapter.
+
+    If the specified file does not exist, this function creates it. But if the
+    file already exists, it is truncated to a length of 0. Function 3CH then
+    assigns the attribute in CX to the file and opens it for read/write. AX
+    returns the file handle. If there is an error, the carry flag (CF) is set
+    and the error code returns in AX:
+
+    Code               Meaning
+    ──────────────────────────────────────────────────────────────────────────
+    2                  File not found
+
+    3                  Path is invalid
+
+    4                  Too many open files (no handle available)
+
+    5                  Directory is full, a directory with the same name
+                        exists, or a file with the same name exists with more
+    ──────────────────────────────────────────────────────────────────────────
+
+    Macro Definition:
+
+    create_handle  macro  path,attrib
+                    mov    dx,offset path
+                    mov    cx,attrib
+                    mov    ah,3CH
+                    int    21H
+                    endm
+
+    Example:
+
+    The following program creates a file named dir.tmp, containing the name
+    and extension of each file in the current directory, on the disk in drive
+    B.
+
+    srch_file db      "b:*.*",0
+    tmp_file  db      "b:dir.tmp",0
+    buffer    db       43 dup (?)
+    handle    dw       ?
+    ;
+    begin:    set_dta buffer                ; See Function 1AH
+            find_first_file  srch_file,16H  ; See Function 4EH
+            cmp     ax,12H                ; Directory empty?
+            je      all_done              ; Yes, go home
+            create_handle  tmp_file,0     ; THIS FUNCTION
+            jc      error                 ; Routine not shown
+            mov     handle,ax             ; Save handle
+    write_it: write_handle handle,buffer[1EH],12 ; Function 40H
+            find_next_file                ; See Function 4FH
+            cmp     ax,12H                ; Another entry?
+            je      all_done              ; No, go home
+            jmp     write_it              ; Yes, write record
+    all_done: close_handle  handle          ; See Function 3EH
+
+
+────────────────────────────────────────────────────────────────────────────
+Open Handle (Function 3DH)
+────────────────────────────────────────────────────────────────────────────
+
+    Call:
+
+    AH = 3DH
+    AL
+        Access code (see text)
+    DS:DX
+        Pointer to pathname
+
+    Return:
+
+    Carry set:
+    AX
+        2        = File not found
+        3        = Path not found
+        4        = Too many open files
+        5        = Access denied
+    12        = Invalid access
+    Carry not set:
+        No error
+
+
+    Comments:
+
+    Function 3DH opens any file, including hidden and system files, for input
+    or output. DX contains the offset (from the segment address in DS) of an
+    ASCIZ string that specifies the pathname of the file to be opened. AL
+    contains a code that specifies how the file is to be opened. This code is
+    described later under "Controlling Access to the File."
+
+    If there is no error, AX returns the file handle. MS-DOS sets the
+    read/write pointer to the first byte of the file.
+
+    Controlling Access to the File
+
+    The value in AL is made up of three parts that specify whether the file is
+    to be opened for read, write, or both (access code); what access other
+    processes have to the file (sharing mode); and whether a child process
+    inherits the file (inherit bit).
+
+        ┌───┬───────────┬───────────────┐
+    Bit  │ 7 │ 6   5   4 │ 3   2   1   0 │
+        └───┴───────────┴───────────────┘
+
+        \_/ \_________/ \______________/
+            │       │             │
+            │       │             └────────>  Access code
+            │       │
+            │       └──────────────────────>  Sharing mode
+            │
+            └──────────────────────────────>  Inherit bit
+
+    Inherit Bit
+
+    The high-order bit (bit 7) specifies whether the file is inherited by a
+    child process created with Function 4B00H or 4B03H (Load and Execute
+    Program or Overlay). If the bit is 0, the child process inherits the file;
+    if the bit is 1, it doesn't.
+
+    Sharing Mode
+
+    The sharing mode bits (bits 4-6) specify what access, if any, other
+    processes have to the open file. It can have the following values:
+
+    Table 1.21
+    Sharing Mode Bit Values
+    Bits 4-6   Sharing Mode         Description
+    ──────────────────────────────────────────────────────────────────────────
+    000        Compatibility        On a given machine, any process can open
+                                    the file any number of times with this
+                                    mode. Fails if the file has been opened
+                                    with any of the other sharing modes.
+
+    001        Deny both            Fails if the file has been opened in
+                                    compatibility mode or for read or write
+                                    access, even if by the current process.
+
+    010        Deny write           Fails if the file has been opened in
+                                    compatibility mode or for write access by
+                                    any other process.
+
+    011        Deny read            Fails if the file has been opened in
+                                    compatibility mode or for read access by
+                                    any other process.
+
+    100        Deny none            Fails if the file has been opened in
+    ──────────────────────────────────────────────────────────────────────────
+
+    Access Code
+
+    The access code (bits 0-3) specifies how the file is to be used. It can
+    have the following values:
+
+    Table 1.22
+    Access Code Bit Values
+                Access
+    Bits 0-3     Allowed       Description
+    ──────────────────────────────────────────────────────────────────────────
+    0000         Read          Fails if the file has been opened in deny read
+                                or deny both sharing mode.
+
+    0001         Write         Fails if the file has been opened in deny write
+                                or deny both sharing mode.
+
+    0010         Both          Fails if the file has been opened in deny read,
+    ──────────────────────────────────────────────────────────────────────────
+
+    If there is an error, the carry flag (CF) is set and the error code is
+    returned in AX:
+
+    Code               Meaning
+    ──────────────────────────────────────────────────────────────────────────
+    2                  Specified file is invalid or doesn't exist
+
+    3                  Specified path is invalid or doesn't exist
+
+    4                  No handles are available in the current process or the
+                        internal system tables are full
+
+    5                  Program attempted to open a directory or VolumeID, or
+                        tried to open a read-only file for writing
+
+    12                 Access code (bits 0-3 of AL) not 0, 1, or 2
+    ──────────────────────────────────────────────────────────────────────────
+
+    If this system call fails because of a file-sharing error, MS-DOS issues
+    Interrupt 24H with error code 2 (Drive Not Ready). A subsequent Function
+    59H (Get Extended Error) returns the extended error code that specifies a
+    sharing violation.
+
+    When opening a file, it is important to inform MS-DOS of any operations
+    that other processes may perform on this file (sharing mode). The default
+    (compatibility mode) denies all other processes access to the file, unless
+    they also attempt to open the file in compatibility mode. The following
+    table shows the effect of opening a file with compatibility mode set:
+
+    Type of File Opening            Read-Only File       Not Read-Only
+    ──────────────────────────────────────────────────────────────────────────
+    First open for read, write, or  Succeeds             Succeeds
+    both by machine/process "N"
+
+    Subsequent opens by machine or  Succeeds             Succeeds
+    process "N"
+
+    An open by another machine or   Succeeds             Fails
+    process
+    ──────────────────────────────────────────────────────────────────────────
+
+    Files may be read-only with the MS-DOS attrib command or by a read-only
+    share over the network.
+
+    It may be all right for other processes to continue to read the file while
+    your process is operating on it. In this case, you should specify "Deny
+    Write," which inhibits other processes from writing to your files but
+    allows them to read from these files.
+
+    Similarly, it is important for you to specify what operations your process
+    will perform ("Access" mode). If another process has the file open with
+    any sharing mode other than "Deny" mode, then the default mode
+    ("Read/Write") causes the open request to fail. If you only want to read
+    the file, your open request succeeds unless all other processes have
+    specified "Deny" mode or "Deny write."
+
+    Macro Definition:
+
+    open_handle  macro  path,access
+                mov    dx, offset path
+                mov    al, access
+                mov    ah, 3DH
+                int    21H
+                endm
+
+    Example:
+
+    The following program prints a file named textfile.asc that is on the disk
+    in drive B.
+
+    file       db  "b:textfile.asc",0
+    buffer     db   ?
+    handle     dw   ?
+    ;
+    begin:     open_handle  file,0          ; THIS FUNCTION
+                mov  handle,ax               ; Save handle
+    read_char: read_handle handle,buffer,1  ; Read 1 character
+                jc   error_read              ; Routine not shown
+                cmp  ax,0                    ; End of file?
+                je   return                  ; Yes, go home
+                print_char  buffer           ; See Function 05H
+                jmp  read_char               ; Read another
+
+
+────────────────────────────────────────────────────────────────────────────
+Close Handle (Function 3EH)
+────────────────────────────────────────────────────────────────────────────
+
+    Call:
+
+    AH = 3EH
+    BX
+        Handle
+
+    Return:
+
+    Carry set:
+    AX
+        6 = Invalid handle
+    Carry not set:
+        No error
+
+
+    Comments:
+
+    Function 3EH closes a file opened with Function 3DH (Open Handle) or
+    3CH (Create Handle). BX must contain the handle of the open file that you
+    want to close.
+
+    If there is no error, MS-DOS closes the file and flushes all internal
+    buffers. If there is an error, the carry flag (CF) is set and the error
+    code returns in AX:
+
+    Code               Meaning
+    ──────────────────────────────────────────────────────────────────────────
+    6                  Handle not open or invalid
+    ──────────────────────────────────────────────────────────────────────────
+
+    Macro Definition:
+
+    close_handle  macro  handle
+                mov    bx,handle
+                mov    ah,3EH
+                int    21H
+                endm
+
+    Example:
+
+    The following program creates a file named dir.tmp, containing the
+    filename and extension of each file in the current directory, in the
+    current directory on the disk in drive B.
+
+    srch_file  db  "b:*.*",0
+    tmp_file   db  "b:dir.tmp",0
+    buffer     db   43 dup (?)
+    handle     dw   ?
+    ;
+    begin:     set_dta  buffer              ; See Function 1AH
+                find_first_file  srch_file,16H  ; See Function 4EH
+                cmp      ax,12H              ; Directory empty?
+                je       all_done            ; Yes, go home
+                create_handle  tmp_file,0    ; See Function 3CH
+                jc       error_create        ; Routine not shown
+                mov      handle,ax           ; Save handle
+    write_it:  write_handle  handle,buffer[1EH],12 ; See Function
+                jc       error_write                ; 40H
+                find_next_file               ; See Function 4FH
+                cmp      ax,12H              ; Another entry?
+                je       all_done            ; No, go home
+                jmp      write_it            ; Yes, write record
+    all_done:  close_handle  handle         ; See Function 3EH
+                jc       error_close         ; Routine not shown
+
+
+────────────────────────────────────────────────────────────────────────────
+Read Handle (Function 3FH)
+────────────────────────────────────────────────────────────────────────────
+
+    Call:
+
+    AH = 3FH
+    BX
+        Handle
+    CX
+        Bytes to read
+    DS:DX
+        Pointer to buffer
+
+    Return:
+
+    Carry set:
+    AX
+        5 = Access denied
+        6 = Invalid handle
+    Carry not set:
+    AX
+        Bytes read
+
+
+    Comments:
+
+    Function 3FH reads from the file or device associated with the specified
+    handle. BX must contain the handle. CX must contain the number of bytes to
+    be read. DX must contain the offset (to the segment address in DS) of the
+    buffer.
+
+    If there is no error, AX returns the number of bytes read; if you attempt
+    to read starting at end of file, AX returns 0. The number of bytes
+    specified in CX is not necessarily transferred to the buffer; if you use
+    this call to read from the keyboard, for example, it reads only up to the
+    first carriage-return.
+
+    If you use this function request to read from standard input, you can
+    redirect the input.
+
+    If there is an error, the carry flag (CF) is set and the error code
+    returns in AX:
+
+    Code               Meaning
+    ──────────────────────────────────────────────────────────────────────────
+    5                  Handle not open for reading
+    6                  Handle not open or invalid
+    ──────────────────────────────────────────────────────────────────────────
+
+    Macro Definition:
+
+    read_handle  macro  handle,buffer,bytes
+                mov    bx,handle
+                mov    dx,offset buffer
+                mov    cx,bytes
+                mov    ah,3FH
+                int    21H
+                endm
+
+    Example:
+
+    The following program displays a file named textfile.asc that is on the
+    disk in drive B.
+
+    filename   db     "b:\textfile.asc",0
+    buffer     db      129 dup (?)
+    handle     dw      ?
+    ;
+    begin:     open_handle  filename,0        ; See Function 3DH
+                jc           error_open        ; Routine not shown
+                mov          handle,ax         ; Save handle
+    read_file: read_handle  buffer,file_handle,128
+                jc           error_open        ; Routine not shown
+                cmp          ax,0              ; End of file?
+                je           return            ; Yes, go home
+                mov          bx,ax             ; # of bytes read
+                mov          buffer[bx],"$"    ; Make a string
+                display      buffer            ; See Function 09H
+                jmp          read_file         ; Read more
+
+
+────────────────────────────────────────────────────────────────────────────
+Write Handle (Function 40H)
+────────────────────────────────────────────────────────────────────────────
+
+    Call:
+
+    AH = 40H
+    BX
+        Handle
+    CX
+        Bytes to write
+    DS:DX
+        Pointer to buffer
+
+    Return:
+
+    Carry set:
+    AX
+        5 = Access denied
+        6 = Invalid handle
+    Carry not set:
+    AX
+        Bytes written
+
+
+    Comments:
+
+    Function 40H writes to the file or device associated with the specified
+    handle. BX must contain the handle. CX must contain the number of bytes to
+    be written. DX must contain the offset (to the segment address in DS) of
+    the data to be written.
+
+    If you set CX to zero, the file will be truncated at the current position
+    of the file pointer. MS-DOS will not perform the write if the handle is
+    read-only.
+
+    If there is no error, AX returns the number of bytes written. Be sure to
+    check AX after performing a write. If its value is less than the number in
+    CX when the call was made, it indicates an error, even though the carry
+    flag isn't set. If AX contains 0, and if the target is a disk file, the
+    disk is full.
+
+    If you use this function request to write to standard output, you can
+    redirect the output. If you call this request with CX=0, the file size is
+    set to the value of the read/write pointer. To satisfy the new file size,
+    allocation units are allocated or released, as required. If there is an
+    error, the carry flag (CF) is set and the error code returns in AX:
+
+    Code               Meaning
+    ──────────────────────────────────────────────────────────────────────────
+    5                  Handle not open for writing
+    6                  Handle not open or invalid
+    ──────────────────────────────────────────────────────────────────────────
+
+    Macro Definition:
+
+    write_handle  macro  handle,buffer,bytes
+                mov    bx,handle
+                mov    dx,offset buffer
+                mov    cx,bytes
+                mov    ah,40H
+                int    21H
+                endm
+
+    Example:
+
+    The following program creates a file named dir.tmp, containing the
+    filename and extension of each file in the current directory, in the
+    current directory on the disk in drive B.
+
+    srch_file db     "b:*.*",0
+    tmp_file  db     "b:dir.tmp",0
+    buffer    db      43 dup (?)
+    handle    dw      ?
+    ;
+    begin:    set_dta buffer                ; See Function 1AH
+            find_first_file  srch_file,16H ; Check directory
+            cmp     ax,12H                ; Directory empty?
+            je      return                ; Yes, go home
+            create_handle  tmp_file,0     ; See Function 3CH
+            jc      error_create          ; Routine not shown
+            mov     handle,ax             ; Save handle
+    write_it: write_handle handle,buffer[1EH],12 ; THIS FUNCTION
+            jc      error_write           ; Routine not shown
+            find_next_file                ; Check directory
+            cmp     ax,12H                ; Another entry?
+            je      all_done              ; No, go home
+            jmp     write_it              ; Yes, write record
+    all_done: close_handle  handle          ; See Function 3EH
+            jc      error_close           ; Routine not shown
+

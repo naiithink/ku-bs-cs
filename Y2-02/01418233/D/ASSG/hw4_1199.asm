@@ -23,24 +23,47 @@ SSEG    ENDS
 
 ;; DS stores printable data
 DSEG    SEGMENT
-OFILE_HEADER            db      "TODAY'S DATE IS",'$'                   ; Out file line #1
-OFILE_TBL_HEADER_C1     db      "NAME",'$'                              ; Out file line #3 -- table header col #1
-OFILE_TBL_HEADER_C2     db      "DATE OF BIRTH",'$'                     ; Out file line #3 -- table header col #2
-OFILE_TBL_HEADER_C3     db      "AGE",'$'                               ; Out file line #3 -- table header col #3
-OFILE_TBL_RS            db      13,10,10,'$'                            ; Out file table record separator -- ASCII CRLF + LF
+OFILE_HANDLE            dw      ?                                       ; The out file handle
+OFILE_NAME              db      "PEOPLE.TXT",0                          ; The out filename, in the current directory
+OFILE_HEADER            db      "TODAY'S DATE IS"                       ; Out file line #1
+LOFILE_HEADER           dw      $-OFILE_HEADER                          ; Length of OFILE_HEADER
+OFILE_TBL_HEADER_C1     db      "NAME"                                  ; Out file line #3 -- table header col #1
+LOFILE_TBL_HEADER_C1    dw      $-OFILE_TBL_HEADER_C1                   ; Length of OFILE_TBL_HEADER_C1
+OFILE_TBL_HEADER_C2     db      "DATE OF BIRTH"                         ; Out file line #3 -- table header col #2
+LOFILE_TBL_HEADER_C2    dw      $-OFILE_TBL_HEADER_C2                   ; Length of OFILE_TBL_HEADER_C2
+OFILE_TBL_HEADER_C3     db      "AGE"                                   ; Out file line #3 -- table header col #3
+LOFILE_TBL_HEADER_C3    dw      $-OFILE_TBL_HEADER_C3                   ; Length of OFILE_TBL_HEADER_C3
+OFILE_TBL_RS            db      13,10,'$'                               ; Out file table record separator -- ASCII CRLF + LF
 OFILE_TBL_FS            db      9,'$'                                   ; Out file table field separator -- ASCII TAB
-STRING                  db      36,?,36 dup (' ')                       ; String buffer -- 35 chars + CR = 36
-                                                                        ;       Byte 1: Sets to max length of the buffer, including CR
+STRING_START            db      36                                      ; \
+STRING_CHARS_GOT        db      ?                                       ;  * String buffer -- 35 chars + CR = 36
+STRING                  db      36 dup (' ')                            ; /     Byte 1: Sets to max length of the buffer, including CR
                                                                         ;       Byte 2: The function sets to input chars, not counting CR
                                                                         ;       Byte 3--n: The buffer
+LSTRING                 dw      $ - STRING                              ; Length of STRING
 STRING_TERM             db      '$',0                                   ; Prevent any kind of buffer overflow -- dollar-terminated or ASCIIZ strings
 BUFF_NUM                dw      ?                                       ; Number buffer
+ASCII_SPC               db      ' '                                     ; ASCII TAB
+ASCII_TAB               db      9                                       ; ASCII TAB
+ASCII_CRLF              db      13,10                                   ; ASCII TAB
+ASCII_VRT               db      '|'                                     ; ASCII TAB
+MSGERR_OPEN_FILE        db      "ERROR OPENING FILE",'$'                ; File access error message
 DSEG    ENDS
+
+
+;; Person structure stores each person data
+PERSON  STRUCT
+        SNAME           db      35 dup (?),'$'                          ; <string> The person's name
+        SBRTH           db      10 dup (?),'$'                          ; <string> The person's birth date
+        DAGE            db      ?                                       ; <number> The person's age in days
+PERSON  ENDS
 
 
 ;; ES stores dynamic data and constants
 ESEG    SEGMENT
-OFILE_NAME              db      "PEOPLE.TXT",0                          ; The out file name, in the current directory
+BC_AD_DIFF              dw      543                                     ; Difference between BC and AD year, in years
+DAYS_IN_YEAR            dw      365                                     ; Number of days in a year
+DAYS_IN_MNTH            dw      30                                      ; Number of days in a year
 CUR_YYYY                dw      ?                                       ; Current year in AD [1980, 2099]
 CUR_MM                  db      ?                                       ; Current month [1, 12]
 CUR_DD                  db      ?                                       ; Current day [1, 31]
@@ -57,61 +80,287 @@ _start  PROC                                    ; Start of the main procedure _s
         mov     ax, ESEG                        ; Initialize ES
         mov     es, ax
 
-;;; Getting keyboard input
-        ; lea     dx, STRING                      ; Load the formed buffer to DS:DX
-        ; mov     ah, 0Ah                         ; DOS Buffered Keyboard Input function
-        ; int     21h
+        ; mov     ax, 0
+        ; push    ax
+        ; lea     ax, STRING
+        ; push    ax
+        ; mov     ax, LSTRING
+        ; push    ax
+        ; call    fprint
 
-        ; mov     bx, 0                           ; Clear BX
-        ; mov     bl, STRING[1]                   ; Get the number of input chars from the buffer;
-        ;                                         ;       set by DOS function 0Ah
-        ; mov     STRING[bx+2], '$'               ; Insert '$' into the string buffer;
-        ;                                         ;       the string terminator for DOS function 09h to work properly.
+        mov     ah, 2Ah                         ; DOS Get Date
+        int     21h                             ;       CX: Year (1980-2099)
+                                                ;       DH: Month (1-12)
+                                                ;       DL: Day (1-31)
+                                                ;       AL: Day of the week (0=Sun., 6=Sat.)
 
+        mov     CUR_YYYY, cx                    ; Store current Year to DS:[CUR_YYYY]
+        mov     CUR_MM, dh                      ; Store current Month to DS:[CUR_MM]
+        mov     CUR_DD, dl                      ; Store current Day to DS:[CUR_DAY]
+
+; Check if out file already exists
+        mov     ah, 3Ch                         ; DOS Create Handle
+        lea     dx, OFILE_NAME                  ; Out filename
+        mov     cx, 0h                          ; As a normal file
+        int     21h
+
+        jc      J_ERR_OPEN_FILE                 ; Error occurs
+        jmp     FILE_READY                      ; The file is ready to be written
+
+J_ERR_OPEN_FILE:
+        jmp     ERR_OPEN_FILE
+
+; Every resource is ready
+FILE_READY:
+        mov     OFILE_HANDLE, ax                ; Save file handle
+
+; Print line 1
+        mov     ax, OFILE_HANDLE
+        push    ax
+        lea     ax, ASCII_TAB
+        push    ax
+        mov     ax, 1
+        push    ax
+        call    fprint
+
+        mov     ax, OFILE_HANDLE                ; "TODAY'S DATE IS"
+        push    ax
+        lea     ax, OFILE_HEADER
+        push    ax
+        mov     ax, LOFILE_HEADER
+        push    ax
+        call    fprint
+
+        mov     ax, OFILE_HANDLE                ; TAB
+        push    ax
+        lea     ax, ASCII_TAB
+        push    ax
+        mov     ax, 1
+        push    ax
+        call    fprint
+
+; Print current date
         lea     ax, STRING
+        push    ax
+        mov     ax, CUR_YYYY
+        push    ax
+        mov     al, CUR_MM
+        cbw
+        push    ax
+        mov     al, CUR_DD
+        cbw
+        push    ax
+        call    date_string
+
+        mov     ax, OFILE_HANDLE                ; "TODAY'S DATE IS"
+        push    ax
+        lea     ax, STRING
+        push    ax
+        mov     ax, 10                          ; Date is 10 chars long
+        push    ax
+        call    fprint
+
+        mov     ax, OFILE_HANDLE                ; TAB
+        push    ax
+        lea     ax, ASCII_CRLF
+        push    ax
+        mov     ax, 2
+        push    ax
+        call    fprint
+
+; Line 2
+        mov     ax, OFILE_HANDLE                ; "NAME"
+        push    ax
+        lea     ax, OFILE_TBL_HEADER_C1
+        push    ax
+        mov     ax, LOFILE_TBL_HEADER_C1
+        push    ax
+        call    fprint
+
+        lea     ax, ASCII_SPC                   ; Header padding
+        push    ax
+        mov     ax, 31                          ; Padding; names can be up to 35 chars long, not counting "NAME" header
+        push    ax
+        mov     ax, OFILE_HANDLE
+        push    ax
+        call    fprint_dup_chars
+
+; Field sep
+        lea     ax, ASCII_VRT                   ; Field separator
+        push    ax
+        mov     ax, 2                           ; Separate with double-whitespace
+        push    ax
+        mov     ax, OFILE_HANDLE
+        push    ax
+        call    fprint_dup_chars
+;;;
+
+        mov     bx, OFILE_HANDLE                ; "DATE OF BIRTH"
+        mov     cx, LOFILE_TBL_HEADER_C2
+        lea     dx, OFILE_TBL_HEADER_C2
+        mov     ah, 40h
+        int     21h
+
+; Field sep
+        lea     ax, ASCII_VRT                   ; Field separator
+        push    ax
+        mov     ax, 2                           ; Separate with double-whitespace
+        push    ax
+        mov     ax, OFILE_HANDLE
+        push    ax
+        call    fprint_dup_chars
+
+        mov     bx, OFILE_HANDLE                ; "AGE"
+        mov     cx, LOFILE_TBL_HEADER_C3
+        lea     dx, OFILE_TBL_HEADER_C3
+        mov     ah, 40h
+        int     21h
+
+        lea     ax, ASCII_SPC                   ; Header padding
+        push    ax
+        mov     ax, 20                          ; Padding; names can be up to 35 chars long, not counting "NAME" header
+        push    ax
+        mov     ax, OFILE_HANDLE
+        push    ax
+        call    fprint_dup_chars
+
+; Field sep
+        lea     ax, ASCII_VRT                   ; Field separator
+        push    ax
+        mov     ax, 2                           ; Separate with double-whitespace
+        push    ax
+        mov     ax, OFILE_HANDLE
+        push    ax
+        call    fprint_dup_chars
+
+; Newline
+        lea     ax, ASCII_CRLF                  ; Field separator
+        push    ax
+        mov     ax, 1                           ; Separate with double-whitespace
+        push    ax
+        mov     ax, OFILE_HANDLE
+        push    ax
+        call    fprint_dup_chars
+
+; Header written
+        lea     ax, STRING_START                ; Get number of people
         push    ax
         call    get_string
 
-        call    print_crlf                      ; Move pass the first input line
+        lea     ax, STRING                      ; Convert input string to number
+        push    ax
+        mov     al, STRING_CHARS_GOT
+        cbw
+        push    ax
+        lea     ax, BUFF_NUM
+        push    ax
+        call    atob
 
-        lea     ax, [STRING+2]
+        mov     cx, BUFF_NUM                    ; Loop over the people
+
+NEXT_PERSON:
+        push    cx
+        ; lea     dx, [STRING+2]                  ; As required for 0Ah to work,
+        ;                                         ;       starting byte of the string buffer is located at the end of the 2nd byte
+        ; mov     ah, 09h                         ; DOS Display String function
+        ; int     21h
+        lea     ax, STRING_START                ; Get each ones name
+        push    ax
+        call    get_string
+
+; Write name
+        mov     bx, OFILE_HANDLE
+        mov     al, STRING_CHARS_GOT
+        cbw
+        mov     cx, ax
+        lea     dx, STRING
+        mov     ah, 40h
+        int     21h
+
+; Write name padding
+        lea     ax, ASCII_SPC                   ; Field separator
+        push    ax
+; Calculate padding amount
+        mov     ax, 35
+        mov     bx, cx
+        sub     ax, bx
+        push    ax
+        mov     ax, OFILE_HANDLE
+        push    ax
+        call    fprint_dup_chars
+
+; Field sep
+        lea     ax, ASCII_VRT                   ; Field separator
+        push    ax
+        mov     ax, 2                           ; Separate with double-whitespace
+        push    ax
+        mov     ax, OFILE_HANDLE
+        push    ax
+        call    fprint_dup_chars
+
+
+; Get Birthdate
+        lea     ax, STRING_START                ; Get number of people
+        push    ax
+        call    get_string
+
+        mov     bx, OFILE_HANDLE
+        mov     al, STRING_CHARS_GOT
+        cbw
+        mov     cx, ax
+        lea     dx, STRING
+        mov     ah, 40h
+        int     21h
+
+; Birthdate padding
+        lea     ax, ASCII_SPC                   ; Newline
+        push    ax
+        mov     ax, 3                           ; Separate with double-whitespace
+        push    ax
+        mov     ax, OFILE_HANDLE
+        push    ax
+        call    fprint_dup_chars
+
+        lea     ax, ASCII_VRT                   ; Newline
+        push    ax
+        mov     ax, 2                           ; Separate with double-whitespace
+        push    ax
+        mov     ax, OFILE_HANDLE
+        push    ax
+        call    fprint_dup_chars
+
+;;;
+        lea     ax, ASCII_CRLF                  ; Newline
+        push    ax
+        mov     ax, 1                           ; Separate with double-whitespace
+        push    ax
+        mov     ax, OFILE_HANDLE
+        push    ax
+        call    fprint_dup_chars
+
+        pop     cx
+        dec     cx
+        cmp     cx, 0
+        jg      JNEXT_PERSON
+        jmp     EOP
+
+JNEXT_PERSON:
+        jmp     NEXT_PERSON
+
+        jmp     EOP                             ; Skip the error tracing
+
+ERR_OPEN_FILE:                                  ; File access error
+        lea     ax, MSGERR_OPEN_FILE
         push    ax
         mov     ax, 1
         push    ax
         call    print
 
-        ; lea     ax, STRING                      ; The input string
-        ; add     ax, 2                           ; DOS function 0Ah string format
-        ; push    ax
-        ; mov     ax, 0                           ; Clear AX
-        ; mov     al, [STRING+1]                  ; Get string length w/o CR
-        ; push    ax
-        ; lea     ax, BUFF_NUM                    ; Save the decoded number
-        ; push    ax
-        ; call    atob
-
-;;;
-        ; mov     ax, BUFF_NUM
-        ; push    ax
-        ; mov     ax, 10
-        ; push    ax
-        ; lea     ax, STRING
-        ; push    ax
-        ; call    btoa
-
-        ; mov     ax, offset [STRING+2]
-        ; push    ax
-        ; mov     ax, 1
-        ; push    ax
-        ; call    print
-
-        mov     cx, BUFF_NUM                    ; Number of people
-        
-
-        ; lea     dx, [STRING+2]                  ; As required for 0Ah to work,
-        ;                                         ;       starting byte of the string buffer is located at the end of the 2nd byte
-        ; mov     ah, 09h                         ; DOS Display String function
-        ; int     21h
+EOP:                                            ; Very end of _start procedure
+; Close file
+        mov     bx, OFILE_HANDLE
+        mov     ah, 3Eh
+        int     21h
 
         mov     al, 0
         mov     ah, 4Ch
@@ -286,6 +535,165 @@ EO_PROC:                                        ; End-of-procedure
 print   ENDP
 
 
+; Print/Display String to File of Console (Function 09H, 40h wrapper)
+; ARGUMENTS:
+;       push    WORD                            ; [BP+8]  Set to 0 for Console only, otherwise, this procedure assumes that as a file handle.
+;       push    BYTE PTR []                     ; [BP+6]  Pointer to string, ending with '$'
+;       push    WORD                            ; [BP+4]  Length of string to be printed
+fprint  PROC
+        push    ax                              ; Save AX
+        push    bx                              ; Save BX
+        push    cx                              ; Save CX
+        push    dx                              ; Save DX
+        push    bp                              ; Save BP
+        mov     bp, sp                          ; Copy SP to BP
+        sub     sp, 2                           ; Step into local scope
+
+        mov     bx, [bp+16]                     ; Third argument; File to be printed
+        mov     dx, [bp+14]                     ; Second argument; String to be printed
+
+        cmp     bx, 0
+        jne     FPRINT_TO_FILE                  ; BX != 0, it's a file handle
+
+        mov     ah, 09h                         ; DOS Display String
+        int     21h
+
+        jmp     EOP_FPRINT
+
+FPRINT_TO_FILE:
+        mov     cx, [bp+12]                     ; First argument; String length
+        mov     ah, 40h                         ; DOS Write Handle
+        int     21h
+
+EOP_FPRINT:                                     ; End-of-procedure
+        mov     sp, bp                          ; Step out of local scope
+        pop     bp                              ; Restore BP
+        pop     dx                              ; Restore DX
+        pop     cx                              ; Restore CX
+        pop     bx                              ; Restore BX
+        pop     ax                              ; Restore AX
+        ret     6                               ; This procedure uses 3 stack elements -- 2 bytes each
+fprint  ENDP
+
+
+;; Convert date to string
+;       push    BYTE PTR []                     ; Destination string
+;       push    WORD                            ; Year
+;       push    WORD                            ; Month
+;       push    WORD                            ; Day
+date_string     PROC
+        push    ax
+        push    bx
+        push    cx                              ; Save CX
+        push    dx                              ; Save DX
+        push    bp                              ; Save BP
+        mov     bp, sp                          ; Copy SP to BP
+        sub     sp, 2                           ; Step into local scope
+
+; DD
+        mov     ax, [bp+12]                     ; Day
+        push    ax
+        mov     ax, 2                           ; Day is printed in 2 digits
+        push    ax
+        mov     ax, [bp+18]
+        push    ax
+        call    btoa
+
+        mov     ax, [bp+12]
+        cmp     ax, 10
+        jge     NO_DD_PAD
+
+        mov     bx, [bp+18]
+        mov     BYTE PTR [bx], '0'
+
+NO_DD_PAD:
+        add     bx, 2                           ; To insert '/'
+        mov     BYTE PTR [bx], '/'
+        add     bx, 1
+        mov     [bp+18], bx
+
+; MM
+        mov     ax, [bp+14]                     ; Month
+        push    ax
+        mov     ax, 2                           ; Month is printed in 2 digits
+        push    ax
+        mov     ax, [bp+18]
+        push    ax
+        call    btoa
+
+        mov     ax, [bp+14]
+        cmp     ax, 10
+        jge     NO_MM_PAD
+
+        mov     bx, [bp+18]
+        mov     BYTE PTR [bx], '0'
+
+NO_MM_PAD:
+        add     bx, 2                           ; To insert '/'
+        mov     BYTE PTR [bx], '/'
+        add     bx, 1
+        mov     [bp+18], bx
+
+; YYYY
+        mov     ax, [bp+16]                     ; Year
+        push    ax
+        mov     ax, 4                           ; Year is printed in 4 digits
+        push    ax
+        mov     ax, [bp+18]
+        push    ax
+        call    btoa
+
+EOP_DATE_STRING:                                ; End-of-procedure
+        mov     sp, bp                          ; Step out of local scope
+        pop     bp                              ; Restore BP
+        pop     dx                              ; Restore DX
+        pop     cx                              ; Restore CX
+        pop     bx                              ; Restore BX
+        pop     ax                              ; Restore AX
+        ret     6                               ; This procedure uses 3 stack elements -- 2 bytes each
+date_string     ENDP
+
+
+;; Write a char to file n <= 255 times
+;       push    BYTE PTR []                     ; Pointer to a character buffer in DS
+;       push    WORD                            ; Number of times to be printed
+;       push    WORD                            ; File handle
+fprint_dup_chars   PROC
+        push    ax                              ; Save AX
+        push    bx                              ; Save BX
+        push    cx                              ; Save CX
+        push    dx                              ; Save DX
+        push    bp                              ; Save BP
+        mov     bp, sp
+        sub     sp, 2
+
+        mov     bx, [bp+12]                     ; File handle
+        mov     cx, 1                           ; Bytes to write
+        mov     dx, [bp+16]                     ; Pointer to char
+
+        mov     ax, [bp+14]                     ; Loop counter
+
+FPRINT_DUP_CHARS_NEXT:
+        push    ax
+
+        mov     ah, 40h                         ; DOS Write Handle
+        int     21h
+
+        pop     ax
+        dec     ax
+        cmp     ax, 0
+        jg      FPRINT_DUP_CHARS_NEXT
+
+        mov     sp, bp
+        pop     bp                              ; Restore BP
+        pop     dx                              ; Restore DX
+        pop     cx                              ; Restore CX
+        pop     bx                              ; Restore BX
+        pop     ax                              ; Restore AX
+        ret     6
+fprint_dup_chars   ENDP
+
+
 ;; Procedure #5
 ;; Get String
 ; ARGUMENTS:
@@ -308,6 +716,15 @@ get_string      PROC
 
         mov     bl, [si+1]                      ; Get number of input chars, not counting CR
         mov     WORD PTR [bx+si+2], '$'
+
+; CRLF according to input line
+        mov     dl, 13
+        mov     ah, 02h
+        int     21h
+
+        mov     dl, 10
+        mov     ah, 02h
+        int     21h
 
         mov     sp, bp                          ; Step out of local stack frame
         pop     bp                              ; Restore BP

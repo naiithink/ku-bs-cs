@@ -1,0 +1,271 @@
+────────────────────────────────────────────────────────────────────────────
+Get Date (Function 2AH)
+────────────────────────────────────────────────────────────────────────────
+
+    Call:
+
+    AH = 2AH
+
+    Return:
+
+    CX
+    Year (1980-2099)
+    DH
+    Month (1-12)
+    DL
+    Day (1-31)
+    AL
+    Day of week (0=Sun., 6=Sat.)
+
+
+    Comments:
+
+    Function 2AH returns the current date set in the operating system as
+    binary numbers in CX and DX:
+
+    Register           Contents
+    ──────────────────────────────────────────────────────────────────────────
+    CX                 Year (1980-2099)
+    DH                 Month (1=January, 2=February, etc.)
+    DL                 Day of month (1-31)
+    AL                 Day of week (0=Sunday, 1=Monday, etc.)
+    ──────────────────────────────────────────────────────────────────────────
+
+    Macro Definition:
+
+    get_date  macro
+            mov   ah,2AH
+            int   21H
+            endm
+
+    Example:
+
+    The following program gets the date, increments the day, increments the
+    month or year, if necessary, and sets the new date.
+
+    month      db      31,28,31,30,31,30,31,31,30,31,30,31
+    ;
+    begin:     get_date            ; THIS FUNCTION
+                inc    dl           ; increment day
+                xor    bx,bx        ; so BL can be used as index
+                mov    bl,dh        ; move month to index register
+                dec    bx           ; month table starts with 0
+                cmp    dl,month[bx] ; past end of month?
+                jle    month_ok     ; no, set new date
+                mov    dl,1         ; yes, set day to 1
+                inc    dh           ; and increment month
+                cmp    dh,12        ; past end of year?
+                jle    month_ok     ; no, set new date
+                mov    dh,1         ; yes, set month to 1
+                inc    cx           ; increment year
+    month_ok:  set_date cx,dh,dl   ; see Function 2AH
+
+
+────────────────────────────────────────────────────────────────────────────
+Set Date (Function 2BH)
+────────────────────────────────────────────────────────────────────────────
+
+    Call:
+
+    AH = 2BH
+    CX
+    Year (1980-2099)
+    DH
+    Month (1-12)
+    DL
+    Day (1-31)
+
+    Return:
+
+    AL
+    00H        = Date was valid
+    FFH        = Date was invalid
+
+
+    Comments:
+
+    Function 2BH sets the date in the operating system (and in the CMOS clock,
+    if one exists). Registers CX and DX must contain a valid date in binary:
+
+    Register           Contents
+    ──────────────────────────────────────────────────────────────────────────
+    CX                 Year (1980-2099)
+    DH                 Month (1=January, 2=February, etc.)
+    DL                 Day of month (1-31)
+    ──────────────────────────────────────────────────────────────────────────
+
+    If the date is valid, the call sets it and AL returns 0. If the date is
+    not valid, the function aborts and AL returns FFH.
+
+    Macro Definition:
+
+    set_date  macro  year,month,day
+            mov    cx,year
+            mov    dh,month
+            mov    dl,day
+            mov    ah,2BH
+            int    21H
+            endm
+
+    Example:
+
+    The following program gets the date, increments the day, increments the
+    month or year, if necessary, and sets the new date.
+
+    month      db      31,28,31,30,31,30,31,31,30,31,30,31
+    ;
+    begin:     get_date            ; see Function 2AH
+                inc    dl           ; increment day
+                xor    bx,bx        ; so BL can be used as index
+                mov    bl,dh        ; move month to index register
+                dec    bx           ; month table starts with 0
+                cmp    dl,month[bx] ; past end of month?
+                jle    month_ok     ; no, set the new date
+                mov    dl,1         ; yes, set day to 1
+                inc    dh           ; and increment month
+                cmp    dh,12        ; past end of year?
+                jle    month_ok     ; no, set the new date
+                mov    dh,1         ; yes, set the month to 1
+                inc    cx           ; increment year
+    month_ok:  set_date cx,dh,dl   ; THIS FUNCTION
+
+
+────────────────────────────────────────────────────────────────────────────
+Get Time (Function 2CH)
+────────────────────────────────────────────────────────────────────────────
+
+    Call:
+
+    AH = 2CH
+
+    Return:
+
+    CH
+    Hour (0-23)
+    CL
+    Minutes (0-59)
+    DH
+    Seconds (0-59)
+    DL
+    Hundredths (0-99)
+
+
+    Comments:
+
+    Function 2CH returns the current time set in the operating system (and
+    sets the CMOS clock, if one exists) as binary numbers in CX and DX:
+
+    Register           Contents
+    ──────────────────────────────────────────────────────────────────────────
+    CH                 Hour (0-23)
+    CL                 Minutes (0-59)
+    DH                 Seconds (0-59)
+    DL                 Hundredths of a second (0-99)
+    ──────────────────────────────────────────────────────────────────────────
+
+    Depending on how your hardware keeps time, some of these fields may be
+    irrelevant. As an example, many CMOS clock chips do not resolve more than
+    seconds. In such a case, the value in DL will probably always be 0.
+
+    Macro Definition:
+
+    get_time  macro
+            mov   ah,2CH
+            int   21H
+            endm
+
+    Example:
+
+    The following program displays the time continuously until you press any
+    key.
+
+    time         db    "00:00:00.00",0DH,"$"
+    ;
+    begin:       get_time               ; THIS FUNCTION
+                byte_to_dec ch,time    ; see end of chapter
+                byte_to_dec cl,time[3] ; see end of chapter
+                byte_to_dec dh,time[6] ; see end of chapter
+                byte_to_dec dl,time[9] ; see end of chapter
+                display time           ; see Function 09H
+                check_kbd_status       ; see Function 0BH
+                cmp     al,0FFH        ; has a key been pressed?
+                je      return         ; yes, terminate
+                jmp     begin          ; no, display time
+
+
+────────────────────────────────────────────────────────────────────────────
+Set Time (Function 2DH)
+────────────────────────────────────────────────────────────────────────────
+
+    Call:
+
+    AH = 2DH
+    CH
+    Hour (0-23)
+    CL
+    Minutes (0-59)
+    DH
+    Seconds (0-59)
+    DL
+    Hundredths (0-99)
+
+    Return:
+
+    AL
+    00H        = Time was valid
+    FFH        = Time was invalid
+
+
+    Comments:
+
+    Function 2DH sets the time in the operating system. Registers CX and DX
+    must contain a valid time in binary:
+
+    Register           Contents
+    ──────────────────────────────────────────────────────────────────────────
+    CH                 Hour (0-23)
+    CL                 Minutes (0-59)
+    DH                 Seconds (0-59)
+    DL                 Hundredths of a second (0-99)
+    ──────────────────────────────────────────────────────────────────────────
+
+    Depending on how your hardware keeps time, some of these fields may be
+    irrelevant. As an example, many CMOS clock chips do not resolve more than
+    seconds. In such a case, the value in DL will not be relevant.
+
+    If the time is valid, the call sets it and AL returns 0. If the time is
+    not valid, the function aborts and AL returns FFH.
+
+    Macro Definition:
+
+    set_time  macro  hour,minutes,seconds,hundredths
+            mov    ch,hour
+            mov    cl,minutes
+            mov    dh,seconds
+            mov    dl,hundredths
+            mov    ah,2DH
+            int    21H
+            endm
+
+    Example:
+
+    The following program sets the system clock to 0 and displays the time
+    continuously. When you type a character, the display freezes; when you
+    type another character, the clock is reset to 0 and the display starts
+    again.
+
+    time          db  "00:00:00.00",0DH,0AH,"$"
+    ;
+    begin:        set_time  0,0,0,0       ; THIS FUNCTION
+    read_clock:   get_time                ; see Function 2CH
+                byte_to_dec  ch,time    ; see end of chapter
+                byte_to_dec  cl,time[3] ; see end of chapter
+                byte_to_dec  dh,time[6] ; see end of chapter
+                byte_to_dec  dl,time[9] ; see end of chapter
+                display  time           ; see Function 09H
+                dir_console_io 0FFH     ; see Function 06H
+                cmp      al,00H         ; was a char. typed?
+                jne      stop           ; yes, stop the timer
+                jmp      read_clock     ; no keep timer on
+    stop:         read_kbd                ; see Function 08H
+                jmp      begin          ; keep displaying time
