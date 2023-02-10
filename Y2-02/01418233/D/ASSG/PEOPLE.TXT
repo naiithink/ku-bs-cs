@@ -1,2 +1,1 @@
-	TODAY'S DATE IS	09/02/2023
-NAME                               ||DATE OF BIRTH||AGE                    ||hello                              ||22/10/2023   ||
+                    TODAY'S DATE IS   27/01/2023NAME                               |||DATE OF BIRTH|||AGE                    |||h                                  |||09/12/1957   |||65 YEARS  1 MONTHS 18 DAYS
