@@ -127,7 +127,14 @@ FILE_READY:
 
         lea     si, STRING                      ; To check the input char
         cmp     BYTE PTR [si], '0'              ; Did the user input blank string?
-        jle     EOP                             ; Yes, they did.
+        jle     J_A_EOP                         ; Yes, they did.
+
+        jmp     J_A_NEXT
+
+J_A_EOP:
+        jmp     EOP
+
+J_A_NEXT:
 
         lea     ax, STRING                      ; Convert input string to number
         push    ax
@@ -140,7 +147,14 @@ FILE_READY:
 
         mov     cx, BUFF_NUM                    ; Loop over the people
         cmp     cx, 0                           ; Invalid input
-        jle     EOP
+        jle     J_B_EOP
+
+        jmp     J_B_NEXT
+
+J_B_EOP:
+        jmp     EOP
+
+J_B_NEXT:
 
 ; Get current date
         lea     ax, STRING_START                ; Start of string buffer
@@ -681,10 +695,10 @@ FILL:                                           ; Fill the resulting string with
         push    ax
 
         cmp     ax, 0                           ; Compare the number with 0d
-        jge     NEXT                            ; The number is non-negative
+        jge     BTOA_NEXT                       ; The number is non-negative
         neg     ax                              ; If the number is negative, complement out.
 
-NEXT:
+BTOA_NEXT:
         mov     di, 10                          ; 10d as divisor
         cwd                                     ; Sign-extend from WORD AX to DWORD DX:AX
         div     di                              ; AX <- AX / 10
@@ -697,18 +711,18 @@ NEXT:
                                                 ;       current digit in the resulting string
 
         cmp     ax, 0                           ; Done?
-        jne     NEXT                            ; Continue to the next digit
+        jne     BTOA_NEXT                       ; Continue to the next digit
 
 ; Done conversion
         pop     ax                              ; Get the number, store to AX for sign comparision
         cmp     ax, 0                           ; Whether the number is non-negative
-        jge     DONE                            ; The number is non-negative, then return to the caller
+        jge     BTOA_DONE                       ; The number is non-negative, then return to the caller
 
         dec     bx                              ; Move to the left-most position in the resulting string to set the sign
         mov     BYTE PTR [bx], '-'              ; Store the character '-' to the string
 
 ; All done
-DONE:
+BTOA_DONE:
         mov     sp, bp                          ; Step out of local stack frame
 ; Restore registers
         pop     bp
@@ -751,7 +765,7 @@ atob    PROC
         mov     ax, 0                           ; A* register accumulates the decoded values
         mov     bx, 1                           ; BX yields the place values -- in decimal
 
-NEXT_DIGIT:
+ATOB_NEXT:
         mov     dl, [si]                        ; Get the ASCII-coded number
         sub     dl, 30h                         ; De-ASCII the number
 
@@ -781,15 +795,15 @@ NEXT_DIGIT:
 
         dec     si                              ; Decimal-left-shift over the source string
 
-        loop    NEXT_DIGIT
+        loop    ATOB_NEXT
 
-        jmp     DONE                            ; No `'-'` was found, non-negative number
+        jmp     ATOB_DONE                       ; No `'-'` was found, non-negative number
 
 NEG_NUM:
         mov     bx, -1                          ; Negate the number
         mul     bx
 
-DONE:
+ATOB_DONE:
         mov     [di], ax                        ; Store the result at location pointed to by DI
 
         mov     sp, bp                          ; Step out of local stack frame
