@@ -2,6 +2,18 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "Main"
+        },
+        {
+            "type": "java",
+            "name": "Launch HuffmanEncoder",
+            "request": "launch",
+            "mainClass": "HuffmanEncoder"
+        },
+        {
+            "type": "java",
             "name": "Launch OddOrPos",
             "request": "launch",
             "mainClass": "th.ku.naiithink.cs211.lessons.unit_test.white_box.OddOrPos",
