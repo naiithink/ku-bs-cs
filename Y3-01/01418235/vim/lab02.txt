@@ -1,0 +1,78 @@
+LAB02
+Potsawat Thinkanwatthana
+6410451199
+
+This file was written in English to avoid encoding errors.
+^ indicates the Control key
+
+1. Usages & thoughts on vim
+	1.1 Using vim
+		- Cursor control:
+			- h: go left
+			- j: go down
+			- k: go up
+			- l: go right
+			- e: jump to next word
+			- w: jump to current word's end
+			- 0: jump to line start
+			- $: jump to line end
+		- Text editing:
+			- i: insert here
+			- A: append to end of line
+			- x: delete current char
+			- o: insert new line below
+			- O: insert new line above
+			- dd: delete line
+			- dw: delete word
+			- de: delete chars til next word
+			- d$: delete chars from current to end of line
+			- r<char>: replace current char with <char>
+			- ce: change til end of word; delete chars til end of word then put into insert mode
+			- cc: change whole line; simply dd + i
+		- Cut, copy, & paste:
+			- c: cut
+			- y: yank; copy
+			- p: paste
+		- Repeating commands:
+			- <count> <command>: repeat <command> <count> times
+		- Global commands -- press ':' to activate; the command prefix.
+			- w: write
+			- q: quit
+			- !: discard editing
+			- sav <file_name>: save as 
+		- Other commands:
+			- u: undo changes
+			- U: undo whole line changes
+			- R: redo changes
+	1.2 My thoughts on vim
+		To be honest, I am an Emacs user. vim used to be the CLI text editor
+		of my choice, just before I met Emacs.
+
+		vim control keys are not intuitively recognizeable.
+		Such as the cursor control keys. In the resting position,
+		we -- at least to me -- rest our left and right hands by placing
+		the index fingers on F and J keys, respectively. But in order
+		to move the cursor while using vim, we need to shift our right
+		hand fingers to the left to make them agree with vim's hjkl key layout.
+
+		Modes made me confused.
+		Switching between normal and insert -- or otherlike -- modes is such a pain for me.
+		With Emacs, we can insert text and move the cursor without having to switch
+		between modes -- and I am glad that I can move cursor up or down by pressing ^n or ^p
+		which I am more comfortable to.
+
+		vim is light-weight (likely).
+		When it comes to performance, vim does not take up as much memory as Emacs.
+		This might be the only reason if I had to switch from Emacs to vim.
+
+2. Commands used to edit this file
+	- hjkl keys
+	- i
+	- A
+	- 0
+	- $
+	- e
+	- wq
+
+	Configs:
+		- tabstop=4 
