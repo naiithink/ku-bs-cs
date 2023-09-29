@@ -1,0 +1,14 @@
+5 completely duplicate lines
+5 completely duplicate lines
+5 completely duplicate lines
+5 completely duplicate lines
+5 completely duplicate lines
+Not a duplicate--next duplicates first 5
+5 completely duplicate lines
+Last 3 fields duplicate: one two three
+Last 3 fields duplicate: one two three
+Last 3 fields duplicate: one two three
+The next 3 lines are duplicate after char 5
+abcde Duplicate to end
+fghij Duplicate to end
+klmno Duplicate to end

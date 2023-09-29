@@ -1,0 +1,11 @@
+UNIX is as UNIX does.
+And DOS is as DOS does.
+But UNIX is not as DOS does.
+Nor is DOS as UNIX does.
+
+So, if UNIX was as DOS does,
+Would UNIX be DOS
+Or would DOS be UNIX?
+Or to put the question another way:
+Is an operating system by any other name
+As beautiful as a UNIX operating system?

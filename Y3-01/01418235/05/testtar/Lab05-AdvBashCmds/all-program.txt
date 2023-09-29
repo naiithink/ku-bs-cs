@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+   char  string1[1024];
+
+   sprintf (string1, "This is the output from file1.c.\n"
+                     "There is two lines here.");
+   printf ("%s", string1);
+}
+#include <stdio.h>
+
+int main() {
+   int i;
+
+   for (i=1;i<5;i++) {
+      if (i/2 == (i-1)/2)
+         fprintf (stderr,"Error! %d is an odd number\n", i);
+      else
+         fprintf (stdout,"Output! %d is an even number\n", i);
+   }
+}
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+   char  string1[1024];
+
+   sprintf (string1, "This is the output from file1.c.\n"
+                     "There is two lines here.");
+   printf ("%s", string1);
+}
+#include <stdio.h>
+
+int main() {
+   int i;
+
+   for (i=1;i<5;i++) {
+      if (i/2 == (i-1)/2)
+         fprintf (stderr,"Error! %d is an odd number\n", i);
+      else
+         fprintf (stdout,"Output! %d is an even number\n", i);
+   }
+}
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char* argv[])  {
+   int i;
+
+   for (i=0; i<argc; i++)  {
+      printf ("Argument #%d is %s\n", i, argv[i]);
+   }
+}
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()  {
+   int i=65;
+   int x;
+
+   for (i=0; i<30; i++)  {
+      x = (rand() % 26) + 65;
+      printf ("%2d %c %2d\n", x, x, i+1);
+   }
+}
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()  {
+   int i=65;
+   int x;
+   int y;
+
+   for (i=0; i<30; i++)  {
+      x = (rand() % 26) + 65;
+      y = (rand() % 26) + 65;
+      printf ("%2d %c %2d\t%d\n", x, x, i+1, y);
+   }
+}

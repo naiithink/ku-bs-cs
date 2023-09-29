@@ -1,0 +1,4 @@
+Hello, world!
+	This is the start of a legendary file since the computer.
+		Then continued to the second line, no lesser legend that the prior.
+			We've encountered the last line I'd have written to this file.

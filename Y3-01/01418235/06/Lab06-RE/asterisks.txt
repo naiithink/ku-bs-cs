@@ -1,0 +1,14 @@
+* This is a line with only one asterisk.
+* This is a line that starts with an asterisk, but has more.*
+*** This is a line with three asterisks in a row.
+This line has no asterisk.
+* This is another line with only one asterisk.
+This line has two asterisks * separated by other characters. *
+This line has two asterisks *a* surrounding one other letter
+This line has more than two asterisks **b** surrounding one other letter
+This line has more than two asterisks *c** surrounding one other letter
+This line has more than two asterisks **d* surrounding one other letter
+*** The start and end have three asterisks. ***
+This line has two asterisks with a character between them.
+*** The start has three, but the end has four asterisks. ****
+*The start and end have one asterisk.*

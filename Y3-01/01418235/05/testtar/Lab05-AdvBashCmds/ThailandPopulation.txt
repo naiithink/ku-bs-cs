@@ -1,0 +1,77 @@
+0	Bangkok Metropolitan Area 	9930634
+1	Bangkok 	5690510
+2	Nakhon Ratchasima 	2555346
+3	Ubon Ratchathani 	1728529
+4	Khon Kaen 	1749935
+5	Chiang Mai 	1661020
+6	Buri Ram 	1536045
+7	Udon Thani 	1526722
+8	Nakhon Si Thammarat 	1509378
+9	Si Sa Ket 	1446494
+10	Surin 	1375567
+11	Songkhla 	1314395
+12	Roi Et 	1309939
+13	Chiang Rai 	1231002
+14	Chon Buri 	1205574
+15	Chaiyaphum 	1118986
+16	Sakon Nakhon 	1108624
+17	Samut Prakan 	1104766
+18	Nakhon Sawan 	1075573
+19	Phetchabun 	1002159
+20	Nonthaburi 	996072
+21	Kalasin 	975276
+22	Surat Thani 	951174
+23	Maha Sarakham 	937402
+24	Nong Khai 	899033
+25	Pathum Thani 	856790
+26	Phitsanulok 	844620
+27	Suphanburi 	843868
+28	Kanchanaburi 	835927
+29	Ratchaburi 	828779
+30	Nakhon Pathom 	820704
+31	Lampang 	794266
+32	Ayutthaya 	753986
+33	Lop Buri 	751431
+34	Kamphaeng Phet 	728313
+35	Narathiwat 	706620
+36	Nakhon Phanom 	695269
+37	Chachoengsao 	653731
+38	Pattani 	636164
+39	Loei 	613070
+40	Sukhothai 	608965
+41	Saraburi 	608612
+42	Trang 	607078
+43	Rayong 	572254
+44	Phichit 	558012
+45	Yasothon 	540832
+46	Sa Kaeo 	538492
+47	Tak 	531712
+48	Phattalung 	502940
+49	Chanthaburi 	502392
+50	Nong Bua Lam Phu 	496676
+51	Prachuap Khiri Khan 	493946
+52	Phayao 	486476
+53	Chumphon 	478956
+54	Nan 	477721
+55	Phrae 	468767
+56	Yala 	461792
+57	Uttaradit 	467446
+58	Samut Sakhon 	461792
+59	Phetchaburi 	456175
+60	Prachin Buri 	453263
+61	Lamphun 	405876
+62	Krabi 	402559
+63	Amnat Charoen 	368894
+64	Chai Nat 	339139
+65	Mukdahan 	338770
+66	Uthai Thani 	335359
+67	Phuket 	299768
+68	Ang Thong 	284105
+69	Satun 	281126
+70	Mae Hong Son 	256338
+71	Nakhon Nayok 	250140
+72	Phang Nga 	245295
+73	Trat 	220472
+74	Sing Buri 	217055
+75	Samut Songkhram 	195143
+76	Ranong 	181588

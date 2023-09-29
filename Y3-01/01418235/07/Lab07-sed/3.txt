@@ -1,0 +1,6 @@
+John    Adams 23
+George    Bull    17
+Anne Blue 19
+Janet  Blue  22
+Ben Benjamin    25
+Ted   White          21

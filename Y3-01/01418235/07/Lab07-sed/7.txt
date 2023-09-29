@@ -1,0 +1,7 @@
+/usr/local/bin/netscape
+/var/spool/mail/user1
+/etc/apt/sources.list
+/home/user1/.bashrc
+/bin/wc
+/etc
+/tmp
