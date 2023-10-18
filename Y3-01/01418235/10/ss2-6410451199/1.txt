@@ -1,0 +1,19 @@
+ss2
+
+# passwd
+
+login_name[:encrypted_password]:uid:gid:username/comment:home[:shell]
+
+       •   login name
+
+       •   optional encrypted password
+
+       •   numerical user ID
+
+       •   numerical group ID
+
+       •   user name or comment field
+
+       •   user home directory
+
+       •   optional user command interpreter
