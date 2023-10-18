@@ -1,0 +1,71 @@
+#! /usr/bin/env bash
+
+COMPILE_TIMEOUT_S=5
+EXT_SOURCE='c'
+EXT_IN='input'
+EXT_OUT='output'
+EXT_TMP='tmp'
+
+# IS_ABS_PATH=-1
+
+ARGC=$#
+ARGV=( $@ )
+
+if [ $ARGC -eq 0 ]; then
+    exit 1
+fi
+
+# echo 'PASS 1: Argument #1 is valid'
+
+FILE_PREFIX=$(echo "$1" | awk '{ $NF = ""; print $0 }' FS='/' OFS='/' -)
+FILE_NAME=$(echo "$1" | awk '{ print $NF }' FS='/' | sed -n 's/\(.*\)\..*/\1/p')
+
+# echo 'Prefix: ' $FILE_PREFIX
+# echo 'File name: '  $FILE_NAME
+
+if [ ! -r "$1" ]; then
+    exit 1
+fi
+
+# echo 'PASS 2: File exists and readable'
+
+# if [[ "$1" = /* ]]; then
+#     IS_ABS_PATH=1
+# fi
+
+# echo $IS_ABS_PATH
+# echo 'PASS 3: Path kind checked'
+
+timeout --preserve-status $COMPILE_TIMEOUT_S make "${FILE_PREFIX}${FILE_NAME}" &> /dev/null
+
+if [ ! $? -eq 0 ]; then
+    exit 2
+fi
+
+# echo 'PASS 4: Compiled successfully'
+
+if [ $(echo "$1" | awk '{ print NF }' FS='/') -eq 1 ]; then
+    CMD="./${FILE_NAME}"
+else
+    CMD="${FILE_PREFIX}${FILE_NAME}"
+fi
+
+# echo 'Input: ' "${FILE_PREFIX}${FILE_NAME}.${EXT_IN}"
+# echo 'Output: ' "${FILE_PREFIX}${FILE_NAME}.${EXT_OUT}"
+# echo 'Command: ' $CMD
+
+$CMD < "${FILE_PREFIX}${FILE_NAME}.${EXT_IN}" > "${FILE_PREFIX}${FILE_NAME}.${EXT_TMP}"
+
+# echo 'PASS 5: Command run'
+
+# cat "${FILE_PREFIX}${FILE_NAME}.${EXT_OUT}"
+# echo '--'
+# cat "${FILE_PREFIX}${FILE_NAME}.${EXT_TMP}"
+
+if [ "$(cat "${FILE_PREFIX}${FILE_NAME}.${EXT_TMP}" | shasum -a 512)" = "$(cat "${FILE_PREFIX}${FILE_NAME}.${EXT_OUT}" | shasum -a 512)" ]; then
+    echo 1
+else
+    echo 0
+fi
+
+rm "${FILE_PREFIX}${FILE_NAME}.${EXT_TMP}"
